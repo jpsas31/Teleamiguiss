@@ -31,10 +31,11 @@ public class Gerente extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
         rol = new javax.swing.JLabel();
-        botonSalida = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        clientes = new javax.swing.JButton();
+        estadoClientes = new javax.swing.JButton();
+        logo = new javax.swing.JLabel();
+        reportes = new javax.swing.JButton();
+        salida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(850, 450));
@@ -56,57 +57,62 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         jPanel2.add(nombre, gridBagConstraints);
 
-        rol.setText("ROL");
+        rol.setText("GERENTE");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 20, 5);
         jPanel2.add(rol, gridBagConstraints);
 
-        botonSalida.setBackground(new java.awt.Color(202, 44, 145));
-        botonSalida.setText("Salida");
-        botonSalida.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        botonSalida.addActionListener(new java.awt.event.ActionListener() {
+        clientes.setBackground(new java.awt.Color(254, 63, 146));
+        clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        clientes.setForeground(new java.awt.Color(255, 255, 255));
+        clientes.setText("Clientes");
+        clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonSalidaActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.ipadx = 20;
-        gridBagConstraints.ipady = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
-        gridBagConstraints.insets = new java.awt.Insets(210, 0, 0, 0);
-        jPanel2.add(botonSalida, gridBagConstraints);
-
-        jButton1.setBackground(new java.awt.Color(254, 63, 146));
-        jButton1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                clientesActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(50, 10, 10, 10);
-        jPanel2.add(jButton1, gridBagConstraints);
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(20, 10, 10, 10);
+        jPanel2.add(clientes, gridBagConstraints);
 
-        jButton2.setBackground(new java.awt.Color(254, 63, 146));
-        jButton2.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("jButton2");
+        estadoClientes.setBackground(new java.awt.Color(254, 63, 146));
+        estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        estadoClientes.setForeground(new java.awt.Color(255, 255, 255));
+        estadoClientes.setText("Estado cliente");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        jPanel2.add(jButton2, gridBagConstraints);
+        jPanel2.add(estadoClientes, gridBagConstraints);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/teleamiguis/img/Logo.png"))); // NOI18N
-        jPanel2.add(jLabel1, new java.awt.GridBagConstraints());
+        logo.setIcon(new javax.swing.ImageIcon("/home/gyron/Desktop/Todo/Workspace/Teleamiguiss/teleamiguis/src/main/java/com/mycompany/teleamiguis/img/Logo.png")); // NOI18N
+        jPanel2.add(logo, new java.awt.GridBagConstraints());
+
+        reportes.setBackground(new java.awt.Color(254, 63, 146));
+        reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        reportes.setForeground(new java.awt.Color(255, 255, 255));
+        reportes.setText("Reportes");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        jPanel2.add(reportes, gridBagConstraints);
+
+        salida.setBackground(new java.awt.Color(202, 44, 145));
+        salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        salida.setForeground(new java.awt.Color(255, 255, 255));
+        salida.setText("Salida");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.insets = new java.awt.Insets(50, 10, 10, 10);
+        jPanel2.add(salida, gridBagConstraints);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 450));
 
@@ -124,14 +130,9 @@ public class Gerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalidaActionPerformed
+    private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_botonSalidaActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_clientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,13 +170,14 @@ public class Gerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonSalida;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton clientes;
+    private javax.swing.JButton estadoClientes;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel logo;
     private javax.swing.JLabel nombre;
+    private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
+    private javax.swing.JButton salida;
     // End of variables declaration//GEN-END:variables
 }
