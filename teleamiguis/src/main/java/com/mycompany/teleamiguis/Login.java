@@ -41,10 +41,10 @@ public class Login extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        loginPanel.setBackground(new java.awt.Color(255, 153, 255));
+        loginPanel.setBackground(new java.awt.Color(98, 197, 255));
         loginPanel.setLayout(new java.awt.GridBagLayout());
 
-        usuarioTF.setBackground(new java.awt.Color(255, 153, 255));
+        usuarioTF.setBackground(new java.awt.Color(98, 197, 255));
         usuarioTF.setForeground(new java.awt.Color(0, 0, 0));
         usuarioTF.setText("Usuario");
         usuarioTF.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -64,7 +64,7 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         loginPanel.add(usuarioTF, gridBagConstraints);
 
-        passTF.setBackground(new java.awt.Color(255, 153, 255));
+        passTF.setBackground(new java.awt.Color(98, 197, 255));
         passTF.setForeground(new java.awt.Color(0, 0, 0));
         passTF.setText("Contraseña");
         passTF.addMouseListener(new java.awt.event.MouseAdapter() {
