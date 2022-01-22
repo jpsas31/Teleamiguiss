@@ -9,6 +9,8 @@ package com.mycompany.teleamiguis;
  * @author gyron
  */
 public class Gerente extends javax.swing.JFrame {
+    int xMouse; 
+    int yMouse; 
 
 
     /**
@@ -28,8 +30,8 @@ public class Gerente extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        panelGeneral = new javax.swing.JPanel();
+        panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
         rol = new javax.swing.JLabel();
         clientes = new javax.swing.JButton();
@@ -37,19 +39,22 @@ public class Gerente extends javax.swing.JFrame {
         reportes = new javax.swing.JButton();
         salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
+        barraTitulo = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
+        setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(98, 197, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(850, 450));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelGeneral.setBackground(new java.awt.Color(98, 197, 255));
+        panelGeneral.setPreferredSize(new java.awt.Dimension(850, 450));
+        panelGeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(51, 51, 152));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        jPanel2.setPreferredSize(new java.awt.Dimension(300, 450));
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        panelIzq.setBackground(new java.awt.Color(51, 51, 152));
+        panelIzq.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        panelIzq.setPreferredSize(new java.awt.Dimension(300, 450));
+        panelIzq.setLayout(new java.awt.GridBagLayout());
 
         nombre.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -58,7 +63,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
-        jPanel2.add(nombre, gridBagConstraints);
+        panelIzq.add(nombre, gridBagConstraints);
 
         rol.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         rol.setForeground(new java.awt.Color(255, 255, 255));
@@ -67,7 +72,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
-        jPanel2.add(rol, gridBagConstraints);
+        panelIzq.add(rol, gridBagConstraints);
 
         clientes.setBackground(new java.awt.Color(254, 63, 146));
         clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -83,7 +88,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 6, 10);
-        jPanel2.add(clientes, gridBagConstraints);
+        panelIzq.add(clientes, gridBagConstraints);
 
         estadoClientes.setBackground(new java.awt.Color(254, 63, 146));
         estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -93,7 +98,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
-        jPanel2.add(estadoClientes, gridBagConstraints);
+        panelIzq.add(estadoClientes, gridBagConstraints);
 
         reportes.setBackground(new java.awt.Color(254, 63, 146));
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -104,7 +109,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
-        jPanel2.add(reportes, gridBagConstraints);
+        panelIzq.add(reportes, gridBagConstraints);
 
         salida.setBackground(new java.awt.Color(202, 44, 145));
         salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -119,43 +124,84 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.insets = new java.awt.Insets(80, 10, 10, 10);
-        jPanel2.add(salida, gridBagConstraints);
+        panelIzq.add(salida, gridBagConstraints);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
-        jPanel2.add(Logo, new java.awt.GridBagConstraints());
+        panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 450));
+        panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
-        jPanel3.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel3.setOpaque(false);
-        jPanel3.setPreferredSize(new java.awt.Dimension(500, 450));
+        panelDer.setBackground(new java.awt.Color(255, 204, 204));
+        panelDer.setOpaque(false);
+        panelDer.setPreferredSize(new java.awt.Dimension(500, 450));
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
         Fondo.setToolTipText("");
+        Fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
+        panelDer.setLayout(panelDerLayout);
+        panelDerLayout.setHorizontalGroup(
+            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDerLayout.createSequentialGroup()
+                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 700, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelDerLayout.setVerticalGroup(
+            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
+        panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
+        panelDer.getAccessibleContext().setAccessibleDescription("");
+
+        barraTitulo.setBackground(new java.awt.Color(0, 0, 0));
+        barraTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        barraTitulo.setPreferredSize(new java.awt.Dimension(850, 30));
+        barraTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                barraTituloMouseDragged(evt);
+            }
+        });
+        barraTitulo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                barraTituloMousePressed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Gerente");
+
+        javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
+        barraTitulo.setLayout(barraTituloLayout);
+        barraTituloLayout.setHorizontalGroup(
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraTituloLayout.createSequentialGroup()
+                .addGap(395, 395, 395)
+                .addComponent(jLabel1)
+                .addContainerGap(401, Short.MAX_VALUE))
+        );
+        barraTituloLayout.setVerticalGroup(
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraTituloLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 700, 450));
-        jPanel3.getAccessibleContext().setAccessibleDescription("");
+        panelGeneral.add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
         pack();
@@ -167,10 +213,25 @@ public class Gerente extends javax.swing.JFrame {
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
         // TODO add your handling code here:    
-dispose();
-Login login = new Login();
-login.setVisible(true);
+    dispose();
+    Login login = new Login();
+    login.setVisible(true);
+    
     }//GEN-LAST:event_salidaActionPerformed
+
+    private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraTituloMouseDragged
+        // TODO add your handling code here:
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        
+        this.setLocation (x - xMouse, y - yMouse);
+    }//GEN-LAST:event_barraTituloMouseDragged
+
+    private void barraTituloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraTituloMousePressed
+        // TODO add your handling code here:
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_barraTituloMousePressed
 
 
     /**
@@ -211,12 +272,14 @@ login.setVisible(true);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
+    private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton clientes;
     private javax.swing.JButton estadoClientes;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nombre;
+    private javax.swing.JPanel panelDer;
+    private javax.swing.JPanel panelGeneral;
+    private javax.swing.JPanel panelIzq;
     private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
