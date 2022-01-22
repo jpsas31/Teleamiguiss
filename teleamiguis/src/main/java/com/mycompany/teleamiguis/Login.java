@@ -33,8 +33,8 @@ public class Login extends javax.swing.JFrame {
         passL = new javax.swing.JLabel();
         usuarioL = new javax.swing.JLabel();
         botonLogin = new javax.swing.JButton();
-        foto = new javax.swing.JLabel();
         salir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
@@ -45,7 +45,6 @@ public class Login extends javax.swing.JFrame {
         loginPanel.setLayout(new java.awt.GridBagLayout());
 
         usuarioTF.setBackground(new java.awt.Color(98, 197, 255));
-        usuarioTF.setForeground(new java.awt.Color(0, 0, 0));
         usuarioTF.setText("Usuario");
         usuarioTF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -65,7 +64,6 @@ public class Login extends javax.swing.JFrame {
         loginPanel.add(usuarioTF, gridBagConstraints);
 
         passTF.setBackground(new java.awt.Color(98, 197, 255));
-        passTF.setForeground(new java.awt.Color(0, 0, 0));
         passTF.setText("Contraseña");
         passTF.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -83,7 +81,6 @@ public class Login extends javax.swing.JFrame {
         loginPanel.add(passTF, gridBagConstraints);
 
         passL.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
-        passL.setForeground(new java.awt.Color(0, 0, 0));
         passL.setText("Contraseña");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -92,7 +89,6 @@ public class Login extends javax.swing.JFrame {
         loginPanel.add(passL, gridBagConstraints);
 
         usuarioL.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
-        usuarioL.setForeground(new java.awt.Color(0, 0, 0));
         usuarioL.setText("Usuario ");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -102,7 +98,6 @@ public class Login extends javax.swing.JFrame {
 
         botonLogin.setBackground(new java.awt.Color(255, 255, 255));
         botonLogin.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        botonLogin.setForeground(new java.awt.Color(0, 0, 0));
         botonLogin.setText("Login");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -110,16 +105,8 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         loginPanel.add(botonLogin, gridBagConstraints);
 
-        foto.setIcon(new javax.swing.ImageIcon("/home/gyron/Desktop/Todo/Univalle/SEMESTRE 6/DESARROLLO DE SOFTWARE I/icons8-user-64.png")); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
-        loginPanel.add(foto, gridBagConstraints);
-
         salir.setBackground(new java.awt.Color(255, 51, 51));
         salir.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        salir.setForeground(new java.awt.Color(0, 0, 0));
         salir.setText("Salir");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +119,12 @@ public class Login extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         loginPanel.add(salir, gridBagConstraints);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/icons8-user-64.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        loginPanel.add(jLabel1, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,7 +201,7 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonLogin;
-    private javax.swing.JLabel foto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JLabel passL;
     private javax.swing.JTextField passTF;

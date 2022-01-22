@@ -33,12 +33,11 @@ public class Gerente extends javax.swing.JFrame {
         rol = new javax.swing.JLabel();
         clientes = new javax.swing.JButton();
         estadoClientes = new javax.swing.JButton();
-        logo = new javax.swing.JLabel();
         reportes = new javax.swing.JButton();
         salida = new javax.swing.JButton();
+        Logo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -96,9 +95,6 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
         jPanel2.add(estadoClientes, gridBagConstraints);
 
-        logo.setIcon(new javax.swing.ImageIcon("/home/gyron/Desktop/Todo/Workspace/Teleamiguiss/teleamiguis/src/main/java/com/mycompany/teleamiguis/img/Logo.png")); // NOI18N
-        jPanel2.add(logo, new java.awt.GridBagConstraints());
-
         reportes.setBackground(new java.awt.Color(254, 63, 146));
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         reportes.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,36 +116,31 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(60, 10, 10, 10);
         jPanel2.add(salida, gridBagConstraints);
 
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
+        jPanel2.add(Logo, new java.awt.GridBagConstraints());
+
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 450));
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 204));
         jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(500, 450));
 
-        jButton1.setText("jButton1");
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
+        Fondo.setToolTipText("");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jButton1)
-                .addContainerGap(577, Short.MAX_VALUE))
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jButton1)
-                .addContainerGap(399, Short.MAX_VALUE))
+            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 700, 450));
         jPanel3.getAccessibleContext().setAccessibleDescription("");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon("/home/gyron/Desktop/Todo/Workspace/Teleamiguiss/teleamiguis/src/main/java/com/mycompany/teleamiguis/img/fondo.png")); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,14 +196,13 @@ public class Gerente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Fondo;
+    private javax.swing.JLabel Logo;
     private javax.swing.JButton clientes;
     private javax.swing.JButton estadoClientes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JLabel logo;
     private javax.swing.JLabel nombre;
     private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
