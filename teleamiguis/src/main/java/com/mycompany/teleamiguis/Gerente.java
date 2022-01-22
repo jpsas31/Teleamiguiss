@@ -10,6 +10,7 @@ package com.mycompany.teleamiguis;
  */
 public class Gerente extends javax.swing.JFrame {
 
+
     /**
      * Creates new form Gerente
      */
@@ -39,7 +40,6 @@ public class Gerente extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(98, 197, 255));
@@ -82,7 +82,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 6, 10);
         jPanel2.add(clientes, gridBagConstraints);
 
         estadoClientes.setBackground(new java.awt.Color(254, 63, 146));
@@ -92,7 +92,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
         jPanel2.add(estadoClientes, gridBagConstraints);
 
         reportes.setBackground(new java.awt.Color(254, 63, 146));
@@ -103,17 +103,22 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
         jPanel2.add(reportes, gridBagConstraints);
 
         salida.setBackground(new java.awt.Color(202, 44, 145));
         salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         salida.setForeground(new java.awt.Color(255, 255, 255));
         salida.setText("Salida");
+        salida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salidaActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(60, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(80, 10, 10, 10);
         jPanel2.add(salida, gridBagConstraints);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
@@ -159,6 +164,14 @@ public class Gerente extends javax.swing.JFrame {
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clientesActionPerformed
+
+    private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
+        // TODO add your handling code here:    
+dispose();
+Login login = new Login();
+login.setVisible(true);
+    }//GEN-LAST:event_salidaActionPerformed
+
 
     /**
      * @param args the command line arguments

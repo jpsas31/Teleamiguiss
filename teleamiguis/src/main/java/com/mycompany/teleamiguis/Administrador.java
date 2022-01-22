@@ -36,6 +36,7 @@ public class Administrador extends javax.swing.JFrame {
         reportes = new javax.swing.JButton();
         salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
+        estadoClientes1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
 
@@ -72,7 +73,7 @@ public class Administrador extends javax.swing.JFrame {
         clientes.setBackground(new java.awt.Color(254, 63, 146));
         clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         clientes.setForeground(new java.awt.Color(255, 255, 255));
-        clientes.setText("Clientes");
+        clientes.setText("Usuarios");
         clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 clientesActionPerformed(evt);
@@ -82,17 +83,18 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 6, 10);
         jPanel2.add(clientes, gridBagConstraints);
 
         estadoClientes.setBackground(new java.awt.Color(254, 63, 146));
         estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         estadoClientes.setForeground(new java.awt.Color(255, 255, 255));
-        estadoClientes.setText("Estado cliente");
+        estadoClientes.setText("Clientes");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
         jPanel2.add(estadoClientes, gridBagConstraints);
 
         reportes.setBackground(new java.awt.Color(254, 63, 146));
@@ -101,9 +103,9 @@ public class Administrador extends javax.swing.JFrame {
         reportes.setText("Reportes");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
         jPanel2.add(reportes, gridBagConstraints);
 
         salida.setBackground(new java.awt.Color(202, 44, 145));
@@ -112,12 +114,22 @@ public class Administrador extends javax.swing.JFrame {
         salida.setText("Salida");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
-        gridBagConstraints.insets = new java.awt.Insets(60, 10, 10, 10);
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.insets = new java.awt.Insets(25, 10, 10, 10);
         jPanel2.add(salida, gridBagConstraints);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
         jPanel2.add(Logo, new java.awt.GridBagConstraints());
+
+        estadoClientes1.setBackground(new java.awt.Color(254, 63, 146));
+        estadoClientes1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        estadoClientes1.setForeground(new java.awt.Color(255, 255, 255));
+        estadoClientes1.setText("Registro Num");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
+        jPanel2.add(estadoClientes1, gridBagConstraints);
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 450));
 
@@ -204,6 +216,7 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JLabel Logo;
     private javax.swing.JButton clientes;
     private javax.swing.JButton estadoClientes;
+    private javax.swing.JButton estadoClientes1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
