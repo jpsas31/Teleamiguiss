@@ -34,7 +34,9 @@ public class Operador extends javax.swing.JFrame {
         panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
         rol = new javax.swing.JLabel();
-        RegistroPago = new javax.swing.JButton();
+        clientes = new javax.swing.JButton();
+        estadoClientes = new javax.swing.JButton();
+        reportes = new javax.swing.JButton();
         salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
         panelDer = new javax.swing.JPanel();
@@ -65,20 +67,20 @@ public class Operador extends javax.swing.JFrame {
 
         rol.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         rol.setForeground(new java.awt.Color(255, 255, 255));
-        rol.setText("Operador");
+        rol.setText("GERENTE");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
         panelIzq.add(rol, gridBagConstraints);
 
-        RegistroPago.setBackground(new java.awt.Color(254, 63, 146));
-        RegistroPago.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        RegistroPago.setForeground(new java.awt.Color(255, 255, 255));
-        RegistroPago.setText("Registro de pago");
-        RegistroPago.addActionListener(new java.awt.event.ActionListener() {
+        clientes.setBackground(new java.awt.Color(254, 63, 146));
+        clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        clientes.setForeground(new java.awt.Color(255, 255, 255));
+        clientes.setText("Clientes");
+        clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistroPagoActionPerformed(evt);
+                clientesActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -86,7 +88,28 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 6, 10);
-        panelIzq.add(RegistroPago, gridBagConstraints);
+        panelIzq.add(clientes, gridBagConstraints);
+
+        estadoClientes.setBackground(new java.awt.Color(254, 63, 146));
+        estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        estadoClientes.setForeground(new java.awt.Color(255, 255, 255));
+        estadoClientes.setText("Estado cliente");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
+        panelIzq.add(estadoClientes, gridBagConstraints);
+
+        reportes.setBackground(new java.awt.Color(254, 63, 146));
+        reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        reportes.setForeground(new java.awt.Color(255, 255, 255));
+        reportes.setText("Reportes");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
+        panelIzq.add(reportes, gridBagConstraints);
 
         salida.setBackground(new java.awt.Color(202, 44, 145));
         salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -149,7 +172,7 @@ public class Operador extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Operador");
+        jLabel1.setText("Gerente");
 
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
@@ -158,7 +181,7 @@ public class Operador extends javax.swing.JFrame {
             .addGroup(barraTituloLayout.createSequentialGroup()
                 .addGap(395, 395, 395)
                 .addComponent(jLabel1)
-                .addContainerGap(390, Short.MAX_VALUE))
+                .addContainerGap(401, Short.MAX_VALUE))
         );
         barraTituloLayout.setVerticalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,13 +273,15 @@ public class Operador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
-    private javax.swing.JButton RegistroPago;
     private javax.swing.JPanel barraTitulo;
+    private javax.swing.JButton clientes;
+    private javax.swing.JButton estadoClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
+    private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
     // End of variables declaration//GEN-END:variables
