@@ -41,21 +41,19 @@ public class Administrador extends javax.swing.JFrame {
         Logo = new javax.swing.JLabel();
         estadoClientes1 = new javax.swing.JButton();
         panelDer = new javax.swing.JPanel();
-        Fondo = new javax.swing.JLabel();
         barraTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        Fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(850, 480));
         setResizable(false);
 
         panelGeneral.setBackground(new java.awt.Color(98, 197, 255));
         panelGeneral.setPreferredSize(new java.awt.Dimension(850, 450));
         panelGeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelIzq.setBackground(new java.awt.Color(51, 51, 152));
-        panelIzq.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        panelIzq.setBackground(new java.awt.Color(22, 49, 92));
         panelIzq.setPreferredSize(new java.awt.Dimension(300, 450));
         panelIzq.setLayout(new java.awt.GridBagLayout());
 
@@ -77,9 +75,9 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
         panelIzq.add(rol, gridBagConstraints);
 
-        clientes.setBackground(new java.awt.Color(254, 63, 146));
+        clientes.setBackground(new java.awt.Color(255, 255, 255));
         clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        clientes.setForeground(new java.awt.Color(255, 255, 255));
+        clientes.setForeground(new java.awt.Color(0, 0, 0));
         clientes.setText("Usuarios");
         clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,9 +91,9 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 6, 10);
         panelIzq.add(clientes, gridBagConstraints);
 
-        estadoClientes.setBackground(new java.awt.Color(254, 63, 146));
+        estadoClientes.setBackground(new java.awt.Color(255, 255, 255));
         estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        estadoClientes.setForeground(new java.awt.Color(255, 255, 255));
+        estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
         estadoClientes.setText("Clientes");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -104,9 +102,9 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
         panelIzq.add(estadoClientes, gridBagConstraints);
 
-        reportes.setBackground(new java.awt.Color(254, 63, 146));
+        reportes.setBackground(new java.awt.Color(255, 255, 255));
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        reportes.setForeground(new java.awt.Color(255, 255, 255));
+        reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -115,7 +113,7 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
         panelIzq.add(reportes, gridBagConstraints);
 
-        salida.setBackground(new java.awt.Color(202, 44, 145));
+        salida.setBackground(new java.awt.Color(102, 102, 102));
         salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         salida.setForeground(new java.awt.Color(255, 255, 255));
         salida.setText("Salida");
@@ -133,9 +131,9 @@ public class Administrador extends javax.swing.JFrame {
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
         panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
-        estadoClientes1.setBackground(new java.awt.Color(254, 63, 146));
+        estadoClientes1.setBackground(new java.awt.Color(255, 255, 255));
         estadoClientes1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        estadoClientes1.setForeground(new java.awt.Color(255, 255, 255));
+        estadoClientes1.setForeground(new java.awt.Color(0, 0, 0));
         estadoClientes1.setText("Registro Num");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -145,35 +143,24 @@ public class Administrador extends javax.swing.JFrame {
 
         panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
-        panelDer.setBackground(new java.awt.Color(255, 204, 204));
-        panelDer.setOpaque(false);
+        panelDer.setBackground(new java.awt.Color(255, 255, 255,150));
         panelDer.setPreferredSize(new java.awt.Dimension(500, 450));
-
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
-        Fondo.setToolTipText("");
-        Fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(106, 106, 106))
+            .addGap(0, 700, Short.MAX_VALUE)
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 450, Short.MAX_VALUE)
         );
 
         panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
         panelDer.getAccessibleContext().setAccessibleDescription("");
 
-        barraTitulo.setBackground(new java.awt.Color(0, 0, 0));
+        barraTitulo.setBackground(new java.awt.Color(43, 41, 40));
         barraTitulo.setForeground(new java.awt.Color(255, 255, 255));
         barraTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -210,6 +197,11 @@ public class Administrador extends javax.swing.JFrame {
 
         panelGeneral.add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 30));
 
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
+        Fondo.setToolTipText("");
+        Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelGeneral.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,7 +210,7 @@ public class Administrador extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
