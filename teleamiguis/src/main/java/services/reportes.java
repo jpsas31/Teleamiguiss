@@ -1,11 +1,16 @@
 
-package com.mycompany.teleamiguis;
+package services;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -17,15 +22,19 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import net.sf.jasperreports.export.SimplePdfReportConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author pablo
  */
 public class reportes {
-    public static Connection getConnection(){
+    public static Connection getConnection() throws FileNotFoundException, IOException{
         Connection conn = null;
+        Properties properties= new Properties();
+        properties.load(new FileInputStream(new File("./src/main/resources/properties/credenciales.properties")));
+        
         try {
-          conn = DriverManager.getConnection("jdbc:postgresql://ec2-54-159-126-187.compute-1.amazonaws.com:5432/d5fj66nnqgd2dj","mujvqfxznhjlby","6c6084db23a79034be8cfdae64f615ded77905a14f48ed20d27f840426542e4d");
+          conn = DriverManager.getConnection((String) properties.get("JDBC"),(String) properties.get("USUARIO"),(String) properties.get("CLAVE"));
           conn.setAutoCommit(false);
           return conn;
         }
@@ -63,7 +72,7 @@ public class reportes {
       exporter.setConfiguration(exportConfig);
       exporter.exportReport();
     }
-    public static void main(String args[]) throws JRException, SQLException {
+    public static void main(String args[]) throws JRException, SQLException, IOException {
       Connection conn= getConnection();
       //Prueba de traer e imprimir filas
 //      Statement stmt = conn.createStatement();
@@ -85,12 +94,12 @@ public class reportes {
       parameters.put("title", "Soy un titulo mamon");
       String jrxml = "/reports/reportes.jrxml";
       JasperPrint print=createPrint(parameters,jrxml,conn);
-//      previewReport(print);
+      previewReport(print);
       createPdf("./src/main/resources/reports/kkReport.pdf",print);
       
       
     }
 
-
     
 }
+
