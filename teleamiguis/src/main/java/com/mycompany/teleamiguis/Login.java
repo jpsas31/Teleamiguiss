@@ -34,16 +34,16 @@ public class Login extends javax.swing.JFrame {
         panelGeneral = new javax.swing.JPanel();
         loginelement = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
-        LoginIcon = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         contra = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
         salida = new javax.swing.JButton();
         iniciarsesion = new javax.swing.JButton();
-        loginPanel = new javax.swing.JPanel();
-        fondologin = new javax.swing.JLabel();
         barraTitulo = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        loginPanel = new javax.swing.JPanel();
+        fondologin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
@@ -60,7 +60,7 @@ public class Login extends javax.swing.JFrame {
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setText("Usuario");
 
-        LoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/login.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/login (2).png"))); // NOI18N
 
         username.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
         username.addActionListener(new java.awt.event.ActionListener() {
@@ -82,11 +82,6 @@ public class Login extends javax.swing.JFrame {
 
         salida.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 18)); // NOI18N
         salida.setText("Salida");
-        salida.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                salidaMouseClicked(evt);
-            }
-        });
         salida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salidaActionPerformed(evt);
@@ -101,10 +96,11 @@ public class Login extends javax.swing.JFrame {
         loginelementLayout.setHorizontalGroup(
             loginelementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginelementLayout.createSequentialGroup()
-                .addGap(107, 107, 107)
                 .addGroup(loginelementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoginIcon))
+                    .addGroup(loginelementLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(jLabel3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginelementLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -120,7 +116,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(loginelementLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(salida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(iniciarsesion)
                 .addGap(62, 62, 62))
         );
@@ -128,7 +124,7 @@ public class Login extends javax.swing.JFrame {
             loginelementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginelementLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(LoginIcon)
+                .addComponent(jLabel3)
                 .addGap(27, 27, 27)
                 .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -141,15 +137,8 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(loginelementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(salida)
                     .addComponent(iniciarsesion))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
-
-        loginPanel.setBackground(new java.awt.Color(98, 197, 255));
-        loginPanel.setPreferredSize(new java.awt.Dimension(415, 550));
-        loginPanel.setLayout(new java.awt.GridBagLayout());
-
-        fondologin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Fondo.png"))); // NOI18N
-        loginPanel.add(fondologin, new java.awt.GridBagConstraints());
 
         barraTitulo.setBackground(new java.awt.Color(0, 0, 0));
         barraTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -184,6 +173,13 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        loginPanel.setBackground(new java.awt.Color(98, 197, 255));
+        loginPanel.setPreferredSize(new java.awt.Dimension(415, 550));
+        loginPanel.setLayout(new java.awt.GridBagLayout());
+
+        fondologin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Fondo.png"))); // NOI18N
+        loginPanel.add(fondologin, new java.awt.GridBagConstraints());
 
         javax.swing.GroupLayout panelGeneralLayout = new javax.swing.GroupLayout(panelGeneral);
         panelGeneral.setLayout(panelGeneralLayout);
@@ -246,12 +242,7 @@ public class Login extends javax.swing.JFrame {
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
     }//GEN-LAST:event_salidaActionPerformed
-
-    private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_salidaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -289,12 +280,12 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LoginIcon;
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JLabel contra;
     private javax.swing.JLabel fondologin;
     private javax.swing.JButton iniciarsesion;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel loginPanel;
     private javax.swing.JPanel loginelement;
     private javax.swing.JLabel nombre;
