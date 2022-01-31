@@ -21,6 +21,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import net.sf.jasperreports.export.SimplePdfExporterConfiguration;
 import net.sf.jasperreports.export.SimplePdfReportConfiguration;
+import net.sf.jasperreports.swing.JRViewer;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -51,11 +52,12 @@ public class reportes {
       jasperReport, parameters, conn);
       return jasperPrint;
     }
-    public static void previewReport(JasperPrint print){
-      JasperViewer jView=new JasperViewer(print,false);
-      jView.setVisible(true);
+    public static JRViewer createReportView(JasperPrint print){
+      JRViewer jView=new JRViewer(print);
+      return jView;
         
     }
+
     public static void createPdf(String dir, JasperPrint print) throws JRException{
       JRPdfExporter exporter = new JRPdfExporter();
       exporter.setExporterInput(new SimpleExporterInput(print));
@@ -74,27 +76,12 @@ public class reportes {
     }
     public static void main(String args[]) throws JRException, SQLException, IOException {
       Connection conn= getConnection();
-      //Prueba de traer e imprimir filas
-//      Statement stmt = conn.createStatement();
-//      ResultSet rs= stmt.executeQuery("SELECT * FROM trabajadore"
-//              + "s");
-//      ResultSetMetaData rsmd = rs.getMetaData();
-//      int columnsNumber = rsmd.getColumnCount();
-//      while (rs.next()) {
-//      for (int i = 1; i <= columnsNumber; i++) {
-//        if (i > 1) System.out.print(",  ");
-//        String columnValue = rs.getString(i);
-//        System.out.print(columnValue + " " + rsmd.getColumnName(i));
-//        }
-//    System.out.println("");
-//    
-//      }
        
       Map<String, Object> parameters = new HashMap<>();
       parameters.put("title", "Soy un titulo mamon");
       String jrxml = "/reports/reportes.jrxml";
       JasperPrint print=createPrint(parameters,jrxml,conn);
-      previewReport(print);
+      createReportView(print);
       createPdf("./src/main/resources/reports/kkReport.pdf",print);
       
       

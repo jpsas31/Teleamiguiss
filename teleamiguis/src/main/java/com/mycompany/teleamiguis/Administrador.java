@@ -4,6 +4,20 @@
  */
 package com.mycompany.teleamiguis;
 
+import java.awt.BorderLayout;
+import java.io.IOException;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
+import static services.reportes.createPrint;
+import static services.reportes.createReportView;
+import static services.reportes.getConnection;
+
 /**
  *
  * @author gyron
@@ -34,12 +48,12 @@ public class Administrador extends javax.swing.JFrame {
         panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
         rol = new javax.swing.JLabel();
-        clientes = new javax.swing.JButton();
+        usuarios = new javax.swing.JButton();
         estadoClientes = new javax.swing.JButton();
         reportes = new javax.swing.JButton();
         salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
-        estadoClientes1 = new javax.swing.JButton();
+        registroNum = new javax.swing.JButton();
         panelDer = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -75,13 +89,13 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
         panelIzq.add(rol, gridBagConstraints);
 
-        clientes.setBackground(new java.awt.Color(255, 255, 255));
-        clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        clientes.setForeground(new java.awt.Color(0, 0, 0));
-        clientes.setText("Usuarios");
-        clientes.addActionListener(new java.awt.event.ActionListener() {
+        usuarios.setBackground(new java.awt.Color(255, 255, 255));
+        usuarios.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        usuarios.setForeground(new java.awt.Color(0, 0, 0));
+        usuarios.setText("Usuarios");
+        usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientesActionPerformed(evt);
+                usuariosActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -89,12 +103,17 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 6, 10);
-        panelIzq.add(clientes, gridBagConstraints);
+        panelIzq.add(usuarios, gridBagConstraints);
 
         estadoClientes.setBackground(new java.awt.Color(255, 255, 255));
         estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
         estadoClientes.setText("Clientes");
+        estadoClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoClientesActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -106,6 +125,11 @@ public class Administrador extends javax.swing.JFrame {
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
+        reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportesActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -131,15 +155,20 @@ public class Administrador extends javax.swing.JFrame {
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
         panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
-        estadoClientes1.setBackground(new java.awt.Color(255, 255, 255));
-        estadoClientes1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        estadoClientes1.setForeground(new java.awt.Color(0, 0, 0));
-        estadoClientes1.setText("Registro Num");
+        registroNum.setBackground(new java.awt.Color(255, 255, 255));
+        registroNum.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        registroNum.setForeground(new java.awt.Color(0, 0, 0));
+        registroNum.setText("Registro Num");
+        registroNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registroNumActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
-        panelIzq.add(estadoClientes1, gridBagConstraints);
+        panelIzq.add(registroNum, gridBagConstraints);
 
         panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
@@ -216,9 +245,17 @@ public class Administrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
+    private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_clientesActionPerformed
+        panelDer.removeAll();
+        panelDer.repaint();
+        panelDer.revalidate();
+        panelGeneral.repaint();
+        reportes.setEnabled(true);
+        usuarios.setEnabled(false);
+        registroNum.setEnabled(true);
+        estadoClientes.setEnabled(true);
+    }//GEN-LAST:event_usuariosActionPerformed
 
     private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraTituloMouseDragged
         // TODO add your handling code here:
@@ -240,6 +277,57 @@ public class Administrador extends javax.swing.JFrame {
         Login login = new Login();
         login.setVisible(true);
     }//GEN-LAST:event_salidaActionPerformed
+
+    private void registroNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registroNumActionPerformed
+        // TODO add your handling code here:
+        panelDer.removeAll();
+        panelDer.repaint();
+        panelDer.revalidate();
+        panelGeneral.repaint();
+        reportes.setEnabled(true);
+        usuarios.setEnabled(true);
+        registroNum.setEnabled(false);
+        estadoClientes.setEnabled(true);
+    }//GEN-LAST:event_registroNumActionPerformed
+
+    private void estadoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoClientesActionPerformed
+        // TODO add your handling code here:
+        panelDer.removeAll();
+        panelDer.repaint();
+        panelDer.revalidate();
+        panelGeneral.repaint();
+        reportes.setEnabled(true);
+        usuarios.setEnabled(true);
+        registroNum.setEnabled(true);
+        estadoClientes.setEnabled(false);
+    }//GEN-LAST:event_estadoClientesActionPerformed
+
+    private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
+        // TODO add your handling code here:
+        panelDer.removeAll();
+        panelDer.repaint();
+        panelDer.revalidate();
+        panelGeneral.repaint();
+        reportes.setEnabled(false);
+        usuarios.setEnabled(true);
+        registroNum.setEnabled(true);
+        estadoClientes.setEnabled(true);
+        panelDer.setLayout(new BorderLayout());
+        try {
+            Connection conn= getConnection();
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("title", "Soy un titulo mamon");
+            String jrxml = "/reports/reportes.jrxml";
+            JasperPrint print=createPrint(parameters,jrxml,conn);
+            JRViewer view= createReportView(print);
+            panelDer.add(view);
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reportesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,16 +369,16 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
     private javax.swing.JPanel barraTitulo;
-    private javax.swing.JButton clientes;
     private javax.swing.JButton estadoClientes;
-    private javax.swing.JButton estadoClientes1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
+    private javax.swing.JButton registroNum;
     private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
+    private javax.swing.JButton usuarios;
     // End of variables declaration//GEN-END:variables
 }

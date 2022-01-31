@@ -4,6 +4,21 @@
  */
 package com.mycompany.teleamiguis;
 
+import java.awt.BorderLayout;
+import java.io.IOException;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JPanel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
+import static services.reportes.createPrint;
+import static services.reportes.createReportView;
+import static services.reportes.getConnection;
+
 /**
  *
  * @author gyron
@@ -93,6 +108,11 @@ public class Gerente extends javax.swing.JFrame {
         estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
         estadoClientes.setText("Estado cliente");
+        estadoClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoClientesActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -103,6 +123,11 @@ public class Gerente extends javax.swing.JFrame {
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
+        reportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportesActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -205,6 +230,13 @@ public class Gerente extends javax.swing.JFrame {
 
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
         // TODO add your handling code here:
+        panelDer.removeAll();
+        panelDer.repaint();
+        panelDer.revalidate();
+        panelGeneral.repaint();
+        reportes.setEnabled(true);
+        clientes.setEnabled(false);
+        estadoClientes.setEnabled(true);
     }//GEN-LAST:event_clientesActionPerformed
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
@@ -228,6 +260,43 @@ public class Gerente extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_barraTituloMousePressed
+
+    private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
+        panelDer.removeAll();
+        panelDer.repaint();
+        panelGeneral.repaint();
+        panelDer.revalidate();
+        reportes.setEnabled(false);
+        clientes.setEnabled(true);
+        estadoClientes.setEnabled(true);
+        panelDer.setLayout(new BorderLayout());
+        try {
+            Connection conn= getConnection();
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("title", "Soy un titulo mamon");
+            String jrxml = "/reports/reportes.jrxml";
+            JasperPrint print=createPrint(parameters,jrxml,conn);
+            JRViewer view= createReportView(print);
+            panelDer.add(view);
+            
+        } catch (JRException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_reportesActionPerformed
+
+    private void estadoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoClientesActionPerformed
+        // TODO add your handling code here:
+         panelDer.removeAll();
+         panelDer.repaint();
+         panelDer.revalidate();
+         panelGeneral.repaint();
+         reportes.setEnabled(true);
+         clientes.setEnabled(true);
+         estadoClientes.setEnabled(false);
+    }//GEN-LAST:event_estadoClientesActionPerformed
 
 
     /**
