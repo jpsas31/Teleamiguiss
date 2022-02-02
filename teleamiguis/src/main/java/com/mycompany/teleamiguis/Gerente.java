@@ -7,11 +7,13 @@ package com.mycompany.teleamiguis;
 import java.awt.BorderLayout;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
@@ -55,9 +57,14 @@ public class Gerente extends javax.swing.JFrame {
         salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
         panelDer = new javax.swing.JPanel();
+        Fondo = new javax.swing.JLabel();
+        tabsReportes = new javax.swing.JTabbedPane();
+        reporteGanancias = new javax.swing.JPanel();
+        reporteFactura = new javax.swing.JPanel();
+        reporteOperadores = new javax.swing.JPanel();
+        reporteNose = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        Fondo = new javax.swing.JLabel();
 
         setUndecorated(true);
         setResizable(false);
@@ -158,16 +165,50 @@ public class Gerente extends javax.swing.JFrame {
         panelDer.setBackground(new java.awt.Color(255,255,255,150));
         panelDer.setPreferredSize(new java.awt.Dimension(500, 450));
 
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
+        Fondo.setToolTipText("");
+
+        tabsReportes.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabsReportesStateChanged(evt);
+            }
+        });
+
+        reporteGanancias.setLayout(new java.awt.BorderLayout());
+        tabsReportes.addTab("Ganancias", reporteGanancias);
+
+        reporteFactura.setLayout(new java.awt.BorderLayout());
+        tabsReportes.addTab("Factura", reporteFactura);
+
+        reporteOperadores.setLayout(new java.awt.BorderLayout());
+        tabsReportes.addTab("Operadores", reporteOperadores);
+
+        reporteNose.setLayout(new java.awt.BorderLayout());
+        tabsReportes.addTab("Nose", reporteNose);
+
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addComponent(tabsReportes)
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Fondo)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addComponent(tabsReportes)
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Fondo)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
+
+        //Iniciar el componente en modo oculto
+        tabsReportes.setVisible(false);
 
         panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
         panelDer.getAccessibleContext().setAccessibleDescription("");
@@ -210,10 +251,6 @@ public class Gerente extends javax.swing.JFrame {
 
         panelGeneral.add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
 
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
-        Fondo.setToolTipText("");
-        panelGeneral.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -229,11 +266,12 @@ public class Gerente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
-        // TODO add your handling code here:
-        panelDer.removeAll();
+
+        tabsReportes.setVisible(false);
+        panelGeneral.repaint();
+        panelGeneral.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
-        panelGeneral.repaint();
         reportes.setEnabled(true);
         clientes.setEnabled(false);
         estadoClientes.setEnabled(true);
@@ -262,41 +300,52 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_barraTituloMousePressed
 
     private void reportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportesActionPerformed
-        panelDer.removeAll();
-        panelDer.repaint();
+        tabsReportes.setVisible(true);
         panelGeneral.repaint();
+        panelGeneral.revalidate();
+        panelDer.repaint();
         panelDer.revalidate();
         reportes.setEnabled(false);
         clientes.setEnabled(true);
         estadoClientes.setEnabled(true);
-        panelDer.setLayout(new BorderLayout());
-        try {
-            Connection conn= getConnection();
-            Map<String, Object> parameters = new HashMap<>();
-            parameters.put("title", "Soy un titulo mamon");
-            String jrxml = "/reports/reportes.jrxml";
-            JasperPrint print=createPrint(parameters,jrxml,conn);
-            JRViewer view= createReportView(print);
-            panelDer.add(view);
-            
-        } catch (JRException ex) {
-            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-        }
         
     }//GEN-LAST:event_reportesActionPerformed
 
     private void estadoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoClientesActionPerformed
-        // TODO add your handling code here:
-         panelDer.removeAll();
+//         panelDer.removeAll();
+         tabsReportes.setVisible(false);
+         panelGeneral.repaint();
+         panelGeneral.revalidate();
          panelDer.repaint();
          panelDer.revalidate();
-         panelGeneral.repaint();
          reportes.setEnabled(true);
          clientes.setEnabled(true);
          estadoClientes.setEnabled(false);
+         
     }//GEN-LAST:event_estadoClientesActionPerformed
+
+    private void tabsReportesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsReportesStateChanged
+
+        if(tabsReportes.getSelectedIndex()==0){
+            try {
+                Connection conn= getConnection();
+                Map<String, Object> parameters = new HashMap<>();
+                parameters.put("title", "Soy un titulo mamon");
+                String jrxml = "/reports/reportes.jrxml";
+                JasperPrint print=createPrint(parameters,jrxml,conn);
+                JRViewer view= createReportView(print);
+                reporteGanancias.add(view);
+                conn.close();
+
+            } catch (JRException | IOException | SQLException ex) {
+                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+//        else{
+//        
+//        }
+       
+    }//GEN-LAST:event_tabsReportesStateChanged
 
 
     /**
@@ -345,8 +394,13 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
+    private javax.swing.JPanel reporteFactura;
+    private javax.swing.JPanel reporteGanancias;
+    private javax.swing.JPanel reporteNose;
+    private javax.swing.JPanel reporteOperadores;
     private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
+    private javax.swing.JTabbedPane tabsReportes;
     // End of variables declaration//GEN-END:variables
 }
