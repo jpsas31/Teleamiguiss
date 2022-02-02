@@ -197,14 +197,13 @@ public class Operador extends javax.swing.JFrame {
 
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
 
-        tabsReportes.setVisible(false);
+      
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
-        reportes.setEnabled(true);
         clientes.setEnabled(false);
-        estadoClientes.setEnabled(true);
+       
     }//GEN-LAST:event_clientesActionPerformed
 
     private void salida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salida1ActionPerformed
