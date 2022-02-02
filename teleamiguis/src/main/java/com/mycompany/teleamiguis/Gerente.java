@@ -97,7 +97,6 @@ public class Gerente extends javax.swing.JFrame {
 
         clientes.setBackground(new java.awt.Color(255, 255, 255));
         clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        clientes.setForeground(new java.awt.Color(0, 0, 0));
         clientes.setText("Clientes");
         clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +112,6 @@ public class Gerente extends javax.swing.JFrame {
 
         estadoClientes.setBackground(new java.awt.Color(255, 255, 255));
         estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
         estadoClientes.setText("Estado cliente");
         estadoClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,7 +126,6 @@ public class Gerente extends javax.swing.JFrame {
 
         reportes.setBackground(new java.awt.Color(255, 255, 255));
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
         reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +196,7 @@ public class Gerente extends javax.swing.JFrame {
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)

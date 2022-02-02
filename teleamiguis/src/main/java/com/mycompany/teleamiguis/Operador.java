@@ -34,9 +34,9 @@ public class Operador extends javax.swing.JFrame {
         panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
         rol = new javax.swing.JLabel();
-        registrarPago = new javax.swing.JButton();
-        salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
+        clientes = new javax.swing.JButton();
+        salida1 = new javax.swing.JButton();
         panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
         barraTitulo = new javax.swing.JPanel();
@@ -49,8 +49,7 @@ public class Operador extends javax.swing.JFrame {
         panelGeneral.setPreferredSize(new java.awt.Dimension(850, 450));
         panelGeneral.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelIzq.setBackground(new java.awt.Color(51, 51, 152));
-        panelIzq.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        panelIzq.setBackground(new java.awt.Color(22, 49, 92));
         panelIzq.setPreferredSize(new java.awt.Dimension(300, 450));
         panelIzq.setLayout(new java.awt.GridBagLayout());
 
@@ -69,42 +68,41 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 77, 5);
         panelIzq.add(rol, gridBagConstraints);
 
-        registrarPago.setBackground(new java.awt.Color(254, 63, 146));
-        registrarPago.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        registrarPago.setForeground(new java.awt.Color(255, 255, 255));
-        registrarPago.setText("Registrar pago");
-        registrarPago.addActionListener(new java.awt.event.ActionListener() {
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
+        panelIzq.add(Logo, new java.awt.GridBagConstraints());
+
+        clientes.setBackground(new java.awt.Color(255, 255, 255));
+        clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        clientes.setText("Registrar pago");
+        clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                registrarPagoActionPerformed(evt);
+                clientesActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
-        panelIzq.add(registrarPago, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 38, 10);
+        panelIzq.add(clientes, gridBagConstraints);
 
-        salida.setBackground(new java.awt.Color(202, 44, 145));
-        salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        salida.setForeground(new java.awt.Color(255, 255, 255));
-        salida.setText("Salida");
-        salida.addActionListener(new java.awt.event.ActionListener() {
+        salida1.setBackground(new java.awt.Color(102, 102, 102));
+        salida1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        salida1.setForeground(new java.awt.Color(255, 255, 255));
+        salida1.setText("Salida");
+        salida1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salidaActionPerformed(evt);
+                salida1ActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.insets = new java.awt.Insets(80, 10, 10, 10);
-        panelIzq.add(salida, gridBagConstraints);
-
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
-        panelIzq.add(Logo, new java.awt.GridBagConstraints());
+        panelIzq.add(salida1, gridBagConstraints);
 
         panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
@@ -114,14 +112,13 @@ public class Operador extends javax.swing.JFrame {
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
         Fondo.setToolTipText("");
-        Fondo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDerLayout.createSequentialGroup()
-                .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 700, Short.MAX_VALUE)
+                .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelDerLayout.setVerticalGroup(
@@ -132,7 +129,7 @@ public class Operador extends javax.swing.JFrame {
         panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
         panelDer.getAccessibleContext().setAccessibleDescription("");
 
-        barraTitulo.setBackground(new java.awt.Color(0, 0, 0));
+        barraTitulo.setBackground(new java.awt.Color(43, 41, 40));
         barraTitulo.setForeground(new java.awt.Color(255, 255, 255));
         barraTitulo.setPreferredSize(new java.awt.Dimension(850, 30));
         barraTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -184,14 +181,6 @@ public class Operador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
-        // TODO add your handling code here:    
-    dispose();
-    Login login = new Login();
-    login.setVisible(true);
-    
-    }//GEN-LAST:event_salidaActionPerformed
-
     private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraTituloMouseDragged
         // TODO add your handling code here:
         int x = evt.getXOnScreen();
@@ -206,9 +195,25 @@ public class Operador extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_barraTituloMousePressed
 
-    private void registrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarPagoActionPerformed
+    private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
+
+        tabsReportes.setVisible(false);
+        panelGeneral.repaint();
+        panelGeneral.revalidate();
+        panelDer.repaint();
+        panelDer.revalidate();
+        reportes.setEnabled(true);
+        clientes.setEnabled(false);
+        estadoClientes.setEnabled(true);
+    }//GEN-LAST:event_clientesActionPerformed
+
+    private void salida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salida1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_registrarPagoActionPerformed
+        dispose();
+        Login login = new Login();
+        login.setVisible(true);
+
+    }//GEN-LAST:event_salida1ActionPerformed
 
 
     /**
@@ -251,13 +256,13 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
     private javax.swing.JPanel barraTitulo;
+    private javax.swing.JButton clientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
-    private javax.swing.JButton registrarPago;
     private javax.swing.JLabel rol;
-    private javax.swing.JButton salida;
+    private javax.swing.JButton salida1;
     // End of variables declaration//GEN-END:variables
 }
