@@ -35,7 +35,7 @@ public class Operador extends javax.swing.JFrame {
         nombre = new javax.swing.JLabel();
         rol = new javax.swing.JLabel();
         Logo = new javax.swing.JLabel();
-        clientes = new javax.swing.JButton();
+        registrarPago = new javax.swing.JButton();
         salida1 = new javax.swing.JButton();
         panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
@@ -74,12 +74,12 @@ public class Operador extends javax.swing.JFrame {
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
         panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
-        clientes.setBackground(new java.awt.Color(255, 255, 255));
-        clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        clientes.setText("Registrar pago");
-        clientes.addActionListener(new java.awt.event.ActionListener() {
+        registrarPago.setBackground(new java.awt.Color(255, 255, 255));
+        registrarPago.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        registrarPago.setText("Registrar pago");
+        registrarPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clientesActionPerformed(evt);
+                registrarPagoActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -87,7 +87,7 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 38, 10);
-        panelIzq.add(clientes, gridBagConstraints);
+        panelIzq.add(registrarPago, gridBagConstraints);
 
         salida1.setBackground(new java.awt.Color(102, 102, 102));
         salida1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -195,16 +195,16 @@ public class Operador extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_barraTituloMousePressed
 
-    private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
+    private void registrarPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarPagoActionPerformed
 
       
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
-        clientes.setEnabled(false);
+        registrarPago.setEnabled(false);
        
-    }//GEN-LAST:event_clientesActionPerformed
+    }//GEN-LAST:event_registrarPagoActionPerformed
 
     private void salida1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salida1ActionPerformed
         // TODO add your handling code here:
@@ -255,12 +255,12 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
     private javax.swing.JPanel barraTitulo;
-    private javax.swing.JButton clientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
+    private javax.swing.JButton registrarPago;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida1;
     // End of variables declaration//GEN-END:variables

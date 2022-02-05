@@ -76,6 +76,7 @@ public class reportes {
       exporter.setConfiguration(exportConfig);
       exporter.exportReport();
     }
+    
     public static void main(String args[]) throws JRException, SQLException, IOException {
       Connection conn= getConnection();
        

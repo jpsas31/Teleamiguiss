@@ -10,22 +10,26 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.sql.Statement;
+import java.util.Hashtable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
  * @author gyron
  */
 public class administradorUsuarios {
-    
-        private Statement stm;
+   
+       
         private Connection conn;
         
         public administradorUsuarios() throws IOException, SQLException {
             conn = getConnection();
-            stm = conn.createStatement();
         
         }
     
@@ -71,14 +75,38 @@ public class administradorUsuarios {
         return confirmacion;
     }
     
-    public String cambiarUsuario()
+//    Funcion para ejecutar un update a un usuario en la DB, este metodo recibe un arreglo con los datos del usuario en el siguiente orden:
+//    tipo_identificacio, cargo, nombre, direccion, telefono, correo,  id_trabajador ";
+      public int modificarUsuario(String[] atributos) throws SQLException
     {
-        String confirmacion="";
-        
+
+        PreparedStatement stm;
+        int confirmacion;
+        String sql =   "UPDATE trabajadores  SET  tipo_identificacion=?, cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ?";
+        stm=conn.prepareStatement(sql);
+        //Recorrer todo el arreglo de atributos para insertarlos en la secuencia SQL
+        for (int i = 1; i<=atributos.length; i++){
+            System.out.println(atributos[i-1]);
+            stm.setString(i,atributos[i-1]);
+        }
+        //Ejecutar la sentencia                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+        confirmacion=stm.executeUpdate ();   
+        conn.commit();
         return confirmacion;
     }
     
-    
+
+    public static void main(String args[]) throws JRException, SQLException, IOException {
+      
+            String [] datos={"C.C","Gerente","Carnitas","carrera 1C 4 #53b-10","3116259843","andresfelipe042001@gmail.com","1193552015"};
+            administradorUsuarios admin;
+
+            admin = new administradorUsuarios();
+            admin.modificarUsuario(datos);
+
+
+      
+    }
     
     
 }
