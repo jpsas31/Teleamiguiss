@@ -94,19 +94,4 @@ public class administradorUsuarios {
         conn.commit();
         return confirmacion;
     }
-    
-
-    public static void main(String args[]) throws JRException, SQLException, IOException {
-      
-            String [] datos={"C.C","Gerente","Carnitas","carrera 1C 4 #53b-10","3116259843","andresfelipe042001@gmail.com","1193552015"};
-            administradorUsuarios admin;
-
-            admin = new administradorUsuarios();
-            admin.modificarUsuario(datos);
-
-
-      
-    }
-    
-    
 }
