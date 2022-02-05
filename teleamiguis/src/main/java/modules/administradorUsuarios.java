@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.sql.Statement;
@@ -52,26 +53,122 @@ public class administradorUsuarios {
         
         
      
-      
-    public String mostrarUsuarios()
+    // Consulta de usuarios (trabajadores)
+    public String[][] mostrarUsuarios() throws SQLException
     {
-        String confirmacion="";
+        //Realizacion del query 
+         String sql = "SELECT * FROM trabajadores";
+         Statement stmt = conn.createStatement(
+                                      ResultSet.TYPE_SCROLL_INSENSITIVE,
+                                      ResultSet.CONCUR_UPDATABLE);
+         ResultSet result = stmt.executeQuery(sql);
+
+
+        //Saber la cantidad de filas que existen en la tabla trabajadores
+         int size =0;
+         do {
+         size++;
+         } while (result.next());
+
+         String arr[] [] = new String[8][size-1];
+
+
+        //Regresar el cursor del ResultSet al inicio
+        result.first();
+
+        //Colocar los datos dentro de un arreglo bidimensional
+         int j = 0;
+         do {
+            for(int i = 0; i<8;i++){
+                if (i != 7){
+                    arr[i][j] = result.getString(i+1);
+                } else {
+                    //true --> Activo / false --> Inactivo
+                    if (true == result.getBoolean(8)){
+                        arr[i][j] = "ACTIVO";
+                    } else {
+                           arr[i][j] = "INACTIVO";
+                    }
+                }
+            }
+
+         j++;
+         } while (result.next());
+
+
+        /*
+                for (int y =0;y<size-1;y++){
+                    for (int x = 0; x < 8;x++){
+                          System.out.print(arr[x][y]);
+                    }
+                System.out.println();
+                }
+        */
+
+        return arr;
+    }
+   public int registrarUsuario(String id, String tipoI, String cargo, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
+    {
+        
+        PreparedStatement stm;
+        int confirmacion=0;
+
+        // Preparando el statement de la tabla trabajadores
+        String sql = "INSERT INTO trabajadores (id_trabajador, tipo_identificacion, cargo, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
+        stm = conn.prepareStatement(sql);
+        
+        stm.setString(1,id);
+        stm.setString(2,tipoI);
+        stm.setString(3,cargo);
+        stm.setString(4,nombre);
+        stm.setString(5,direccion);
+        stm.setString(6,telefono);
+        stm.setString(7,correo);
+        stm.setBoolean(8,estado);
+        
+        //envviando el query INSERT trabajadores
+        confirmacion = stm.executeUpdate();
+        conn.commit();
+        
+        //Preparando las varibales del stament de usuario
+        String usr = id;
+        String tipoU = tipoI;
+        String pass = "";
+        
+        //Generando la contraseña
+        pass = pass + nombre.charAt(0);
+        pass = pass + id.substring(0, 4);
+        
+        //Preparando el statement de la tabla usuarios
+        sql = "INSERT INTO usuarios (id_trabajador,tipo_identificacion,contraseña) VALUES (?,?,?)";
+        stm = conn.prepareStatement(sql);
+        
+        stm.setString(1,usr);
+        stm.setString(2,tipoU);
+        stm.setString(3,pass);
+        
+        //Enviando el query INSERT usuarios
+        stm.executeUpdate();
+        conn.commit();
         
         return confirmacion;
     }
     
-    public String registrarUsuario()
+    public int cambiaEstadoUsuario(String id, String status) throws SQLException
     {
+        PreparedStatement stm;
+        int confirmacion;
+        // Escribimos el Query
+        String inhabQuery =   "UPDATE trabajadores  SET  estado = CAST( ? AS boolean ) WHERE id_trabajador = ?";
+        stm=conn.prepareStatement(inhabQuery);
         
-        String confirmacion="";
+        // Seteamos los parametros del query teniendo en cuenta los parametros de la funcion
+        stm.setString(1, status); 
+        stm.setString(2, id); 
         
-        return confirmacion;
-    }
-    
-    public String inhabilitarUsuario()
-    {
-        String confirmacion="";
-        
+        //Ejecutamos la sentencia
+        confirmacion= stm.executeUpdate ();
+        conn.commit();
         return confirmacion;
     }
     
