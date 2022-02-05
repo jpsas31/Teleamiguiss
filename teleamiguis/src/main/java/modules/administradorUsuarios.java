@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.sql.Statement;
 
 /**
  *
@@ -19,7 +20,16 @@ import java.util.Properties;
  */
 public class administradorUsuarios {
     
-      public static Connection getConnection() throws FileNotFoundException, IOException{
+        private Statement stm;
+        private Connection conn;
+        
+        public administradorUsuarios() throws IOException, SQLException {
+            conn = getConnection();
+            stm = conn.createStatement();
+        
+        }
+    
+        public static Connection getConnection() throws FileNotFoundException, IOException{
         Connection conn = null;
         Properties properties= new Properties();
         properties.load(new FileInputStream(new File("./src/main/resources/properties/credenciales.properties")));
@@ -35,6 +45,9 @@ public class administradorUsuarios {
         }
         return null;
     }
+        
+        
+     
       
     public String mostrarUsuarios()
     {
