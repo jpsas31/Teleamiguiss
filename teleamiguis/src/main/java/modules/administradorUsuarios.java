@@ -15,10 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.sql.Statement;
-import java.util.Hashtable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -53,60 +49,44 @@ public class administradorUsuarios {
         
         
      
-    // Consulta de usuarios (trabajadores)
-    public String[][] mostrarUsuarios() throws SQLException
+    // Consulta de usuario (trabajadores)
+    public String[] mostrarUsuario(String id) throws SQLException
     {
         //Realizacion del query 
-         String sql = "SELECT * FROM trabajadores";
-         Statement stmt = conn.createStatement(
-                                      ResultSet.TYPE_SCROLL_INSENSITIVE,
-                                      ResultSet.CONCUR_UPDATABLE);
-         ResultSet result = stmt.executeQuery(sql);
+         Statement stmt = conn.createStatement();
+         ResultSet result = stmt.executeQuery("SELECT * FROM trabajadores WHERE id_trabajador = '"+id+"'  ");
 
 
-        //Saber la cantidad de filas que existen en la tabla trabajadores
-         int size =0;
-         do {
-         size++;
-         } while (result.next());
-
-         String arr[] [] = new String[8][size-1];
+         String arr[]= new String[8];
 
 
-        //Regresar el cursor del ResultSet al inicio
-        result.first();
+         if (result.next()){
+                   for(int i = 0; i<8;i++){
+                                    if (i != 7){
+                                             arr[i] = result.getString(i+1);
+                                    } else {
+                                             //true --> Activo / false --> Inactivo
+                                             if (true == result.getBoolean(8)){
+                                                  arr[i] = "ACTIVO";
+                                             } else {
+                                                      arr[i] = "INACTIVO";
+                                              }
+                                    }
+                           }
+        } 
+        
 
-        //Colocar los datos dentro de un arreglo bidimensional
-         int j = 0;
-         do {
-            for(int i = 0; i<8;i++){
-                if (i != 7){
-                    arr[i][j] = result.getString(i+1);
-                } else {
-                    //true --> Activo / false --> Inactivo
-                    if (true == result.getBoolean(8)){
-                        arr[i][j] = "ACTIVO";
-                    } else {
-                           arr[i][j] = "INACTIVO";
-                    }
-                }
-            }
+/*
+        for(int j =0; j <8;j++){
+            System.out.println(arr[j]);
+         }*/
 
-         j++;
-         } while (result.next());
-
-
-        /*
-                for (int y =0;y<size-1;y++){
-                    for (int x = 0; x < 8;x++){
-                          System.out.print(arr[x][y]);
-                    }
-                System.out.println();
-                }
-        */
-
+        conn.close();
         return arr;
     }
+
+
+
    public int registrarUsuario(String id, String tipoI, String cargo, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
     {
         
@@ -190,5 +170,11 @@ public class administradorUsuarios {
         confirmacion=stm.executeUpdate ();   
         conn.commit();
         return confirmacion;
+    }
+
+
+public static void main(String args[]) throws SQLException, IOException {
+      administradorUsuarios prueba = new administradorUsuarios();
+      prueba.mostrarUsuario("5464546454");
     }
 }
