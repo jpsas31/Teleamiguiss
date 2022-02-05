@@ -29,6 +29,8 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author pablo
  */
 public class reportes {
+    
+    
     public static Connection getConnection() throws FileNotFoundException, IOException{
         Connection conn = null;
         Properties properties= new Properties();
