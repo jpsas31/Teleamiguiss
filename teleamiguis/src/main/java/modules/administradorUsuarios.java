@@ -81,7 +81,7 @@ public class administradorUsuarios {
             System.out.println(arr[j]);
          }*/
 
-        conn.close();
+        
         return arr;
     }
 
@@ -134,6 +134,9 @@ public class administradorUsuarios {
         return confirmacion;
     }
     
+   
+   // Funcion para cambiar el estado de un trabajador en el sistema (true -> ACTIVO, false -> INACTIVO). La función recibe como parametro
+   // el id (cedula) del usuario. 
     public int cambiaEstadoUsuario(String id, String status) throws SQLException
     {
         PreparedStatement stm;

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -36,6 +37,10 @@ public class Administrador extends javax.swing.JFrame {
      */
     public Administrador() {
         initComponents();
+        
+        // Hacemos invisibles todos los jlabel de abajo del tab de gestionUsuario
+        estadoventanasEstadoUsuario(false); 
+        estadoventanasConsultaUsuario(false); 
     }
 
     /**
@@ -78,7 +83,12 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_dir = new javax.swing.JTextField();
         jTF_resul_tel = new javax.swing.JTextField();
         jTF_resul_mail = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        cambiarEstado = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        PanelEstado = new javax.swing.JPanel();
+        label_resulEstado2 = new javax.swing.JLabel();
+        label_notificacion = new javax.swing.JLabel();
+        label_imEstado = new javax.swing.JLabel();
         tabConsultaUsuario = new javax.swing.JPanel();
         tabsReportes = new javax.swing.JTabbedPane();
         reporteGanancias = new javax.swing.JPanel();
@@ -219,6 +229,8 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
 
+        tabGestiosUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         campoConsultaUsuario.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         campoConsultaUsuario.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         campoConsultaUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +238,7 @@ public class Administrador extends javax.swing.JFrame {
                 campoConsultaUsuarioActionPerformed(evt);
             }
         });
+        tabGestiosUsuarios.add(campoConsultaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 240, 37));
 
         botonConsultaUsuario.setText("Consultar");
         botonConsultaUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -233,37 +246,54 @@ public class Administrador extends javax.swing.JFrame {
                 botonConsultaUsuarioActionPerformed(evt);
             }
         });
+        tabGestiosUsuarios.add(botonConsultaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 130, -1, -1));
 
         label_id.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_id.setText("Identificación");
+        tabGestiosUsuarios.add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 188, -1, -1));
+        label_id.setVisible(false);
 
         label_nom.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_nom.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_nom.setText("Nombre");
+        tabGestiosUsuarios.add(label_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 188, 64, -1));
+        label_nom.setVisible(false);
 
         label_apellido.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_apellido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_apellido.setText("Apellidos");
+        tabGestiosUsuarios.add(label_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(504, 188, -1, -1));
+        label_apellido.setVisible(false);
 
         label_dir.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_dir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_dir.setText("Dirección");
+        tabGestiosUsuarios.add(label_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(87, 273, 95, -1));
+        label_dir.setVisible(false);
 
         label_tel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_tel.setText("Teléfono");
+        tabGestiosUsuarios.add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(324, 273, -1, -1));
+        label_tel.setVisible(false);
 
         label_mail.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_mail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_mail.setText("Correo ");
+        tabGestiosUsuarios.add(label_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(503, 273, 65, -1));
+        label_mail.setVisible(false);
 
         label_estado.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_estado.setText("Estado");
+        tabGestiosUsuarios.add(label_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(318, 349, 62, -1));
+        label_estado.setVisible(false);
 
         label_resul_estado.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_resul_estado.setForeground(new java.awt.Color(0, 153, 51));
         label_resul_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tabGestiosUsuarios.add(label_resul_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 374, 173, 36));
+        label_resul_estado.setVisible(false);
 
         jTF_resul_nom.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_nom.setEditable(false);
@@ -271,6 +301,13 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_nom.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_nom.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTF_resul_nom.setOpaque(true);
+        jTF_resul_nom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_resul_nomActionPerformed(evt);
+            }
+        });
+        tabGestiosUsuarios.add(jTF_resul_nom, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
+        jTF_resul_nom.setVisible(false);
 
         jTF_resul_id.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_id.setEditable(false);
@@ -283,6 +320,8 @@ public class Administrador extends javax.swing.JFrame {
                 jTF_resul_idActionPerformed(evt);
             }
         });
+        tabGestiosUsuarios.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 213, 173, 33));
+        jTF_resul_id.setVisible(false);
 
         jTF_resul_apellido.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_apellido.setEditable(false);
@@ -290,12 +329,16 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_apellido.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_apellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTF_resul_apellido.setOpaque(true);
+        tabGestiosUsuarios.add(jTF_resul_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 213, 173, 33));
+        jTF_resul_apellido.setVisible(false);
 
         jTF_resul_dir.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_dir.setEditable(false);
         jTF_resul_dir.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_dir.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_dir.setOpaque(true);
+        tabGestiosUsuarios.add(jTF_resul_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 298, 173, 33));
+        jTF_resul_dir.setVisible(false);
 
         jTF_resul_tel.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_tel.setEditable(false);
@@ -303,139 +346,76 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_tel.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_tel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTF_resul_tel.setOpaque(true);
+        tabGestiosUsuarios.add(jTF_resul_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 298, 173, 33));
+        jTF_resul_tel.setVisible(false);
 
         jTF_resul_mail.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_mail.setEditable(false);
         jTF_resul_mail.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_mail.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_mail.setOpaque(true);
-
-        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel2.setText("Dijite el documento de identidad ");
-
-        javax.swing.GroupLayout tabGestiosUsuariosLayout = new javax.swing.GroupLayout(tabGestiosUsuarios);
-        tabGestiosUsuarios.setLayout(tabGestiosUsuariosLayout);
-        tabGestiosUsuariosLayout.setHorizontalGroup(
-            tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                            .addGap(250, 250, 250)
-                            .addComponent(campoConsultaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                            .addGap(314, 314, 314)
-                            .addComponent(botonConsultaUsuario))
-                        .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                            .addGap(318, 318, 318)
-                            .addComponent(label_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                            .addGap(87, 87, 87)
-                            .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                                    .addComponent(label_dir, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(142, 142, 142)
-                                    .addComponent(label_tel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(label_mail, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(67, 67, 67))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabGestiosUsuariosLayout.createSequentialGroup()
-                                    .addComponent(label_id)
-                                    .addGap(140, 140, 140)
-                                    .addComponent(label_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(label_apellido)
-                                    .addGap(66, 66, 66))))
-                        .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                            .addGap(58, 58, 58)
-                            .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTF_resul_id, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTF_resul_dir, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(31, 31, 31)
-                            .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(label_resul_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                                        .addComponent(jTF_resul_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jTF_resul_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                                        .addComponent(jTF_resul_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTF_resul_mail, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                        .addGap(214, 214, 214)
-                        .addComponent(jLabel2)))
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
-        tabGestiosUsuariosLayout.setVerticalGroup(
-            tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tabGestiosUsuariosLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(campoConsultaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(botonConsultaUsuario)
-                .addGap(27, 27, 27)
-                .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_id)
-                    .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(label_nom)
-                        .addComponent(label_apellido)))
-                .addGap(6, 6, 6)
-                .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTF_resul_id, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTF_resul_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTF_resul_apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label_dir)
-                    .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(label_tel)
-                        .addComponent(label_mail)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTF_resul_dir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(tabGestiosUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTF_resul_tel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTF_resul_mail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(label_estado)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label_resul_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        label_id.setVisible(false);
-        label_nom.setVisible(false);
-        label_apellido.setVisible(false);
-        label_dir.setVisible(false);
-        label_tel.setVisible(false);
-        label_mail.setVisible(false);
-        label_estado.setVisible(false);
-        label_resul_estado.setVisible(false);
-        jTF_resul_nom.setVisible(false);
-        jTF_resul_id.setVisible(false);
-        jTF_resul_apellido.setVisible(false);
-        jTF_resul_dir.setVisible(false);
-        jTF_resul_tel.setVisible(false);
+        tabGestiosUsuarios.add(jTF_resul_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 298, 173, 33));
         jTF_resul_mail.setVisible(false);
+
+        cambiarEstado.setText("A/D");
+        cambiarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarEstadoActionPerformed(evt);
+            }
+        });
+        tabGestiosUsuarios.add(cambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel3.setText("Digite el documento de identidad:");
+        tabGestiosUsuarios.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 300, -1));
+
+        label_resulEstado2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_resulEstado2.setForeground(new java.awt.Color(0, 153, 51));
+        label_resulEstado2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        label_notificacion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_notificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        this.setVisible(false);
+        label_imEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
+        label_imEstado.setOpaque(true);
+
+        javax.swing.GroupLayout PanelEstadoLayout = new javax.swing.GroupLayout(PanelEstado);
+        PanelEstado.setLayout(PanelEstadoLayout);
+        PanelEstadoLayout.setHorizontalGroup(
+            PanelEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEstadoLayout.createSequentialGroup()
+                .addContainerGap(90, Short.MAX_VALUE)
+                .addComponent(label_imEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(PanelEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelEstadoLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(label_notificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelEstadoLayout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(label_resulEstado2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67))
+        );
+        PanelEstadoLayout.setVerticalGroup(
+            PanelEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEstadoLayout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addGroup(PanelEstadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label_imEstado)
+                    .addGroup(PanelEstadoLayout.createSequentialGroup()
+                        .addComponent(label_notificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(label_resulEstado2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(72, Short.MAX_VALUE))
+        );
+
+        label_resul_estado.setVisible(false);
+
+        tabGestiosUsuarios.add(PanelEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 170, 720, 250));
 
         tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
 
-        javax.swing.GroupLayout tabConsultaUsuarioLayout = new javax.swing.GroupLayout(tabConsultaUsuario);
-        tabConsultaUsuario.setLayout(tabConsultaUsuarioLayout);
-        tabConsultaUsuarioLayout.setHorizontalGroup(
-            tabConsultaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
-        );
-        tabConsultaUsuarioLayout.setVerticalGroup(
-            tabConsultaUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 439, Short.MAX_VALUE)
-        );
-
+        tabConsultaUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         tabsUsuarios.addTab("Consulta general", tabConsultaUsuario);
 
         tabsReportes.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -538,6 +518,7 @@ public class Administrador extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuariosActionPerformed
@@ -639,15 +620,12 @@ public class Administrador extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tabsReportesStateChanged
 
-    private void jTF_resul_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTF_resul_idActionPerformed
-
     private void botonConsultaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaUsuarioActionPerformed
         // TODO add your handling code here:
         String id;
         id = campoConsultaUsuario.getText();
 
+        estadoventanasEstadoUsuario(false);  // Se ocultan los posibles jlabels sobrepuestos
         try {
             administradorUsuarios admUser = new administradorUsuarios();
             String[] datos = admUser.mostrarUsuario(id);
@@ -692,6 +670,64 @@ public class Administrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tabsUsuariosStateChanged
 
+    private void cambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarEstadoActionPerformed
+        // TODO add your handling code here:
+        estadoventanasConsultaUsuario(false); // Se ocultan los posibles jlabels sobrepuestos
+        
+        int op; 
+        String id = campoConsultaUsuario.getText(); 
+        String user; 
+        try {
+            administradorUsuarios admUser = new administradorUsuarios(); // se crea una instancia de la clase administradorUsuarios
+            String[] datos = admUser.mostrarUsuario(id); 
+            
+            if ("ACTIVO".equals(datos[7])) { // En el caso de que esté activo
+                user = "" + datos[2] + " " + datos[3] + " esta a punto de ser desactivado, ¿desea continuar?"; 
+                
+                op = JOptionPane.showConfirmDialog(null, user, "Desactivar usuario", JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/usedPictures/inactivar.png")));
+                
+               if (op == 0) {
+                   admUser.cambiaEstadoUsuario(id, "false"); 
+                   label_notificacion.setText("El usuario con id " + id + " ha sido:"); 
+                   label_resulEstado2.setText("DESACTIVADO");
+                   label_resulEstado2.setForeground(new java.awt.Color(255,51,51)); // color rojo
+                   estadoventanasEstadoUsuario(true); 
+               } else {
+                   JOptionPane.showMessageDialog(null, "No se han aplicado cambios", "Notificacion", JOptionPane.INFORMATION_MESSAGE,
+                           new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png")));
+                   estadoventanasEstadoUsuario(false); 
+                  }
+            } else { // En el caso de que esté inactivo
+                user = "" + datos[2] + " " + datos[3] + " esta a punto de ser reactivado, ¿desea continuar?"; 
+                op = JOptionPane.showConfirmDialog(null, user, "Activar usuario", JOptionPane.YES_NO_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/usedPictures/activar.png")));
+                if (op == 0)  {
+                   admUser.cambiaEstadoUsuario(id, "true"); 
+                   label_notificacion.setText("El usuario con id " + id + " ha sido:"); 
+                   label_resulEstado2.setText("ACTIVADO"); 
+                   label_resulEstado2.setForeground(new java.awt.Color(0,153,51)); // color verde
+                   estadoventanasEstadoUsuario(true); 
+                } else { 
+                   JOptionPane.showMessageDialog(null, "No se han aplicado cambios", "Notificacion", JOptionPane.INFORMATION_MESSAGE,
+                           new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png")));
+                   estadoventanasEstadoUsuario(false); 
+                }
+            }
+            
+        } catch (IOException | SQLException e) {
+            System.out.println("No fue posible crear la clase administradorUsuarios");
+            }
+    }//GEN-LAST:event_cambiarEstadoActionPerformed
+
+    private void jTF_resul_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_resul_idActionPerformed
+
+    private void jTF_resul_nomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_nomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_resul_nomActionPerformed
+
 
         private void estadoventanasConsultaUsuario(boolean bol){
           //Aparecer los labels de consulta
@@ -712,6 +748,15 @@ public class Administrador extends javax.swing.JFrame {
                         jTF_resul_mail.setVisible(bol);
                         label_resul_estado.setVisible(bol);
 
+        }
+        
+        private void estadoventanasEstadoUsuario(boolean bol){
+            // Aparecer los labels de consulta
+            label_notificacion.setVisible(bol);
+            label_imEstado.setVisible(bol); 
+            
+            // Aparecer los cuadros de consulta
+            label_resulEstado2.setVisible(bol);
         }
 
 
@@ -754,12 +799,14 @@ public class Administrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
+    private javax.swing.JPanel PanelEstado;
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton botonConsultaUsuario;
+    private javax.swing.JButton cambiarEstado;
     private javax.swing.JTextField campoConsultaUsuario;
     private javax.swing.JButton estadoClientes;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTF_resul_apellido;
     private javax.swing.JTextField jTF_resul_dir;
     private javax.swing.JTextField jTF_resul_id;
@@ -770,8 +817,11 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JLabel label_dir;
     private javax.swing.JLabel label_estado;
     private javax.swing.JLabel label_id;
+    private javax.swing.JLabel label_imEstado;
     private javax.swing.JLabel label_mail;
     private javax.swing.JLabel label_nom;
+    private javax.swing.JLabel label_notificacion;
+    private javax.swing.JLabel label_resulEstado2;
     private javax.swing.JLabel label_resul_estado;
     private javax.swing.JLabel label_tel;
     private javax.swing.JLabel nombre;
