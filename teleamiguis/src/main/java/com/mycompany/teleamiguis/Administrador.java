@@ -6,11 +6,13 @@ package com.mycompany.teleamiguis;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,7 +93,6 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_id = new javax.swing.JTextField();
         campoConsultaUsuario = new javax.swing.JComboBox<>();
         actualiarInfo = new javax.swing.JButton();
-        tabConsultaUsuario = new javax.swing.JPanel();
         tabsReportes = new javax.swing.JTabbedPane();
         reporteGanancias = new javax.swing.JPanel();
         reporteFacturas = new javax.swing.JPanel();
@@ -231,6 +232,7 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
 
+        tabGestiosUsuarios.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         tabGestiosUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_id.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -328,6 +330,7 @@ public class Administrador extends javax.swing.JFrame {
         tabGestiosUsuarios.add(jTF_resul_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 298, 173, 33));
         jTF_resul_mail.setVisible(false);
 
+        cambiarEstado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         cambiarEstado.setText("Activar/Desactivar");
         cambiarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -337,8 +340,8 @@ public class Administrador extends javax.swing.JFrame {
         tabGestiosUsuarios.add(cambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 130, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabel3.setText("Digite el documento de identidad:");
-        tabGestiosUsuarios.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 300, -1));
+        jLabel3.setText("Seleccione el documento de identidad:");
+        tabGestiosUsuarios.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 350, -1));
 
         label_resulEstado2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_resulEstado2.setForeground(new java.awt.Color(0, 153, 51));
@@ -410,6 +413,7 @@ public class Administrador extends javax.swing.JFrame {
             for (String[] usuario: usuarios){
                 model.addElement(usuario[0] + "-" + usuario[1]);
             }
+            campoConsultaUsuario.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
             campoConsultaUsuario.setModel(model);
         } catch (IOException | SQLException e) {
             System.out.println("No fue posible crear la clase administradorUsuarios");
@@ -422,6 +426,7 @@ public class Administrador extends javax.swing.JFrame {
         });
         tabGestiosUsuarios.add(campoConsultaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
 
+        actualiarInfo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         actualiarInfo.setText("Actualizar información");
         actualiarInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -431,9 +436,6 @@ public class Administrador extends javax.swing.JFrame {
         tabGestiosUsuarios.add(actualiarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, -1, -1));
 
         tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
-
-        tabConsultaUsuario.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        tabsUsuarios.addTab("Consulta general", tabConsultaUsuario);
 
         tabsReportes.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -478,6 +480,8 @@ public class Administrador extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        //Colocar font a las ventanas
+        tabsUsuarios.setFont( new Font("Sansserif", Font.BOLD, 12));
         //Poner invisible al inicio tab Usuarios
         tabsUsuarios.setVisible(false);
         //Poner invisible all inicio
@@ -655,13 +659,14 @@ public class Administrador extends javax.swing.JFrame {
             
             if ("ACTIVO".equals(datos[7])) { // En el caso de que esté activo
                 user = "" + datos[2] + " " + datos[3] + " esta a punto de ser desactivado, ¿desea continuar?"; 
-                
                 op = JOptionPane.showConfirmDialog(null, user, "Desactivar usuario", JOptionPane.YES_NO_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/usedPictures/inactivar.png")));
+
+
                 
                if (op == 0) {
                    admUser.cambiaEstadoUsuario(id, "false"); 
-                   label_notificacion.setText("El usuario con id " + id + " ha sido:"); 
+                   label_notificacion.setText("El usuario con identificación " + id + " ha sido:"); 
                    label_resulEstado2.setText("DESACTIVADO");
                    label_resulEstado2.setForeground(new java.awt.Color(255,51,51)); // color rojo
                    estadoventanasEstadoUsuario(true); 
@@ -878,7 +883,6 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
-    private javax.swing.JPanel tabConsultaUsuario;
     private javax.swing.JPanel tabGestiosUsuarios;
     private javax.swing.JTabbedPane tabsReportes;
     private javax.swing.JTabbedPane tabsUsuarios;
