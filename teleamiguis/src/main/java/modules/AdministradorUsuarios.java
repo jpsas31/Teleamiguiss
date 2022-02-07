@@ -15,17 +15,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
  * @author gyron
  */
-public class administradorUsuarios {
+public class AdministradorUsuarios {
    
        
         private Connection conn;
         
-        public administradorUsuarios() throws IOException, SQLException {
+        public AdministradorUsuarios() throws IOException, SQLException {
             conn = getConnection();
         
         }
@@ -84,6 +85,28 @@ public class administradorUsuarios {
         
         return arr;
     }
+    // retorna una arreglo de strings de nombres e id de trabajadores;
+    public ArrayList<String[]>  mostrarListaUsuarios() throws SQLException
+    {
+        //Realizacion del query 
+         Statement stmt = conn.createStatement();
+         ResultSet result = stmt.executeQuery("SELECT * FROM trabajadores");
+
+
+         ArrayList<String[]> usuarios= new ArrayList<String[]>();
+
+         while (result.next()) {
+        
+            String aux[]= new String[2];
+            aux[0]=result.getString("nombre");
+            aux[1]= result.getString("id_trabajador");
+            usuarios.add(aux);
+        
+         }         
+        return usuarios;
+    }
+    
+   
 
 
 
@@ -156,13 +179,12 @@ public class administradorUsuarios {
     }
     
 //    Funcion para ejecutar un update a un usuario en la DB, este metodo recibe un arreglo con los datos del usuario en el siguiente orden:
-//    tipo_identificacio, cargo, nombre, direccion, telefono, correo,  id_trabajador ";
+//    cargo, nombre, direccion, telefono, correo,  id_trabajador ";
       public int modificarUsuario(String[] atributos) throws SQLException
     {
-
         PreparedStatement stm;
         int confirmacion;
-        String sql =   "UPDATE trabajadores  SET  tipo_identificacion=?, cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ?";
+        String sql =   "UPDATE trabajadores  SET  cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ?";
         stm=conn.prepareStatement(sql);
         //Recorrer todo el arreglo de atributos para insertarlos en la secuencia SQL
         for (int i = 1; i<=atributos.length; i++){
@@ -172,12 +194,14 @@ public class administradorUsuarios {
         //Ejecutar la sentencia                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         confirmacion=stm.executeUpdate ();   
         conn.commit();
+        System.out.println(confirmacion);
+        System.out.println(atributos[5]);
         return confirmacion;
     }
 
 
 public static void main(String args[]) throws SQLException, IOException {
-      administradorUsuarios prueba = new administradorUsuarios();
+      AdministradorUsuarios prueba = new AdministradorUsuarios();
       prueba.mostrarUsuario("5464546454");
     }
 }

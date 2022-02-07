@@ -28,7 +28,7 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author pablo
  */
-public class reportes {
+public class Reportes {
     
     
     public static Connection getConnection() throws FileNotFoundException, IOException{
@@ -48,7 +48,7 @@ public class reportes {
         return null;
     }
     public static JasperPrint createPrint(Map<String,Object> parameters,String jrxml, Connection conn) throws JRException{
-      InputStream employeeReportStream= reportes.class.getResourceAsStream(jrxml);
+      InputStream employeeReportStream= Reportes.class.getResourceAsStream(jrxml);
       JasperReport jasperReport= JasperCompileManager.compileReport(employeeReportStream);
       JasperPrint jasperPrint = JasperFillManager.fillReport(
       jasperReport, parameters, conn);

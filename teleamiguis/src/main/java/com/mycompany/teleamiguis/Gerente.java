@@ -17,9 +17,9 @@ import javax.swing.JTabbedPane;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
-import static services.reportes.createPrint;
-import static services.reportes.createReportView;
-import static services.reportes.getConnection;
+import static services.Reportes.createPrint;
+import static services.Reportes.createReportView;
+import static services.Reportes.getConnection;
 
 /**
  *
