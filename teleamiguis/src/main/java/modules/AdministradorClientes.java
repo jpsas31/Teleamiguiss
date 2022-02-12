@@ -107,22 +107,19 @@ public class AdministradorClientes {
     }
     
    
-
-
-
-   public int registrarUsuario(String id, String tipoI, String cargo, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
+    public int registrarCliente(String id, String tipoI, String tCliente, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
     {
         
         PreparedStatement stm;
         int confirmacion=0;
 
         // Preparando el statement de la tabla trabajadores
-        String sql = "INSERT INTO trabajadores (id_trabajador, tipo_identificacion, cargo, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO cliente (id_cliente, tipo_identificacion, tipo_cliente, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
         stm = conn.prepareStatement(sql);
         
         stm.setString(1,id);
         stm.setString(2,tipoI);
-        stm.setString(3,cargo);
+        stm.setString(3,tCliente);
         stm.setString(4,nombre);
         stm.setString(5,direccion);
         stm.setString(6,telefono);
@@ -131,27 +128,6 @@ public class AdministradorClientes {
         
         //envviando el query INSERT trabajadores
         confirmacion = stm.executeUpdate();
-        conn.commit();
-        
-        //Preparando las varibales del stament de usuario
-        String usr = id;
-        String tipoU = tipoI;
-        String pass = "";
-        
-        //Generando la contraseña
-        pass = pass + nombre.charAt(0);
-        pass = pass + id.substring(0, 4);
-        
-        //Preparando el statement de la tabla usuarios
-        sql = "INSERT INTO usuarios (id_trabajador,tipo_identificacion,contraseña) VALUES (?,?,?)";
-        stm = conn.prepareStatement(sql);
-        
-        stm.setString(1,usr);
-        stm.setString(2,tipoU);
-        stm.setString(3,pass);
-        
-        //Enviando el query INSERT usuarios
-        stm.executeUpdate();
         conn.commit();
         
         return confirmacion;
@@ -202,6 +178,6 @@ public class AdministradorClientes {
 
 public static void main(String args[]) throws SQLException, IOException {
       AdministradorClientes prueba = new AdministradorClientes();
-      prueba.mostrarUsuario("5464546454");
+      prueba.registrarCliente("1","1","1","1","1","1","1",false);
     }
 }
