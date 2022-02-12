@@ -77,8 +77,8 @@ public class AdministradorUsuarios {
         } 
         
 
-/*
-        for(int j =0; j <8;j++){
+
+/*        for(int j =0; j <8;j++){
             System.out.println(arr[j]);
          }*/
 
@@ -113,47 +113,51 @@ public class AdministradorUsuarios {
 
    public int registrarUsuario(String id, String tipoI, String cargo, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
     {
-        
-        PreparedStatement stm;
-        int confirmacion=0;
+        int confirmacion = 0;
+         if (id.matches("-?\\d+(\\.\\d+)?") && telefono.matches("-?\\d+(\\.\\d+)?")) {
+             PreparedStatement stm;
+             
 
-        // Preparando el statement de la tabla trabajadores
-        String sql = "INSERT INTO trabajadores (id_trabajador, tipo_identificacion, cargo, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
-        stm = conn.prepareStatement(sql);
-        
-        stm.setString(1,id);
-        stm.setString(2,tipoI);
-        stm.setString(3,cargo);
-        stm.setString(4,nombre);
-        stm.setString(5,direccion);
-        stm.setString(6,telefono);
-        stm.setString(7,correo);
-        stm.setBoolean(8,estado);
-        
-        //envviando el query INSERT trabajadores
-        confirmacion = stm.executeUpdate();
-        conn.commit();
-        
-        //Preparando las varibales del stament de usuario
-        String usr = id;
-        String tipoU = tipoI;
-        String pass = "";
-        
-        //Generando la contraseña
-        pass = pass + nombre.charAt(0);
-        pass = pass + id.substring(0, 4);
-        
-        //Preparando el statement de la tabla usuarios
-        sql = "INSERT INTO usuarios (id_trabajador,tipo_identificacion,contraseña) VALUES (?,?,?)";
-        stm = conn.prepareStatement(sql);
-        
-        stm.setString(1,usr);
-        stm.setString(2,tipoU);
-        stm.setString(3,pass);
-        
-        //Enviando el query INSERT usuarios
-        stm.executeUpdate();
-        conn.commit();
+             // Preparando el statement de la tabla trabajadores
+             String sql = "INSERT INTO trabajadores (id_trabajador, tipo_identificacion, cargo, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
+             stm = conn.prepareStatement(sql);
+
+             stm.setString(1, id);
+             stm.setString(2, tipoI);
+             stm.setString(3, cargo);
+             stm.setString(4, nombre);
+             stm.setString(5, direccion);
+             stm.setString(6, telefono);
+             stm.setString(7, correo);
+             stm.setBoolean(8, estado);
+
+             //envviando el query INSERT trabajadores
+             confirmacion = stm.executeUpdate();
+             conn.commit();
+
+             //Preparando las varibales del stament de usuario
+             String usr = id;
+             String tipoU = tipoI;
+             String pass = "";
+
+             //Generando la contraseña
+             pass = pass + nombre.charAt(0);
+             pass = pass + id.substring(0, 4);
+
+             //Preparando el statement de la tabla usuarios
+             sql = "INSERT INTO usuarios (id_trabajador,tipo_identificacion,contraseña) VALUES (?,?,?)";
+             stm = conn.prepareStatement(sql);
+
+             stm.setString(1, usr);
+             stm.setString(2, tipoU);
+             stm.setString(3, pass);
+
+             //Enviando el query INSERT usuarios
+             stm.executeUpdate();
+             conn.commit();
+         }else {
+            confirmacion = -1;
+        }
         
         return confirmacion;
     }
@@ -184,26 +188,31 @@ public class AdministradorUsuarios {
 //    cargo, nombre, direccion, telefono, correo,  id_trabajador ";
       public int modificarUsuario(String[] atributos) throws SQLException
     {
-        PreparedStatement stm;
         int confirmacion;
-        String sql =   "UPDATE trabajadores  SET  cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ? AND tipo_identificacion = ?";
-        stm=conn.prepareStatement(sql);
-        //Recorrer todo el arreglo de atributos para insertarlos en la secuencia SQL
-        for (int i = 1; i<=atributos.length; i++){
-            //System.out.println(atributos[i-1]);
-            stm.setString(i,atributos[i-1]);
+        if (atributos[3].matches("-?\\d+(\\.\\d+)?")) {
+            PreparedStatement stm;
+
+            String sql = "UPDATE trabajadores  SET  cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ? AND tipo_identificacion = ?";
+            stm = conn.prepareStatement(sql);
+            //Recorrer todo el arreglo de atributos para insertarlos en la secuencia SQL
+            for (int i = 1; i <= atributos.length; i++) {
+                //System.out.println(atributos[i-1]);
+                stm.setString(i, atributos[i - 1]);
+            }
+            //Ejecutar la sentencia                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+            confirmacion = stm.executeUpdate();
+            conn.commit();
+            //System.out.println(confirmacion);
+            //System.out.println(atributos[5]);
+        }else {
+            confirmacion = -1;
         }
-        //Ejecutar la sentencia                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-        confirmacion=stm.executeUpdate ();   
-        conn.commit();
-        //System.out.println(confirmacion);
-        //System.out.println(atributos[5]);
         return confirmacion;
     }
 
 
 public static void main(String args[]) throws SQLException, IOException {
       AdministradorUsuarios prueba = new AdministradorUsuarios();
-      prueba.mostrarUsuario("5464546454","C.C");
+      prueba.mostrarUsuario("1190512015","C.C");
     }
 }

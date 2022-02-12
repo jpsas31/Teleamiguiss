@@ -100,7 +100,7 @@ public class AdministradorClientes {
             String aux[]= new String[3];
             aux[0]=result.getString("nombre");
             aux[1]= result.getString("id_cliente");
-            aux[2]= result.getString("tipo_cliente");
+            aux[2]= result.getString("tipo_identificacion");
             usuarios.add(aux);
         
          }    
@@ -110,13 +110,16 @@ public class AdministradorClientes {
    
     public int registrarCliente(String id, String tipoI, String tCliente, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
     {
-        
-        PreparedStatement stm;
         int confirmacion=0;
+        if (id.matches("-?\\d+(\\.\\d+)?") && telefono.matches("-?\\d+(\\.\\d+)?")){
+            PreparedStatement stm;
+        
 
         // Preparando el statement de la tabla trabajadores
         String sql = "INSERT INTO cliente (id_cliente, tipo_identificacion, tipo_cliente, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
         stm = conn.prepareStatement(sql);
+        
+        
         
         stm.setString(1,id);
         stm.setString(2,tipoI);
@@ -130,6 +133,10 @@ public class AdministradorClientes {
         //envviando el query INSERT trabajadores
         confirmacion = stm.executeUpdate();
         conn.commit();
+        
+    }else {
+         confirmacion = -1;
+        }
         
         return confirmacion;
     }
@@ -160,14 +167,16 @@ public class AdministradorClientes {
 //   tipo_cliente, nombre, direccion telefono, correo, estado,id_cliente, tipo_identificacion
     public int modificarCliente(String[] atributos) throws SQLException
     {
-        PreparedStatement stm;
         int confirmacion;
+        if (atributos[3].matches("-?\\d+(\\.\\d+)?")){
+        PreparedStatement stm;
         
-        String sql =   "UPDATE cliente  SET  tipo_cliente=?, nombre=?, direccion=?, telefono=?,correo=?,  estado=CAST( ? AS boolean )  WHERE id_cliente = ? AND tipo_identificacion = ?";
+        
+        String sql =   "UPDATE cliente  SET  tipo_cliente=?, nombre=?, direccion=?, telefono=?,correo=?  WHERE id_cliente = ? AND tipo_identificacion = ?";
         stm=conn.prepareStatement(sql);
         //Recorrer todo el arreglo de atributos para insertarlos en la secuencia SQL
         for (int i = 1; i<=atributos.length; i++){
-            System.out.println(atributos[i-1]);
+            //System.out.println(atributos[i-1]);
             stm.setString(i,atributos[i-1]);
         }
         //Ejecutar la sentencia                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
@@ -175,6 +184,9 @@ public class AdministradorClientes {
         conn.commit();
         System.out.println(confirmacion);
         System.out.println(atributos[5]);
+        }else {
+            confirmacion = -1;
+        }
         return confirmacion;
     }
 
@@ -182,6 +194,6 @@ public class AdministradorClientes {
 
 public static void main(String args[]) throws SQLException, IOException {
       AdministradorClientes prueba = new AdministradorClientes();
-      prueba.mostrarListaClientes();
+      prueba.mostrarClientes("31482384", "C.C");
     }
 }

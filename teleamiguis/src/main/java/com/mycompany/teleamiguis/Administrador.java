@@ -396,13 +396,13 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_tipoid.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_tipoid.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_tipoid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "C.C", "T.I", "NIT"}));
-        jTF_resul_tipoid.setSelectedIndex(-1);
         jTF_resul_tipoid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTF_resul_tipoidActionPerformed(evt);
             }
         });
         tabGestiosUsuarios.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
+        jTF_resul_tipoid.setSelectedIndex(-1);
 
         this.setVisible(false);
         label_imEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
@@ -421,13 +421,13 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_cargo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_cargo.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Operador", "Gerente" }));
-        jTF_resul_cargo.setSelectedIndex(-1);
         jTF_resul_cargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTF_resul_cargoActionPerformed(evt);
             }
         });
         tabGestiosUsuarios.add(jTF_resul_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
+        jTF_resul_cargo.setSelectedIndex(-1);
 
         tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
 
@@ -792,9 +792,10 @@ public class Administrador extends javax.swing.JFrame {
             String telefono = jTF_resul_tel.getText();
             String direccion =  jTF_resul_dir.getText();
             String correo =jTF_resul_mail.getText();
-            
+         
         try {
-            admUser.registrarUsuario(id, tipol, cargo, nombre, direccion, telefono, correo,true);
+            
+            int confirmacion = admUser.registrarUsuario(id, tipol, cargo, nombre, direccion, telefono, correo,true);
             ArrayList<String[]> usuarios= admUser.mostrarListaUsuarios();
                     DefaultComboBoxModel model = new DefaultComboBoxModel();
                     for (String[] usuario: usuarios){
@@ -804,9 +805,15 @@ public class Administrador extends javax.swing.JFrame {
 
                     validate();
                     repaint();
-            JOptionPane.showMessageDialog(null, "Se registró el usuario ingresado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+                  campoConsultaUsuario.setSelectedIndex(-1);
+                    
+            if (confirmacion == -1) {
+                JOptionPane.showMessageDialog(null, "No fue posible registrar al usuario ingresado, dato inválido", "Notificación", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Se registró el usuario ingresado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (IOException | SQLException e) {
-            System.out.println("No fue posible realizar la operación registrar Usuario");
+            JOptionPane.showMessageDialog(null, "No fue posible ingresar al usuario vacio", "Notificación", JOptionPane.ERROR_MESSAGE);
         }
             
            

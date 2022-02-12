@@ -376,6 +376,7 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
         tabGestiosClientes.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
+        jTF_resul_tipoid.setSelectedIndex(-1);
 
         label_imEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
         label_imEstado.setOpaque(true);
@@ -399,6 +400,7 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
         tabGestiosClientes.add(jTF_resul_tipocliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
+        jTF_resul_tipocliente.setSelectedIndex(-1);
 
         tabsClientes.addTab("Gestion", tabGestiosClientes);
 
@@ -424,30 +426,25 @@ public class Gerente extends javax.swing.JFrame {
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabsClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(tabsClientes)
-                    .addContainerGap()))
-            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelDerLayout.createSequentialGroup()
-                    .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Fondo)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(tabsClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(tabsClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 5, Short.MAX_VALUE)))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
-                    .addContainerGap()
                     .addComponent(Fondo)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         //Colocar font a las ventanas
@@ -696,12 +693,12 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_campoConsultaClienteActionPerformed
 
     private void actualiarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualiarInfoActionPerformed
-
+//   tipo_cliente, nombre, direccion telefono, correo, estado,id_cliente, tipo_identificacion
         try {
             int returnCode;
             String datos[]= {String.valueOf(jTF_resul_tipocliente.getSelectedItem()), jTF_resul_nombre.getText(),jTF_resul_dir.getText(),jTF_resul_tel.getText(),jTF_resul_mail.getText(),jTF_resul_id.getText(),String.valueOf(jTF_resul_tipoid.getSelectedItem())};
 
-            if (!idActual.equals(datos[5]) ) {
+            if (!idActual.equals(datos[5])  && !tipoidActual.equals(datos[6]) ){
                 JOptionPane.showMessageDialog(null, "No es posible editar el documento de identificación", "Advertencia", JOptionPane.ERROR_MESSAGE);
                 jTF_resul_id.setText(idActual);
             } else {
@@ -743,7 +740,8 @@ public class Gerente extends javax.swing.JFrame {
         String correo =jTF_resul_mail.getText();
 
         try {
-            admClient.registrarCliente(id, tipol, cargo, nombre, direccion, telefono, correo,true);
+            //System.out.println("");
+            int confirmacion = admClient.registrarCliente(id, tipol, cargo, nombre, direccion, telefono, correo,true);
             ArrayList<String[]> usuarios= admClient.mostrarListaClientes();
             DefaultComboBoxModel model = new DefaultComboBoxModel();
             for (String[] usuario: usuarios){
@@ -753,7 +751,14 @@ public class Gerente extends javax.swing.JFrame {
 
             validate();
             repaint();
-            JOptionPane.showMessageDialog(null, "Se registró el cliente ingresado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            campoConsultaCliente.setSelectedIndex(-1);
+            
+            if (confirmacion == -1){
+            JOptionPane.showMessageDialog(null, "El cliente no pudo ser registrado", "Notificación", JOptionPane.ERROR_MESSAGE);
+            }else {
+                 JOptionPane.showMessageDialog(null, "Se registró el cliente ingresado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
         } catch (IOException | SQLException e) {
             System.out.println("No fue posible realizar la operación registrar Cliente");
         }
