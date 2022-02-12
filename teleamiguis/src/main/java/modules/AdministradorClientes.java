@@ -51,11 +51,11 @@ public class AdministradorClientes {
         
      
     // Consulta de usuario (trabajadores)
-    public String[] mostrarUsuario(String id) throws SQLException
+    public String[] mostrarClientes(String id,String tipoid) throws SQLException
     {
         //Realizacion del query 
          Statement stmt = conn.createStatement();
-         ResultSet result = stmt.executeQuery("SELECT * FROM trabajadores WHERE id_trabajador = '"+id+"'  ");
+         ResultSet result = stmt.executeQuery("SELECT * FROM cliente WHERE id_cliente = '"+id+"' and tipo_identificacion = '"+tipoid+"' ");
 
 
          String arr[]= new String[8];
@@ -86,23 +86,24 @@ public class AdministradorClientes {
         return arr;
     }
     // retorna una arreglo de strings de nombres e id de trabajadores;
-    public ArrayList<String[]>  mostrarListaUsuarios() throws SQLException
+    public ArrayList<String[]>  mostrarListaClientes() throws SQLException
     {
         //Realizacion del query 
          Statement stmt = conn.createStatement();
-         ResultSet result = stmt.executeQuery("SELECT * FROM trabajadores");
+         ResultSet result = stmt.executeQuery("SELECT * FROM cliente");
 
 
          ArrayList<String[]> usuarios= new ArrayList<String[]>();
 
          while (result.next()) {
         
-            String aux[]= new String[2];
+            String aux[]= new String[3];
             aux[0]=result.getString("nombre");
-            aux[1]= result.getString("id_trabajador");
+            aux[1]= result.getString("id_cliente");
+            aux[2]= result.getString("tipo_cliente");
             usuarios.add(aux);
         
-         }         
+         }    
         return usuarios;
     }
     
@@ -179,6 +180,6 @@ public class AdministradorClientes {
 
 public static void main(String args[]) throws SQLException, IOException {
       AdministradorClientes prueba = new AdministradorClientes();
-      
+      prueba.mostrarListaClientes();
     }
 }
