@@ -35,6 +35,7 @@ public class Administrador extends javax.swing.JFrame {
     
     private AdministradorUsuarios  admUser;
     private String idActual;
+    private String tipoidActual;
     int xMouse;
     int yMouse;
 
@@ -371,7 +372,7 @@ public class Administrador extends javax.swing.JFrame {
             ArrayList<String[]> usuarios= admUser.mostrarListaUsuarios();
             DefaultComboBoxModel model = new DefaultComboBoxModel();
             for (String[] usuario: usuarios){
-                model.addElement(usuario[0] + " - " + usuario[1]);
+                model.addElement(usuario[0] +" - " + usuario[2] +" - " + usuario[1] );
             }
             campoConsultaUsuario.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
             campoConsultaUsuario.setModel(model);
@@ -642,7 +643,7 @@ public class Administrador extends javax.swing.JFrame {
 
         try {
              int returnCode;
-            String datos[]= {jTF_resul_cargo.getText(),jTF_resul_nombre.getText(),jTF_resul_dir.getText(),jTF_resul_tel.getText(),jTF_resul_mail.getText(),jTF_resul_id.getText()};
+            String datos[]= {jTF_resul_cargo.getText(),jTF_resul_nombre.getText(),jTF_resul_dir.getText(),jTF_resul_tel.getText(),jTF_resul_mail.getText(),jTF_resul_id.getText(),jTF_resul_tipoid.getText()};
             
             if (!idActual.equals(datos[5]) ) {
                 JOptionPane.showMessageDialog(null, "No es posible editar el documento de identificación", "Advertencia", JOptionPane.ERROR_MESSAGE);
@@ -657,7 +658,7 @@ public class Administrador extends javax.swing.JFrame {
                     ArrayList<String[]> usuarios= admUser.mostrarListaUsuarios();
                     DefaultComboBoxModel model = new DefaultComboBoxModel();
                     for (String[] usuario: usuarios){
-                        model.addElement(usuario[0] + " - " + usuario[1]);
+                        model.addElement(usuario[0] + " - "+usuario[2] +" - " + usuario[1]);
                     }
                     campoConsultaUsuario.setModel(model);
 
@@ -679,15 +680,17 @@ public class Administrador extends javax.swing.JFrame {
     private void campoConsultaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoConsultaUsuarioActionPerformed
         if (campoConsultaUsuario.getSelectedIndex() != -1){ 
         String info[]= String.valueOf(campoConsultaUsuario.getSelectedItem()).split(" - ");
-        String id = info[1];
-        idActual = info[1];
+        String id = info[2];
+        String tipoid = info[1];
+        idActual = info[2];
+        tipoidActual = info[1];
 
         estadoventanasEstadoUsuario(false);  // Se ocultan los posibles jlabels sobrepuestos
 
          
             String[] datos;
         try {
-            datos = admUser.mostrarUsuario(id);
+            datos = admUser.mostrarUsuario(id,tipoid);
             if (datos[0] != null) {
                 /*
                 for (int j = 0; j < datos.length; j++) {
@@ -729,19 +732,21 @@ public class Administrador extends javax.swing.JFrame {
         estadoventanasConsultaUsuario(false); // Se ocultan los posibles jlabels sobrepuestos
 
         int op;
-        String info[] = String.valueOf(campoConsultaUsuario.getSelectedItem()).split("-");
-        String id = info[1];
+        String info[] = String.valueOf(campoConsultaUsuario.getSelectedItem()).split(" - ");
+        String id = info[2];
+        String tipoid = info[1];
         String user;
         String[] datos;
+
         try {
-            datos = admUser.mostrarUsuario(id);
+            datos = admUser.mostrarUsuario(id,tipoid);
             if ("ACTIVO".equals(datos[7])) { // En el caso de que esté activo
             user = "" + datos[2] + " " + datos[3] + " esta a punto de ser desactivado, ¿desea continuar?";
             op = JOptionPane.showConfirmDialog(null, user, "Desactivar usuario", JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/usedPictures/inactivar.png")));
 
             if (op == 0) {
-                admUser.cambiaEstadoUsuario(id, "false");
+                admUser.cambiaEstadoUsuario(id,tipoid, "false");
                 label_notificacion.setText("El usuario con identificación " + id + " ha sido:");
                 label_resulEstado2.setText("DESACTIVADO");
                 label_resulEstado2.setForeground(new java.awt.Color(255, 51, 51)); // color rojo
@@ -756,7 +761,7 @@ public class Administrador extends javax.swing.JFrame {
             op = JOptionPane.showConfirmDialog(null, user, "Activar usuario", JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/usedPictures/activar.png")));
             if (op == 0) {
-                admUser.cambiaEstadoUsuario(id, "true");
+                admUser.cambiaEstadoUsuario(id,tipoid, "true");
                 label_notificacion.setText("El usuario con identificación " + id + " ha sido:");
                 label_resulEstado2.setText("ACTIVADO");
                 label_resulEstado2.setForeground(new java.awt.Color(0, 153, 51)); // color verde
@@ -789,7 +794,7 @@ public class Administrador extends javax.swing.JFrame {
             ArrayList<String[]> usuarios= admUser.mostrarListaUsuarios();
                     DefaultComboBoxModel model = new DefaultComboBoxModel();
                     for (String[] usuario: usuarios){
-                        model.addElement(usuario[0] + " - " + usuario[1]);
+                        model.addElement(usuario[0] + " - " + usuario[2] +" - " + usuario[1]);
                     }
                     campoConsultaUsuario.setModel(model);
 

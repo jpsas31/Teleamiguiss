@@ -658,7 +658,7 @@
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
                         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch (IOException | SQLException e) {&#xa;            System.out.println(&quot;No fue posible crear la clase administradorUsuarios&quot;);&#xa;}&#xa;campoConsultaUsuario.setSelectedIndex(-1);"/>
-                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {  &#xa;AdministradorUsuarios admUser = new AdministradorUsuarios();&#xa;ArrayList&lt;String[]&gt; usuarios= admUser.mostrarListaUsuarios();&#xa;DefaultComboBoxModel model = new DefaultComboBoxModel();&#xa;for (String[] usuario: usuarios){&#xa;    model.addElement(usuario[0] + &quot; - &quot; + usuario[1]);&#xa;}"/>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="try {  &#xa;AdministradorUsuarios admUser = new AdministradorUsuarios();&#xa;ArrayList&lt;String[]&gt; usuarios= admUser.mostrarListaUsuarios();&#xa;DefaultComboBoxModel model = new DefaultComboBoxModel();&#xa;for (String[] usuario: usuarios){&#xa;    model.addElement(usuario[0] +&quot; - &quot; + usuario[2] +&quot; - &quot; + usuario[1] );&#xa;}"/>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                       <Constraints>

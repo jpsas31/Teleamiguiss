@@ -51,11 +51,11 @@ public class AdministradorUsuarios {
         
      
     // Consulta de usuario (trabajadores)
-    public String[] mostrarUsuario(String id) throws SQLException
+    public String[] mostrarUsuario(String id,String tipoid) throws SQLException
     {
         //Realizacion del query 
          Statement stmt = conn.createStatement();
-         ResultSet result = stmt.executeQuery("SELECT * FROM trabajadores WHERE id_trabajador = '"+id+"'  ");
+         ResultSet result = stmt.executeQuery("SELECT * FROM trabajadores WHERE id_trabajador = '"+id+"' and tipo_identificacion = '"+tipoid+"' ");
 
 
          String arr[]= new String[8];
@@ -97,9 +97,10 @@ public class AdministradorUsuarios {
 
          while (result.next()) {
         
-            String aux[]= new String[2];
+            String aux[]= new String[3];
             aux[0]=result.getString("nombre");
             aux[1]= result.getString("id_trabajador");
+            aux[2]= result.getString("tipo_identificacion");
             usuarios.add(aux);
         
          }         
@@ -160,17 +161,18 @@ public class AdministradorUsuarios {
    
    // Funcion para cambiar el estado de un trabajador en el sistema (true -> ACTIVO, false -> INACTIVO). La función recibe como parametro
    // el id (cedula) del usuario. 
-    public int cambiaEstadoUsuario(String id, String status) throws SQLException
+    public int cambiaEstadoUsuario(String id, String tipoid,String status) throws SQLException
     {
         PreparedStatement stm;
         int confirmacion;
         // Escribimos el Query
-        String inhabQuery =   "UPDATE trabajadores  SET  estado = CAST( ? AS boolean ) WHERE id_trabajador = ?";
+        String inhabQuery =   "UPDATE trabajadores  SET  estado = CAST( ? AS boolean ) WHERE id_trabajador = ? AND tipo_identificacion = ?";
         stm=conn.prepareStatement(inhabQuery);
         
         // Seteamos los parametros del query teniendo en cuenta los parametros de la funcion
         stm.setString(1, status); 
         stm.setString(2, id); 
+        stm.setString(3, tipoid); 
         
         //Ejecutamos la sentencia
         confirmacion= stm.executeUpdate ();
@@ -184,24 +186,24 @@ public class AdministradorUsuarios {
     {
         PreparedStatement stm;
         int confirmacion;
-        String sql =   "UPDATE trabajadores  SET  cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ?";
+        String sql =   "UPDATE trabajadores  SET  cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ? AND tipo_identificacion = ?";
         stm=conn.prepareStatement(sql);
         //Recorrer todo el arreglo de atributos para insertarlos en la secuencia SQL
         for (int i = 1; i<=atributos.length; i++){
-            System.out.println(atributos[i-1]);
+            //System.out.println(atributos[i-1]);
             stm.setString(i,atributos[i-1]);
         }
         //Ejecutar la sentencia                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         confirmacion=stm.executeUpdate ();   
         conn.commit();
-        System.out.println(confirmacion);
-        System.out.println(atributos[5]);
+        //System.out.println(confirmacion);
+        //System.out.println(atributos[5]);
         return confirmacion;
     }
 
 
 public static void main(String args[]) throws SQLException, IOException {
       AdministradorUsuarios prueba = new AdministradorUsuarios();
-      prueba.mostrarUsuario("5464546454");
+      prueba.mostrarUsuario("5464546454","C.C");
     }
 }
