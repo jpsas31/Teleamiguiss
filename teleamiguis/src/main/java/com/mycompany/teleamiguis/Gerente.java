@@ -5,13 +5,17 @@
 package com.mycompany.teleamiguis;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import net.sf.jasperreports.engine.JRException;
@@ -20,12 +24,17 @@ import net.sf.jasperreports.swing.JRViewer;
 import static services.Reportes.createPrint;
 import static services.Reportes.createReportView;
 import static services.Reportes.getConnection;
+import modules.AdministradorClientes;
 
 /**
  *
  * @author gyron
  */
 public class Gerente extends javax.swing.JFrame {
+    
+    private AdministradorClientes  admClient;
+    private String idActual;
+    private String tipoidActual; 
     int xMouse; 
     int yMouse; 
 
@@ -35,6 +44,18 @@ public class Gerente extends javax.swing.JFrame {
      */
     public Gerente() {
         initComponents();
+        
+        try {
+            // Hacemos invisibles todos los jlabel de abajo del tab de gestionClientes
+            admClient = new AdministradorClientes(); // se crea una instancia de la clase AdministradorClientes
+        } catch (IOException  | SQLException e) {
+            System.out.println("Hubo un problema al crear la clase administradorCliente");
+        } 
+        estadoventanasEstadoCliente(false); 
+        estadoventanasConsultaClientes(true); 
+        
+        
+        
     }
 
     /**
@@ -58,6 +79,32 @@ public class Gerente extends javax.swing.JFrame {
         Logo = new javax.swing.JLabel();
         panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
+        tabsClientes = new javax.swing.JTabbedPane();
+        tabGestiosClientes = new javax.swing.JPanel();
+        label_id = new javax.swing.JLabel();
+        label_nombre = new javax.swing.JLabel();
+        label_dir = new javax.swing.JLabel();
+        label_tel = new javax.swing.JLabel();
+        label_mail = new javax.swing.JLabel();
+        label_estado = new javax.swing.JLabel();
+        label_titulo = new javax.swing.JLabel();
+        label_cargo = new javax.swing.JLabel();
+        label_resul_estado = new javax.swing.JLabel();
+        jTF_resul_nombre = new javax.swing.JTextField();
+        jTF_resul_dir = new javax.swing.JTextField();
+        jTF_resul_tel = new javax.swing.JTextField();
+        jTF_resul_mail = new javax.swing.JTextField();
+        jTF_resul_id = new javax.swing.JTextField();
+        cambiarEstado = new javax.swing.JButton();
+        campoConsultaCliente = new javax.swing.JComboBox<>();
+        actualiarInfo = new javax.swing.JButton();
+        Registrar = new javax.swing.JButton();
+        label_notificacion = new javax.swing.JLabel();
+        label_resulEstado2 = new javax.swing.JLabel();
+        jTF_resul_tipoid = new javax.swing.JComboBox<>();
+        label_imEstado = new javax.swing.JLabel();
+        Limpiar = new javax.swing.JButton();
+        jTF_resul_tipocliente = new javax.swing.JComboBox<>();
         tabsReportes = new javax.swing.JTabbedPane();
         reporteGanancias = new javax.swing.JPanel();
         reporteFactura = new javax.swing.JPanel();
@@ -164,6 +211,196 @@ public class Gerente extends javax.swing.JFrame {
 
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
         Fondo.setToolTipText("");
+        Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        tabsClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabsClientes.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabsClientesStateChanged(evt);
+            }
+        });
+
+        tabGestiosClientes.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        tabGestiosClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_id.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_id.setText("Identificación");
+        tabGestiosClientes.add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 188, 160, -1));
+        label_id.setVisible(false);
+
+        label_nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_nombre.setText("Nombre");
+        tabGestiosClientes.add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 188, 170, -1));
+        label_nombre.setVisible(false);
+
+        label_dir.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_dir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_dir.setText("Dirección");
+        tabGestiosClientes.add(label_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 273, 160, -1));
+        label_dir.setVisible(false);
+
+        label_tel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_tel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_tel.setText("Teléfono");
+        tabGestiosClientes.add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 273, 170, -1));
+        label_tel.setVisible(false);
+
+        label_mail.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_mail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_mail.setText("Correo ");
+        tabGestiosClientes.add(label_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 273, 170, -1));
+        label_mail.setVisible(false);
+
+        label_estado.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_estado.setText("Estado");
+        tabGestiosClientes.add(label_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 349, 170, -1));
+        label_estado.setVisible(false);
+
+        label_titulo.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_titulo.setText("Seleccione el documento de identidad:");
+        tabGestiosClientes.add(label_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
+
+        label_cargo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_cargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_cargo.setText("Tipo de cliente");
+        tabGestiosClientes.add(label_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 188, 170, -1));
+        label_cargo.setVisible(false);
+
+        label_resul_estado.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_resul_estado.setForeground(new java.awt.Color(0, 153, 51));
+        label_resul_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tabGestiosClientes.add(label_resul_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 374, 173, 36));
+        label_resul_estado.setVisible(false);
+
+        jTF_resul_nombre.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_nombre.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_nombre.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTF_resul_nombre.setOpaque(true);
+        tabGestiosClientes.add(jTF_resul_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 213, 173, 33));
+        jTF_resul_nombre.setVisible(false);
+
+        jTF_resul_dir.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_dir.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_dir.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_dir.setOpaque(true);
+        tabGestiosClientes.add(jTF_resul_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 298, 170, 33));
+        jTF_resul_dir.setVisible(false);
+
+        jTF_resul_tel.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_tel.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_tel.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_tel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTF_resul_tel.setOpaque(true);
+        tabGestiosClientes.add(jTF_resul_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 298, 173, 33));
+        jTF_resul_tel.setVisible(false);
+
+        jTF_resul_mail.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_mail.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_mail.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_mail.setOpaque(true);
+        tabGestiosClientes.add(jTF_resul_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 298, 173, 33));
+        jTF_resul_mail.setVisible(false);
+
+        jTF_resul_id.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_id.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        tabGestiosClientes.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 213, 100, 33));
+
+        cambiarEstado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        cambiarEstado.setText("Activar/Desactivar");
+        cambiarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarEstadoActionPerformed(evt);
+            }
+        });
+        tabGestiosClientes.add(cambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 180, -1));
+
+        try {
+            AdministradorClientes admClient = new AdministradorClientes();
+            ArrayList<String[]> usuarios= admClient.mostrarListaClientes();
+            DefaultComboBoxModel model = new DefaultComboBoxModel();
+            for (String[] usuario: usuarios){
+                model.addElement(usuario[0] +" - " + usuario[2] +" - " + usuario[1] );
+            }
+            campoConsultaCliente.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
+            campoConsultaCliente.setModel(model);
+        } catch (IOException | SQLException e) {
+            System.out.println("No fue posible crear la clase administradorClientes");
+        }
+        campoConsultaCliente.setSelectedIndex(-1);
+        campoConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoConsultaClienteActionPerformed(evt);
+            }
+        });
+        tabGestiosClientes.add(campoConsultaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
+
+        actualiarInfo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        actualiarInfo.setText("Actualizar información");
+        actualiarInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualiarInfoActionPerformed(evt);
+            }
+        });
+        tabGestiosClientes.add(actualiarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, -1));
+
+        Registrar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        Registrar.setText("Registrar");
+        Registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarActionPerformed(evt);
+            }
+        });
+        tabGestiosClientes.add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 180, -1));
+
+        label_notificacion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_notificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tabGestiosClientes.add(label_notificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 380, 40));
+
+        label_resulEstado2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_resulEstado2.setForeground(new java.awt.Color(0, 153, 51));
+        label_resulEstado2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tabGestiosClientes.add(label_resulEstado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 330, 50));
+        label_resul_estado.setVisible(false);
+
+        jTF_resul_tipoid.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_tipoid.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_tipoid.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_tipoid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "C.C", "T.I", "NIT"}));
+        jTF_resul_tipoid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_resul_tipoidActionPerformed(evt);
+            }
+        });
+        tabGestiosClientes.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
+
+        label_imEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
+        label_imEstado.setOpaque(true);
+        tabGestiosClientes.add(label_imEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+
+        Limpiar.setText("Limpiar");
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
+        tabGestiosClientes.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
+
+        jTF_resul_tipocliente.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_tipocliente.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_tipocliente.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_tipocliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {"Natural", "Corporativo"}));
+        jTF_resul_tipocliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_resul_tipoclienteActionPerformed(evt);
+            }
+        });
+        tabGestiosClientes.add(jTF_resul_tipocliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
+
+        tabsClientes.addTab("Gestion", tabGestiosClientes);
 
         tabsReportes.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -187,23 +424,36 @@ public class Gerente extends javax.swing.JFrame {
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(Fondo)
+                    .addContainerGap()
+                    .addComponent(tabsClientes)
+                    .addContainerGap()))
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addContainerGap()
+                    .addComponent(tabsClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addContainerGap()
                     .addComponent(Fondo)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        //Colocar font a las ventanas
+        tabsClientes.setFont( new Font("Sansserif", Font.BOLD, 12));
+        //Poner invisible al inicio tab Usuarios
+        tabsClientes.setVisible(false);
         //Iniciar el componente en modo oculto
         tabsReportes.setVisible(false);
 
@@ -266,13 +516,14 @@ public class Gerente extends javax.swing.JFrame {
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientesActionPerformed
 
         tabsReportes.setVisible(false);
+        tabsClientes.setVisible(true);
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
         reportes.setEnabled(true);
-        clientes.setEnabled(false);
         estadoClientes.setEnabled(true);
+        
     }//GEN-LAST:event_clientesActionPerformed
 
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
@@ -345,6 +596,235 @@ public class Gerente extends javax.swing.JFrame {
        
     }//GEN-LAST:event_tabsReportesStateChanged
 
+    private void cambiarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cambiarEstadoActionPerformed
+
+        estadoventanasConsultaClientes(false); // Se ocultan los posibles jlabels sobrepuestos
+
+        int op;
+        String info[] = String.valueOf(campoConsultaCliente.getSelectedItem()).split(" - ");
+        String id = info[2];
+        String tipoid = info[1];
+        String user;
+        String[] datos;
+
+        try {
+            datos = admClient.mostrarClientes(id,tipoid);
+            if ("ACTIVO".equals(datos[7])) { // En el caso de que esté activo
+                user = "" + datos[2] + " " + datos[3] + " esta a punto de ser desactivado, ¿desea continuar?";
+                op = JOptionPane.showConfirmDialog(null, user, "Desactivar cliente", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/usedPictures/inactivar.png")));
+
+                if (op == 0) {
+                    admClient.cambiaEstadoCliente(id, tipoid, "false");
+                    label_notificacion.setText("El usuario con identificación " + id + " ha sido:");
+                    label_resulEstado2.setText("DESACTIVADO");
+                    label_resulEstado2.setForeground(new java.awt.Color(255, 51, 51)); // color rojo
+                    estadoventanasEstadoCliente(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se han aplicado cambios", "Notificacion", JOptionPane.INFORMATION_MESSAGE,
+                        new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png")));
+                    estadoventanasEstadoCliente(false);
+                }
+            } else { // En el caso de que esté inactivo
+                user = "" + datos[2] + " " + datos[3] + " esta a punto de ser reactivado, ¿desea continuar?";
+                op = JOptionPane.showConfirmDialog(null, user, "Activar cliente", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, new javax.swing.ImageIcon(getClass().getResource("/usedPictures/activar.png")));
+                if (op == 0) {
+                    admClient.cambiaEstadoCliente(id,tipoid, "true");
+                    label_notificacion.setText("El cliente con identificación " + id + " ha sido:");
+                    label_resulEstado2.setText("ACTIVADO");
+                    label_resulEstado2.setForeground(new java.awt.Color(0, 153, 51)); // color verde
+                    estadoventanasEstadoCliente(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se han aplicado cambios", "Notificacion", JOptionPane.INFORMATION_MESSAGE,
+                        new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png")));
+                    estadoventanasEstadoCliente(false);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_cambiarEstadoActionPerformed
+
+    private void campoConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoConsultaClienteActionPerformed
+        if (campoConsultaCliente.getSelectedIndex() != -1){
+            String info[]= String.valueOf(campoConsultaCliente.getSelectedItem()).split(" - ");
+            String id = info[2];
+            String tipoid = info[1];
+            idActual = info[2];
+            tipoidActual = info[1];
+
+            estadoventanasEstadoCliente(false);  // Se ocultan los posibles jlabels sobrepuestos
+
+            String[] datos;
+            try {
+                datos = admClient.mostrarClientes(id,tipoid);
+                if (datos[0] != null) {
+                    /*
+                    for (int j = 0; j < datos.length; j++) {
+                        System.out.println(datos[j]);
+                    }*/
+
+                    estadoventanasConsultaClientes(true);
+
+                    //Aparecen los resultados
+                    jTF_resul_tipoid.setSelectedItem(datos[1]);
+                    jTF_resul_id.setText(datos[0]);
+                    jTF_resul_tipocliente.setSelectedItem(datos[2]);
+                    jTF_resul_nombre.setText(datos[3]);
+                    jTF_resul_dir.setText(datos[4]);
+                    jTF_resul_tel.setText(datos[5]);
+                    jTF_resul_mail.setText(datos[6]);
+
+                    if ("ACTIVO".equals(datos[7])){
+                        label_resul_estado.setText(datos[7]);
+                        label_resul_estado.setForeground(new java.awt.Color(0,153,51));
+                    }else {
+                        label_resul_estado.setText(datos[7]);
+                        label_resul_estado.setForeground(new java.awt.Color(255,51,51));
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null,"El cliente ingresado no existe","Advertencia" ,JOptionPane.ERROR_MESSAGE);
+                    estadoventanasConsultaClientes(false);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_campoConsultaClienteActionPerformed
+
+    private void actualiarInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualiarInfoActionPerformed
+
+        try {
+            int returnCode;
+            String datos[]= {String.valueOf(jTF_resul_tipocliente.getSelectedItem()), jTF_resul_nombre.getText(),jTF_resul_dir.getText(),jTF_resul_tel.getText(),jTF_resul_mail.getText(),jTF_resul_id.getText(),String.valueOf(jTF_resul_tipoid.getSelectedItem())};
+
+            if (!idActual.equals(datos[5]) ) {
+                JOptionPane.showMessageDialog(null, "No es posible editar el documento de identificación", "Advertencia", JOptionPane.ERROR_MESSAGE);
+                jTF_resul_id.setText(idActual);
+            } else {
+
+                returnCode = admClient.modificarCliente(datos);
+
+                if (returnCode == 1){
+                    ArrayList<String[]> usuarios= admClient.mostrarListaClientes();
+                    DefaultComboBoxModel model = new DefaultComboBoxModel();
+                    for (String[] usuario: usuarios){
+                        model.addElement(usuario[0] + " - "+usuario[2] +" - " + usuario[1]);
+                    }
+                    campoConsultaCliente.setModel(model);
+                    campoConsultaCliente.setSelectedItem(jTF_resul_nombre.getText() + " - " + String.valueOf(jTF_resul_tipoid.getSelectedItem()) + " - " + jTF_resul_id.getText());
+
+                    validate();
+                    repaint();
+                    JOptionPane.showMessageDialog(null, "Se actulizo la informacion");
+
+                }else{
+                    JOptionPane.showMessageDialog(null, "No fue posible actualizar la informacion");
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_actualiarInfoActionPerformed
+
+    private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
+
+        String id = jTF_resul_id.getText();
+        String tipol = String.valueOf(jTF_resul_tipoid.getSelectedItem());
+        String nombre = jTF_resul_nombre.getText();
+        String cargo = String.valueOf(jTF_resul_tipocliente.getSelectedItem());
+        String telefono = jTF_resul_tel.getText();
+        String direccion =  jTF_resul_dir.getText();
+        String correo =jTF_resul_mail.getText();
+
+        try {
+            admClient.registrarCliente(id, tipol, cargo, nombre, direccion, telefono, correo,true);
+            ArrayList<String[]> usuarios= admClient.mostrarListaClientes();
+            DefaultComboBoxModel model = new DefaultComboBoxModel();
+            for (String[] usuario: usuarios){
+                model.addElement(usuario[0] + " - " + usuario[2] +" - " + usuario[1]);
+            }
+            campoConsultaCliente.setModel(model);
+
+            validate();
+            repaint();
+            JOptionPane.showMessageDialog(null, "Se registró el cliente ingresado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException | SQLException e) {
+            System.out.println("No fue posible realizar la operación registrar Cliente");
+        }
+
+    }//GEN-LAST:event_RegistrarActionPerformed
+
+    private void jTF_resul_tipoidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_tipoidActionPerformed
+        // TODO add your handling code here:
+        if (jTF_resul_tipoid.getSelectedIndex() != -1){
+            String tipoid = String.valueOf(jTF_resul_tipoid.getSelectedItem());
+        }
+    }//GEN-LAST:event_jTF_resul_tipoidActionPerformed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+
+        campoConsultaCliente.setSelectedIndex(-1);
+        idActual = "";
+        jTF_resul_id.setText("");
+        jTF_resul_tipoid.setSelectedIndex(-1);
+        jTF_resul_nombre.setText("");
+        jTF_resul_tipocliente.setSelectedIndex(-1);
+        jTF_resul_tel.setText("");
+        jTF_resul_mail.setText("");
+        jTF_resul_dir.setText("");
+
+    }//GEN-LAST:event_LimpiarActionPerformed
+
+    private void jTF_resul_tipoclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_tipoclienteActionPerformed
+        // TODO add your handling code here:
+        if (jTF_resul_tipocliente.getSelectedIndex() != -1){
+            String cargo = String.valueOf(jTF_resul_tipocliente.getSelectedItem());
+
+        }
+
+    }//GEN-LAST:event_jTF_resul_tipoclienteActionPerformed
+
+    private void tabsClientesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsClientesStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabsClientesStateChanged
+
+    
+     private void estadoventanasConsultaClientes(boolean bol){
+          //Aparecer los labels de consulta
+                        label_id.setVisible(bol);
+                        label_cargo.setVisible(bol);
+                        label_nombre.setVisible(bol);
+                        label_dir.setVisible(bol);
+                        label_tel.setVisible(bol);
+                        label_mail.setVisible(bol);
+                        label_estado.setVisible(bol);
+
+                        //Aparecer los cuadros de consulta
+                        jTF_resul_id.setVisible(bol);
+                        jTF_resul_tipocliente.setVisible(bol);
+                        jTF_resul_nombre.setVisible(bol);
+                        jTF_resul_dir.setVisible(bol);
+                        jTF_resul_tel.setVisible(bol);
+                        jTF_resul_mail.setVisible(bol);
+                        jTF_resul_tipoid.setVisible(bol);
+                        label_resul_estado.setVisible(bol);
+
+        }
+        
+        private void estadoventanasEstadoCliente(boolean bol){
+            // Aparecer los labels de consulta
+            label_notificacion.setVisible(bol);
+            label_imEstado.setVisible(bol); 
+            
+            // Aparecer los cuadros de consulta
+            label_resulEstado2.setVisible(bol);
+        }
 
     /**
      * @param args the command line arguments
@@ -383,11 +863,35 @@ public class Gerente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
+    private javax.swing.JButton Limpiar;
     private javax.swing.JLabel Logo;
+    private javax.swing.JButton Registrar;
+    private javax.swing.JButton actualiarInfo;
     private javax.swing.JPanel barraTitulo;
+    private javax.swing.JButton cambiarEstado;
+    private javax.swing.JComboBox<String> campoConsultaCliente;
     private javax.swing.JButton clientes;
     private javax.swing.JButton estadoClientes;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField jTF_resul_dir;
+    private javax.swing.JTextField jTF_resul_id;
+    private javax.swing.JTextField jTF_resul_mail;
+    private javax.swing.JTextField jTF_resul_nombre;
+    private javax.swing.JTextField jTF_resul_tel;
+    private javax.swing.JComboBox<String> jTF_resul_tipocliente;
+    private javax.swing.JComboBox<String> jTF_resul_tipoid;
+    private javax.swing.JLabel label_cargo;
+    private javax.swing.JLabel label_dir;
+    private javax.swing.JLabel label_estado;
+    private javax.swing.JLabel label_id;
+    private javax.swing.JLabel label_imEstado;
+    private javax.swing.JLabel label_mail;
+    private javax.swing.JLabel label_nombre;
+    private javax.swing.JLabel label_notificacion;
+    private javax.swing.JLabel label_resulEstado2;
+    private javax.swing.JLabel label_resul_estado;
+    private javax.swing.JLabel label_tel;
+    private javax.swing.JLabel label_titulo;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
@@ -399,6 +903,8 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
+    private javax.swing.JPanel tabGestiosClientes;
+    private javax.swing.JTabbedPane tabsClientes;
     private javax.swing.JTabbedPane tabsReportes;
     // End of variables declaration//GEN-END:variables
 }

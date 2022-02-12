@@ -88,21 +88,21 @@ public class Administrador extends javax.swing.JFrame {
         label_titulo = new javax.swing.JLabel();
         label_cargo = new javax.swing.JLabel();
         label_resul_estado = new javax.swing.JLabel();
-        jTF_resul_cargo = new javax.swing.JTextField();
         jTF_resul_nombre = new javax.swing.JTextField();
         jTF_resul_dir = new javax.swing.JTextField();
         jTF_resul_tel = new javax.swing.JTextField();
         jTF_resul_mail = new javax.swing.JTextField();
         jTF_resul_id = new javax.swing.JTextField();
-        jTF_resul_tipoid = new javax.swing.JTextField();
         cambiarEstado = new javax.swing.JButton();
         campoConsultaUsuario = new javax.swing.JComboBox<>();
         actualiarInfo = new javax.swing.JButton();
         Registrar = new javax.swing.JButton();
         label_notificacion = new javax.swing.JLabel();
         label_resulEstado2 = new javax.swing.JLabel();
+        jTF_resul_tipoid = new javax.swing.JComboBox<>();
         label_imEstado = new javax.swing.JLabel();
         Limpiar = new javax.swing.JButton();
+        jTF_resul_cargo = new javax.swing.JComboBox<>();
         tabsReportes = new javax.swing.JTabbedPane();
         reporteGanancias = new javax.swing.JPanel();
         reporteFacturas = new javax.swing.JPanel();
@@ -297,20 +297,6 @@ public class Administrador extends javax.swing.JFrame {
         tabGestiosUsuarios.add(label_resul_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 374, 173, 36));
         label_resul_estado.setVisible(false);
 
-        jTF_resul_cargo.setBackground(new java.awt.Color(255, 255, 255));
-        jTF_resul_cargo.setEditable(true);
-        jTF_resul_cargo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jTF_resul_cargo.setForeground(new java.awt.Color(0, 0, 0));
-        jTF_resul_cargo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTF_resul_cargo.setOpaque(true);
-        jTF_resul_cargo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTF_resul_cargoActionPerformed(evt);
-            }
-        });
-        tabGestiosUsuarios.add(jTF_resul_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
-        jTF_resul_cargo.setVisible(false);
-
         jTF_resul_nombre.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_nombre.setEditable(true);
         jTF_resul_nombre.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -347,16 +333,7 @@ public class Administrador extends javax.swing.JFrame {
 
         jTF_resul_id.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_id.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        tabGestiosUsuarios.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 213, 110, 33));
-
-        jTF_resul_tipoid.setBackground(new java.awt.Color(255, 255, 255));
-        jTF_resul_tipoid.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jTF_resul_tipoid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTF_resul_tipoidActionPerformed(evt);
-            }
-        });
-        tabGestiosUsuarios.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 50, 33));
+        tabGestiosUsuarios.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 213, 100, 33));
 
         cambiarEstado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         cambiarEstado.setText("Activar/Desactivar");
@@ -415,6 +392,18 @@ public class Administrador extends javax.swing.JFrame {
         tabGestiosUsuarios.add(label_resulEstado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 330, 50));
         label_resul_estado.setVisible(false);
 
+        jTF_resul_tipoid.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_tipoid.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_tipoid.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_tipoid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "C.C", "T.I", "NIT"}));
+        jTF_resul_tipoid.setSelectedIndex(-1);
+        jTF_resul_tipoid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_resul_tipoidActionPerformed(evt);
+            }
+        });
+        tabGestiosUsuarios.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
+
         this.setVisible(false);
         label_imEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
         label_imEstado.setOpaque(true);
@@ -427,6 +416,18 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
         tabGestiosUsuarios.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
+
+        jTF_resul_cargo.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_resul_cargo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_resul_cargo.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_resul_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Operador", "Gerente" }));
+        jTF_resul_cargo.setSelectedIndex(-1);
+        jTF_resul_cargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_resul_cargoActionPerformed(evt);
+            }
+        });
+        tabGestiosUsuarios.add(jTF_resul_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
 
         tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
 
@@ -643,9 +644,9 @@ public class Administrador extends javax.swing.JFrame {
 
         try {
              int returnCode;
-            String datos[]= {jTF_resul_cargo.getText(),jTF_resul_nombre.getText(),jTF_resul_dir.getText(),jTF_resul_tel.getText(),jTF_resul_mail.getText(),jTF_resul_id.getText(),jTF_resul_tipoid.getText()};
+            String datos[]= {String.valueOf(jTF_resul_cargo.getSelectedItem()), jTF_resul_nombre.getText(),jTF_resul_dir.getText(),jTF_resul_tel.getText(),jTF_resul_mail.getText(),jTF_resul_id.getText(),String.valueOf(jTF_resul_tipoid.getSelectedItem())};
             
-            if (!idActual.equals(datos[5]) ) {
+            if (!idActual.equals(datos[5])  && !tipoidActual.equals(datos[6]) )  {
                 JOptionPane.showMessageDialog(null, "No es posible editar el documento de identificación", "Advertencia", JOptionPane.ERROR_MESSAGE);
                 jTF_resul_id.setText(idActual);
             } else {
@@ -661,15 +662,18 @@ public class Administrador extends javax.swing.JFrame {
                         model.addElement(usuario[0] + " - "+usuario[2] +" - " + usuario[1]);
                     }
                     campoConsultaUsuario.setModel(model);
+                    campoConsultaUsuario.setSelectedItem(jTF_resul_nombre.getText() + " - " + String.valueOf(jTF_resul_tipoid.getSelectedItem()) + " - " + jTF_resul_id.getText());
 
                     validate();
                     repaint();
                     JOptionPane.showMessageDialog(null, "Se actulizo la informacion");
+                   
 
                 }else{
                     JOptionPane.showMessageDialog(null, "No fue posible actualizar la informacion");
                 }
             }
+            
             
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
@@ -700,9 +704,9 @@ public class Administrador extends javax.swing.JFrame {
                 estadoventanasConsultaUsuario(true);
 
                 //Aparecen los resultados
-                jTF_resul_tipoid.setText(datos[1]);
+                jTF_resul_tipoid.setSelectedItem(datos[1]);
                 jTF_resul_id.setText(datos[0]);
-                jTF_resul_cargo.setText(datos[2]);
+                jTF_resul_cargo.setSelectedItem(datos[2]);
                 jTF_resul_nombre.setText(datos[3]);
                 jTF_resul_dir.setText(datos[4]);
                 jTF_resul_tel.setText(datos[5]);
@@ -782,12 +786,12 @@ public class Administrador extends javax.swing.JFrame {
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
 
             String id = jTF_resul_id.getText();
-            String tipol = jTF_resul_tipoid.getText();
+            String tipol = String.valueOf(jTF_resul_tipoid.getSelectedItem());
             String nombre = jTF_resul_nombre.getText();
-            String cargo =jTF_resul_cargo.getText();
+            String cargo = String.valueOf(jTF_resul_cargo.getSelectedItem());
             String telefono = jTF_resul_tel.getText();
-            String direccion = jTF_resul_mail.getText();
-            String correo = jTF_resul_dir.getText();
+            String direccion =  jTF_resul_dir.getText();
+            String correo =jTF_resul_mail.getText();
             
         try {
             admUser.registrarUsuario(id, tipol, cargo, nombre, direccion, telefono, correo,true);
@@ -808,27 +812,36 @@ public class Administrador extends javax.swing.JFrame {
            
     }//GEN-LAST:event_RegistrarActionPerformed
 
-    private void jTF_resul_cargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_cargoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTF_resul_cargoActionPerformed
-
-    private void jTF_resul_tipoidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_tipoidActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTF_resul_tipoidActionPerformed
-
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
         
         campoConsultaUsuario.setSelectedIndex(-1);
         idActual = "";
         jTF_resul_id.setText("");
-        jTF_resul_tipoid.setText("");
+        jTF_resul_tipoid.setSelectedIndex(-1);
         jTF_resul_nombre.setText("");
-        jTF_resul_cargo.setText("");
+        jTF_resul_cargo.setSelectedIndex(-1);
         jTF_resul_tel.setText("");
         jTF_resul_mail.setText("");
         jTF_resul_dir.setText("");
       
     }//GEN-LAST:event_LimpiarActionPerformed
+
+    private void jTF_resul_cargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_cargoActionPerformed
+        // TODO add your handling code here:
+         if (jTF_resul_cargo.getSelectedIndex() != -1){ 
+            String cargo = String.valueOf(jTF_resul_cargo.getSelectedItem());
+            
+         }
+        
+        
+    }//GEN-LAST:event_jTF_resul_cargoActionPerformed
+
+    private void jTF_resul_tipoidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_tipoidActionPerformed
+        // TODO add your handling code here:
+         if (jTF_resul_tipoid.getSelectedIndex() != -1){ 
+            String tipoid = String.valueOf(jTF_resul_tipoid.getSelectedItem());
+         }
+    }//GEN-LAST:event_jTF_resul_tipoidActionPerformed
 
 
         private void estadoventanasConsultaUsuario(boolean bol){
@@ -907,13 +920,13 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> campoConsultaUsuario;
     private javax.swing.JButton estadoClientes;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTF_resul_cargo;
+    private javax.swing.JComboBox<String> jTF_resul_cargo;
     private javax.swing.JTextField jTF_resul_dir;
     private javax.swing.JTextField jTF_resul_id;
     private javax.swing.JTextField jTF_resul_mail;
     private javax.swing.JTextField jTF_resul_nombre;
     private javax.swing.JTextField jTF_resul_tel;
-    private javax.swing.JTextField jTF_resul_tipoid;
+    private javax.swing.JComboBox<String> jTF_resul_tipoid;
     private javax.swing.JLabel label_cargo;
     private javax.swing.JLabel label_dir;
     private javax.swing.JLabel label_estado;
