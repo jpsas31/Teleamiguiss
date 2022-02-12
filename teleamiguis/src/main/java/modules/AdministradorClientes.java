@@ -134,22 +134,23 @@ public class AdministradorClientes {
     }
     
    
-   // Funcion para cambiar el estado de un trabajador en el sistema (true -> ACTIVO, false -> INACTIVO). La función recibe como parametro
+   // Funcion para cambiar el estado de un cliente en el sistema (true -> ACTIVO, false -> INACTIVO). La función recibe como parametro
    // el id (cedula) del usuario. 
-    public int cambiaEstadoUsuario(String id, String status) throws SQLException
+    public int cambiaEstadoCliente(String id, String tipoid, String status) throws SQLException
     {
         PreparedStatement stm;
         int confirmacion;
         // Escribimos el Query
-        String inhabQuery =   "UPDATE trabajadores  SET  estado = CAST( ? AS boolean ) WHERE id_trabajador = ?";
+        String inhabQuery =   "UPDATE cliente SET  estado = CAST( ? AS boolean ) WHERE id_cliente = ? AND tipo_identificacion = ? ";
         stm=conn.prepareStatement(inhabQuery);
         
         // Seteamos los parametros del query teniendo en cuenta los parametros de la funcion
         stm.setString(1, status); 
         stm.setString(2, id); 
+        stm.setString(3, tipoid); 
         
         //Ejecutamos la sentencia
-        confirmacion= stm.executeUpdate ();
+        confirmacion = stm.executeUpdate ();
         conn.commit();
         return confirmacion;
     }
@@ -178,6 +179,6 @@ public class AdministradorClientes {
 
 public static void main(String args[]) throws SQLException, IOException {
       AdministradorClientes prueba = new AdministradorClientes();
-      prueba.registrarCliente("1","1","1","1","1","1","1",false);
+      
     }
 }
