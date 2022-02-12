@@ -158,11 +158,12 @@ public class AdministradorClientes {
     
 //    Funcion para ejecutar un update a un usuario en la DB, este metodo recibe un arreglo con los datos del usuario en el siguiente orden:
 //    cargo, nombre, direccion, telefono, correo,  id_trabajador ";
-      public int modificarUsuario(String[] atributos) throws SQLException
+    public int modificarUsuario(String[] atributos) throws SQLException
     {
         PreparedStatement stm;
         int confirmacion;
-        String sql =   "UPDATE trabajadores  SET  cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ?";
+        
+        String sql =   "UPDATE cliente  SET  tipo_cliente=?, nombre=?, direccion=?, telefono=?,correo=?,  estado=CAST( ? AS boolean )  WHERE id_cliente = ? AND tipo_identificacion = ?";
         stm=conn.prepareStatement(sql);
         //Recorrer todo el arreglo de atributos para insertarlos en la secuencia SQL
         for (int i = 1; i<=atributos.length; i++){
@@ -176,6 +177,7 @@ public class AdministradorClientes {
         System.out.println(atributos[5]);
         return confirmacion;
     }
+
 
 
 public static void main(String args[]) throws SQLException, IOException {
