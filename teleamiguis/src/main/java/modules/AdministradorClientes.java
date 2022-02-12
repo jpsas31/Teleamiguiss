@@ -156,8 +156,8 @@ public class AdministradorClientes {
         return confirmacion;
     }
     
-//    Funcion para ejecutar un update a un usuario en la DB, este metodo recibe un arreglo con los datos del usuario en el siguiente orden:
-//    cargo, nombre, direccion, telefono, correo,  id_trabajador ";
+//    Funcion para ejecutar un update a un cliente en la DB, este metodo recibe un arreglo con los datos del usuario en el siguiente orden:
+//   tipo_cliente, nombre, direccion telefono, correo, estado,id_cliente, tipo_identificacion
     public int modificarUsuario(String[] atributos) throws SQLException
     {
         PreparedStatement stm;
