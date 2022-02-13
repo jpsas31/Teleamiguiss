@@ -10,6 +10,8 @@ import java.awt.Font;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -38,12 +40,19 @@ public class Administrador extends javax.swing.JFrame {
     private String tipoidActual;
     int xMouse;
     int yMouse;
+    String idUsuario;
+    String tipoidUsuario;
 
     /**
      * Creates new form Gerente
      */
-    public Administrador() {
+    public Administrador(String id, String tipoid,String nombreUser) {
         initComponents();
+        
+        idUsuario = id;
+        tipoidUsuario = tipoid;
+        
+        tituloSuperior.setText("Usuario " + nombreUser);
         
         try {
             // Hacemos invisibles todos los jlabel de abajo del tab de gestionUsuario
@@ -109,7 +118,7 @@ public class Administrador extends javax.swing.JFrame {
         reporteOperadores = new javax.swing.JPanel();
         reporteNose = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        tituloSuperior = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -125,7 +134,8 @@ public class Administrador extends javax.swing.JFrame {
 
         nombre.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
-        nombre.setText("NOMBRE");
+        nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nombre.setText("ADMINISTRADOR");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -134,7 +144,9 @@ public class Administrador extends javax.swing.JFrame {
 
         rol.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         rol.setForeground(new java.awt.Color(255, 255, 255));
-        rol.setText("ADMINISTRADOR");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        rol.setText(dtf.format(now));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -497,25 +509,23 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Administrador");
+        tituloSuperior.setBackground(new java.awt.Color(0, 0, 0));
+        tituloSuperior.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        tituloSuperior.setForeground(new java.awt.Color(255, 255, 255));
+        tituloSuperior.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloSuperior.setText("Administrador");
 
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barraTituloLayout.createSequentialGroup()
-                .addGap(374, 374, 374)
-                .addComponent(jLabel1)
-                .addContainerGap(379, Short.MAX_VALUE))
+            .addComponent(tituloSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
         );
         barraTituloLayout.setVerticalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(barraTituloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(tituloSuperior)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -567,6 +577,11 @@ public class Administrador extends javax.swing.JFrame {
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
         // TODO add your handling code here:
         dispose();
+        try {
+            admUser.cerrarConexion(idUsuario,tipoidUsuario);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Login login = new Login();
         login.setVisible(true);
     }//GEN-LAST:event_salidaActionPerformed
@@ -670,7 +685,7 @@ public class Administrador extends javax.swing.JFrame {
                    
 
                 }else{
-                    JOptionPane.showMessageDialog(null, "No fue posible actualizar la informacion");
+                    JOptionPane.showMessageDialog(null, "No fue posible actualizar la informacion", "Advertencia",JOptionPane.ERROR_MESSAGE);
                 }
             }
             
@@ -911,7 +926,7 @@ public class Administrador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Administrador().setVisible(true);
+                new Administrador("1006054580","C.C", "Kevin David Rodriguez B").setVisible(true);
             }
         });
     }
@@ -926,7 +941,6 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JButton cambiarEstado;
     private javax.swing.JComboBox<String> campoConsultaUsuario;
     private javax.swing.JButton estadoClientes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JComboBox<String> jTF_resul_cargo;
     private javax.swing.JTextField jTF_resul_dir;
     private javax.swing.JTextField jTF_resul_id;
@@ -961,6 +975,7 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel tabGestiosUsuarios;
     private javax.swing.JTabbedPane tabsReportes;
     private javax.swing.JTabbedPane tabsUsuarios;
+    private javax.swing.JLabel tituloSuperior;
     private javax.swing.JButton usuarios;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,13 +39,20 @@ public class Gerente extends javax.swing.JFrame {
     private String tipoidActual; 
     int xMouse; 
     int yMouse; 
+    String idUsuario;
+    String tipoidUsuario;
 
 
     /**
      * Creates new form Gerente
      */
-    public Gerente() {
+    public Gerente(String id, String tipoid,String nombreUser) {
         initComponents();
+        
+         idUsuario = id;
+         tipoidUsuario = tipoid;
+         
+         tituloSuperior.setText("Usuario " + nombreUser);
         
         try {
             // Hacemos invisibles todos los jlabel de abajo del tab de gestionClientes
@@ -111,7 +120,7 @@ public class Gerente extends javax.swing.JFrame {
         reporteOperadores = new javax.swing.JPanel();
         reporteNose = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        tituloSuperior = new javax.swing.JLabel();
 
         setUndecorated(true);
         setResizable(false);
@@ -126,7 +135,7 @@ public class Gerente extends javax.swing.JFrame {
 
         nombre.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
-        nombre.setText("NOMBRE");
+        nombre.setText("GERENTE");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -135,7 +144,10 @@ public class Gerente extends javax.swing.JFrame {
 
         rol.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         rol.setForeground(new java.awt.Color(255, 255, 255));
-        rol.setText("GERENTE");
+        rol.setForeground(new java.awt.Color(255, 255, 255));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        rol.setText(dtf.format(now));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -471,25 +483,23 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Gerente");
+        tituloSuperior.setBackground(new java.awt.Color(0, 0, 0));
+        tituloSuperior.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        tituloSuperior.setForeground(new java.awt.Color(255, 255, 255));
+        tituloSuperior.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloSuperior.setText("Gerente");
 
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barraTituloLayout.createSequentialGroup()
-                .addGap(395, 395, 395)
-                .addComponent(jLabel1)
-                .addContainerGap(401, Short.MAX_VALUE))
+            .addComponent(tituloSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
         );
         barraTituloLayout.setVerticalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraTituloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tituloSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -526,6 +536,11 @@ public class Gerente extends javax.swing.JFrame {
     private void salidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salidaActionPerformed
         // TODO add your handling code here:    
     dispose();
+    try {
+            admClient.cerrarConexion(idUsuario,tipoidUsuario);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     Login login = new Login();
     login.setVisible(true);
     
@@ -719,7 +734,7 @@ public class Gerente extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Se actulizo la informacion");
 
                 }else{
-                    JOptionPane.showMessageDialog(null, "No fue posible actualizar la informacion");
+                    JOptionPane.showMessageDialog(null, "No fue posible actualizar la informacion", "Advertencia" , JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -754,7 +769,7 @@ public class Gerente extends javax.swing.JFrame {
             campoConsultaCliente.setSelectedIndex(-1);
             
             if (confirmacion == -1){
-            JOptionPane.showMessageDialog(null, "El cliente no pudo ser registrado", "Notificación", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No fue posible registrar al cliente ingresado, dato inválido", "Notificación", JOptionPane.ERROR_MESSAGE);
             }else {
                  JOptionPane.showMessageDialog(null, "Se registró el cliente ingresado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -861,7 +876,7 @@ public class Gerente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gerente().setVisible(true);
+                new Gerente("1193552015","C.C","Andres Felipe Giron Perez").setVisible(true);
             }
         });
     }
@@ -877,7 +892,6 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> campoConsultaCliente;
     private javax.swing.JButton clientes;
     private javax.swing.JButton estadoClientes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTF_resul_dir;
     private javax.swing.JTextField jTF_resul_id;
     private javax.swing.JTextField jTF_resul_mail;
@@ -911,5 +925,6 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JPanel tabGestiosClientes;
     private javax.swing.JTabbedPane tabsClientes;
     private javax.swing.JTabbedPane tabsReportes;
+    private javax.swing.JLabel tituloSuperior;
     // End of variables declaration//GEN-END:variables
 }

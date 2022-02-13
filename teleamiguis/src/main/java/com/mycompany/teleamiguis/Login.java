@@ -4,6 +4,13 @@
  */
 package com.mycompany.teleamiguis;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modules.LoginBack;
+
 /**
  *
  * @author gyron
@@ -12,14 +19,17 @@ public class Login extends javax.swing.JFrame {
     
     int xMouse;
     int yMouse; 
-
+    private LoginBack loginBack;
     /**
      * Creates new form Login
      */
     public Login() {
-        System.out.print("Prueba1");
         initComponents();
-        System.out.print("Prueba2");
+        try {
+            loginBack = new LoginBack();
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } 
     }
 
     /**
@@ -104,7 +114,7 @@ public class Login extends javax.swing.JFrame {
         LoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/login.png"))); // NOI18N
         loginelement.add(LoginIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
-        username.setFont(new java.awt.Font("Nirmala UI", 0, 14)); // NOI18N
+        username.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         username.setPreferredSize(new java.awt.Dimension(207, 26));
         username.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +147,11 @@ public class Login extends javax.swing.JFrame {
 
         iniciarsesion.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 18)); // NOI18N
         iniciarsesion.setText("Entrar");
+        iniciarsesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                iniciarsesionActionPerformed(evt);
+            }
+        });
         loginelement.add(iniciarsesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 18)); // NOI18N
@@ -201,6 +216,40 @@ public class Login extends javax.swing.JFrame {
     private void salidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_salidaMouseClicked
+
+    private void iniciarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarsesionActionPerformed
+        try {
+            // TODO add your handling code here:
+            String resul[] = loginBack.usuarioIngreso(username.getText(),String.valueOf(password.getPassword()));
+            if ("si".equals(resul[0])){
+                dispose();
+                try {
+                    loginBack.cerrarConexion();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                switch(resul[1]){
+                    case "Administrador":
+                        Administrador admin = new Administrador(resul[2],resul[3],resul[4]);
+                        admin.setVisible(true);
+                        break;
+                    case "Operador":
+                        Operador operador = new Operador();
+                        operador.setVisible(true);
+                        break;
+                    case "Gerente":
+                        Gerente gerente = new Gerente(resul[2],resul[3],resul[4]);
+                        gerente.setVisible(true);
+                        break;
+                }
+                loginBack.cerrarConexion();
+            }else {
+                JOptionPane.showMessageDialog(null,"No se ha podido iniciar sesión" ,"Advertencia", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_iniciarsesionActionPerformed
 
     /**
      * @param args the command line arguments

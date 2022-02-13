@@ -182,14 +182,20 @@ public class AdministradorClientes {
         //Ejecutar la sentencia                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         confirmacion=stm.executeUpdate ();   
         conn.commit();
-        System.out.println(confirmacion);
-        System.out.println(atributos[5]);
         }else {
             confirmacion = -1;
         }
         return confirmacion;
     }
 
+public void cerrarConexion(String idUsuario, String tipoidUsuario) throws SQLException {
+         PreparedStatement stm;
+         stm = conn.prepareStatement("UPDATE usuarios  SET  isactive = false WHERE id_trabajador = '" + idUsuario+ "' and tipo_identificacion = '" + tipoidUsuario+ "' ");
+         stm.executeUpdate();
+         conn.commit();
+
+         conn.close();
+     }
 
 
 public static void main(String args[]) throws SQLException, IOException {
