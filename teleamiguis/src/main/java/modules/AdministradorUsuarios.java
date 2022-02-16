@@ -110,39 +110,36 @@ public class AdministradorUsuarios {
    
 
 
-
-   public int registrarUsuario(String id, String tipoI, String cargo, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
+// Se ingresan los atributos en el respectivo orden
+// id, tipoI, cargo, nombre, direccion, telefono, correo
+   public int registrarUsuario(String[] atributos) throws IOException, SQLException
     {
         int confirmacion = 0;
-         if (id.matches("-?\\d+(\\.\\d+)?") && telefono.matches("-?\\d+(\\.\\d+)?")) {
+        
+         if (atributos[0].matches("-?\\d+(\\.\\d+)?") && atributos[5].matches("-?\\d+(\\.\\d+)?")) {
              PreparedStatement stm;
              
 
              // Preparando el statement de la tabla trabajadores
              String sql = "INSERT INTO trabajadores (id_trabajador, tipo_identificacion, cargo, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
              stm = conn.prepareStatement(sql);
-
-             stm.setString(1, id);
-             stm.setString(2, tipoI);
-             stm.setString(3, cargo);
-             stm.setString(4, nombre);
-             stm.setString(5, direccion);
-             stm.setString(6, telefono);
-             stm.setString(7, correo);
-             stm.setBoolean(8, estado);
+             for (int i = 1; i <= atributos.length; i++) {
+                 stm.setString(i, atributos[i-1]); 
+             } 
+             stm.setBoolean(8, true);
 
              //envviando el query INSERT trabajadores
              confirmacion = stm.executeUpdate();
              conn.commit();
 
              //Preparando las varibales del stament de usuario
-             String usr = id;
-             String tipoU = tipoI;
+             String usr = atributos[0];
+             String tipoU = atributos[1];
              String pass = "";
 
              //Generando la contraseña
-             pass = pass + nombre.charAt(0);
-             pass = pass + id.substring(0, 4);
+             pass = pass + atributos[3].charAt(0);
+             pass = pass + atributos[0].substring(0, 4);
 
              //Preparando el statement de la tabla usuarios
              sql = "INSERT INTO usuarios (id_trabajador,tipo_identificacion,contraseña) VALUES (?,?,?)";
@@ -189,7 +186,7 @@ public class AdministradorUsuarios {
       public int modificarUsuario(String[] atributos) throws SQLException
     {
         int confirmacion;
-        if (atributos[3].matches("-?\\d+(\\.\\d+)?")) {
+        if (atributos[3].matches("-?\\d+(\\.\\d+)?") && atributos[5].matches("-?\\d+(\\.\\d+)?")) {
             PreparedStatement stm;
 
             String sql = "UPDATE trabajadores  SET  cargo=?, nombre=?, direccion=?, telefono=?, correo=? WHERE id_trabajador = ? AND tipo_identificacion = ?";

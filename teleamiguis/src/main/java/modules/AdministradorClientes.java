@@ -107,29 +107,23 @@ public class AdministradorClientes {
         return usuarios;
     }
     
-   
-    public int registrarCliente(String id, String tipoI, String tCliente, String nombre, String direccion, String telefono,String correo, boolean estado ) throws IOException, SQLException
+   // registrar clientes: toma el siguiente orden: 
+   // id, tipoi, tipocliente, nombre, direccion, telefono, correo
+    public int registrarCliente(String[] atributos) throws IOException, SQLException
     {
         int confirmacion=0;
-        if (id.matches("-?\\d+(\\.\\d+)?") && telefono.matches("-?\\d+(\\.\\d+)?")){
+        if (atributos[0].matches("-?\\d+(\\.\\d+)?") && atributos[5].matches("-?\\d+(\\.\\d+)?")){
             PreparedStatement stm;
         
-
         // Preparando el statement de la tabla trabajadores
         String sql = "INSERT INTO cliente (id_cliente, tipo_identificacion, tipo_cliente, nombre, direccion, telefono, correo, estado) VALUES (?,?,?,?,?,?,?,?)";
         stm = conn.prepareStatement(sql);
         
+        for (int i = 1; i <= atributos.length; i++){
+            stm.setString(i, atributos[i-1]);
+        }
         
-        
-        stm.setString(1,id);
-        stm.setString(2,tipoI);
-        stm.setString(3,tCliente);
-        stm.setString(4,nombre);
-        stm.setString(5,direccion);
-        stm.setString(6,telefono);
-        stm.setString(7,correo);
-        stm.setBoolean(8,estado);
-        
+        stm.setBoolean(8, true);
         //envviando el query INSERT trabajadores
         confirmacion = stm.executeUpdate();
         conn.commit();

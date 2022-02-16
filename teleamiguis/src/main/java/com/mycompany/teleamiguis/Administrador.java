@@ -60,8 +60,10 @@ public class Administrador extends javax.swing.JFrame {
         } catch (IOException  | SQLException e) {
             System.out.println("Hubo un problema al crear la clase administradorUsuario");
         } 
+        
         estadoventanasEstadoUsuario(false); 
         estadoventanasConsultaUsuario(true); 
+        limpiar(); 
     }
 
     /**
@@ -800,17 +802,11 @@ public class Administrador extends javax.swing.JFrame {
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
 
-            String id = jTF_resul_id.getText();
-            String tipol = String.valueOf(jTF_resul_tipoid.getSelectedItem());
-            String nombre = jTF_resul_nombre.getText();
-            String cargo = String.valueOf(jTF_resul_cargo.getSelectedItem());
-            String telefono = jTF_resul_tel.getText();
-            String direccion =  jTF_resul_dir.getText();
-            String correo =jTF_resul_mail.getText();
+        String datos[] = {jTF_resul_id.getText(), String.valueOf(jTF_resul_tipoid.getSelectedItem()), String.valueOf(jTF_resul_cargo.getSelectedItem()), jTF_resul_nombre.getText(), jTF_resul_dir.getText(), jTF_resul_tel.getText(), jTF_resul_mail.getText()}; 
          
         try {
             
-            int confirmacion = admUser.registrarUsuario(id, tipol, cargo, nombre, direccion, telefono, correo,true);
+            int confirmacion = admUser.registrarUsuario(datos);
             ArrayList<String[]> usuarios= admUser.mostrarListaUsuarios();
                     DefaultComboBoxModel model = new DefaultComboBoxModel();
                     for (String[] usuario: usuarios){
@@ -824,6 +820,8 @@ public class Administrador extends javax.swing.JFrame {
                     
             if (confirmacion == -1) {
                 JOptionPane.showMessageDialog(null, "No fue posible registrar al usuario ingresado, dato inválido", "Notificación", JOptionPane.ERROR_MESSAGE);
+            }  if (confirmacion == 2) {
+                JOptionPane.showMessageDialog(null, "No fue posible registrar al usuario ingresado, datos vacios", "Notificación", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Se registró el usuario ingresado", "Notificación", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -835,7 +833,12 @@ public class Administrador extends javax.swing.JFrame {
     }//GEN-LAST:event_RegistrarActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
-        
+       
+        limpiar(); 
+    }//GEN-LAST:event_LimpiarActionPerformed
+
+    
+    private void limpiar() {
         campoConsultaUsuario.setSelectedIndex(-1);
         idActual = "";
         jTF_resul_id.setText("");
@@ -845,9 +848,11 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_tel.setText("");
         jTF_resul_mail.setText("");
         jTF_resul_dir.setText("");
-      
-    }//GEN-LAST:event_LimpiarActionPerformed
-
+        label_resul_estado.setText(""); 
+    }
+    
+    
+    
     private void jTF_resul_cargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_cargoActionPerformed
         // TODO add your handling code here:
          if (jTF_resul_cargo.getSelectedIndex() != -1){ 

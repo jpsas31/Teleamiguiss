@@ -62,7 +62,7 @@ public class Gerente extends javax.swing.JFrame {
         } 
         estadoventanasEstadoCliente(false); 
         estadoventanasConsultaClientes(true); 
-        
+        limpiar(); 
         
         
     }
@@ -745,18 +745,11 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_actualiarInfoActionPerformed
 
     private void RegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrarActionPerformed
-
-        String id = jTF_resul_id.getText();
-        String tipol = String.valueOf(jTF_resul_tipoid.getSelectedItem());
-        String nombre = jTF_resul_nombre.getText();
-        String cargo = String.valueOf(jTF_resul_tipocliente.getSelectedItem());
-        String telefono = jTF_resul_tel.getText();
-        String direccion =  jTF_resul_dir.getText();
-        String correo =jTF_resul_mail.getText();
-
+        String datos[] = {jTF_resul_id.getText(), String.valueOf(jTF_resul_tipoid.getSelectedItem()), String.valueOf(jTF_resul_tipocliente.getSelectedItem()),  jTF_resul_nombre.getText(),  jTF_resul_dir.getText(), jTF_resul_tel.getText(), jTF_resul_mail.getText()};
+      
         try {
             //System.out.println("");
-            int confirmacion = admClient.registrarCliente(id, tipol, cargo, nombre, direccion, telefono, correo,true);
+            int confirmacion = admClient.registrarCliente(datos);
             ArrayList<String[]> usuarios= admClient.mostrarListaClientes();
             DefaultComboBoxModel model = new DefaultComboBoxModel();
             for (String[] usuario: usuarios){
@@ -788,7 +781,11 @@ public class Gerente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTF_resul_tipoidActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+        limpiar(); 
+    }//GEN-LAST:event_LimpiarActionPerformed
 
+    
+    private void limpiar() {
         campoConsultaCliente.setSelectedIndex(-1);
         idActual = "";
         jTF_resul_id.setText("");
@@ -798,9 +795,10 @@ public class Gerente extends javax.swing.JFrame {
         jTF_resul_tel.setText("");
         jTF_resul_mail.setText("");
         jTF_resul_dir.setText("");
-
-    }//GEN-LAST:event_LimpiarActionPerformed
-
+       
+    }
+    
+    
     private void jTF_resul_tipoclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_tipoclienteActionPerformed
         // TODO add your handling code here:
         if (jTF_resul_tipocliente.getSelectedIndex() != -1){
