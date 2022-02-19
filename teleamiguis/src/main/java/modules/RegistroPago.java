@@ -12,11 +12,14 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Properties;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,6 +56,10 @@ public class RegistroPago {
     public int registrarPago(String[] atributos) throws IOException, SQLException {
         int confirmacion = 0;
         
+        String [] datos = mostrarFactura(Integer.parseInt(atributos[0]));
+        
+        for(int j =0; j <2;j++){ System.out.println(atributos[j]); }
+        
          for (int i = 0; i < atributos.length; i++) {
             if (atributos[i].isEmpty())
             {
@@ -60,7 +67,61 @@ public class RegistroPago {
             }
         }
 
-        if (atributos[0].matches("-?\\d+(\\.\\d+)?") &&
+        
+        int abono = Integer.parseInt(atributos[1]);
+        
+        
+        //convertir total a pagar de Money a Int
+        StringBuilder totalpagarS = new StringBuilder(datos[3]);
+        totalpagarS.deleteCharAt(0);
+        totalpagarS.deleteCharAt(totalpagarS.length()-1);
+        totalpagarS.deleteCharAt(totalpagarS.length()-2);
+        totalpagarS.deleteCharAt(totalpagarS.length()-3);
+        
+        String totalpagarS2 = totalpagarS.toString();
+        
+        String replace = totalpagarS2.replace(",","");
+        
+        int totalPagar = Integer.parseInt(replace);
+        
+        //convertir cantidad pagada de Money a int
+        StringBuilder totalpagarSII = new StringBuilder(datos[2]);
+        totalpagarSII.deleteCharAt(0);
+        totalpagarSII.deleteCharAt(totalpagarSII.length()-1);
+        totalpagarSII.deleteCharAt(totalpagarSII.length()-2);
+        totalpagarSII.deleteCharAt(totalpagarSII.length()-3);
+        
+        String totalpagarSII2 = totalpagarSII.toString();
+        
+        String replaceII = totalpagarSII2.replace(",","");
+        
+        int cantidadPagada = Integer.parseInt(replaceII);
+        
+        
+        System.out.println("Abonado " + abono);
+        System.out.println("total a pagar " + totalPagar);
+        System.out.println("Pagado Total " + cantidadPagada);
+         
+        if (abono > totalPagar)
+        {
+            confirmacion = 2;
+            JOptionPane.showConfirmDialog(null, 
+                "Monto demasiado alto", "Advertencia", JOptionPane.DEFAULT_OPTION);
+        }else if (abono < 10000)
+        {
+            confirmacion = 2;
+            JOptionPane.showConfirmDialog(null, 
+                "Monto demasiado bajo", "Advertencia", JOptionPane.DEFAULT_OPTION);
+            
+        }else if (abono + cantidadPagada > totalPagar)
+        {
+            confirmacion = 2;
+            JOptionPane.showConfirmDialog(null, 
+                "El monto total excede el debido", "Advertencia", JOptionPane.DEFAULT_OPTION);
+            
+        }
+        
+            if (atributos[0].matches("-?\\d+(\\.\\d+)?") &&
             atributos[1].matches("-?\\d+(\\.\\d+)?") &&
             confirmacion != 2) {
             
@@ -71,12 +132,20 @@ public class RegistroPago {
                     "update factura set cantidad_pagada = ?,fecha_pago = ? where num_factura = ?";
             stm = conn.prepareStatement(sql);
             
-            stm.setInt(1,Integer.parseInt(atributos[1]));
+            stm.setInt(1,abono + cantidadPagada);
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
             
-            stm.setDate(2,java.sql.Date.valueOf (dtf.format(now)) );
+            if (abono + cantidadPagada == totalPagar)
+            {
+                stm.setDate(2,java.sql.Date.valueOf (dtf.format(now)) );
+                
+            }else
+            {
+                stm.setDate(2,null);
+            }
+            
             
             stm.setInt(3,Integer.parseInt(atributos[0]));
             
@@ -92,14 +161,54 @@ public class RegistroPago {
         return confirmacion;
     }
     
+    
+        public String[] mostrarFactura (int numFactura) throws SQLException {
+        // Realizacion del query
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT * FROM factura WHERE num_factura = "
+                + numFactura);
+
+
+        String arr[] = new String[8];
+        
+
+        if (result.next()) {
+            for (int i = 0; i < 8; i++) {
+                if (i != 7) {
+                    arr[i] = result.getString(i + 1);
+                } else {
+                    // true --> Activo / false --> Inactivo
+                    if (result.getString(3).equals(result.getString(4))) {
+                        arr[i] = "PAGADO";
+                    } else {
+                        arr[i] = "IMPAGADO";
+                    }
+                }
+            }
+        }
+
+
+
+        
+        //for(int j =0; j <8;j++){ System.out.println(arr[j]); }
+         
+
+
+        return arr;
+    }
+        
+     
+    
     public static void main(String args[]) throws SQLException, IOException{
         RegistroPago prueba = new RegistroPago();
         
-        String atributos[] = 
+        /*String atributos[] = 
         {
             "1003","70000"
         };
-        prueba.registrarPago(atributos);
+        prueba.registrarPago(atributos);*/
+        
+        prueba.mostrarFactura(1006);
     }
     
 }

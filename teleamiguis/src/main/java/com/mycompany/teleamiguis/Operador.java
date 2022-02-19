@@ -3,6 +3,12 @@
  * license Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.mycompany.teleamiguis;
+import java.awt.Color;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import modules.RegistroPago;
 
 /**
  *
@@ -11,13 +17,19 @@ package com.mycompany.teleamiguis;
 public class Operador extends javax.swing.JFrame {
     int xMouse;
     int yMouse;
+    private RegistroPago rPago;
 
-
-    /**
-     * Creates new form Operador
-     */
+   
     public Operador() {
         initComponents();
+        txf_expedido.setEditable(false);
+        txf_caduca.setEditable(false);
+        txf_total_a_pagar.setEditable(false);
+        txf_num_contrato.setEditable(false);
+        txf_pagado.setEditable(false);
+        txf_abonado.setEditable(false);
+        
+        
     }
 
     /**
@@ -36,10 +48,32 @@ public class Operador extends javax.swing.JFrame {
         Logo = new javax.swing.JLabel();
         registrarPago = new javax.swing.JButton();
         salida1 = new javax.swing.JButton();
-        panelDer = new javax.swing.JPanel();
-        Fondo = new javax.swing.JLabel();
         barraTitulo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        panelDer = new javax.swing.JPanel();
+        Fondo = new javax.swing.JLabel();
+        tabsPagoOperador = new javax.swing.JTabbedPane();
+        tabPago = new javax.swing.JPanel();
+        label_registrarPago = new javax.swing.JLabel();
+        lbl_num_factura = new javax.swing.JLabel();
+        txf_buscar_factura = new javax.swing.JTextField();
+        lbl_num_contrato = new javax.swing.JLabel();
+        txf_num_contrato = new javax.swing.JTextField();
+        lbl_abonado = new javax.swing.JLabel();
+        txf_abonado = new javax.swing.JTextField();
+        txf_total_a_pagar = new javax.swing.JTextField();
+        lbl_expedido = new javax.swing.JLabel();
+        txf_expedido = new javax.swing.JTextField();
+        lbl_pagado = new javax.swing.JLabel();
+        txf_pagado = new javax.swing.JTextField();
+        lbl_caduca = new javax.swing.JLabel();
+        txf_caduca = new javax.swing.JTextField();
+        buscar = new javax.swing.JButton();
+        lbl_total_a_pagar = new javax.swing.JLabel();
+        estado_factura = new javax.swing.JLabel();
+        abonar = new javax.swing.JButton();
+        lbl_abonar = new javax.swing.JLabel();
+        txf_abonar = new javax.swing.JTextField();
 
         setUndecorated(true);
         setResizable(false);
@@ -103,33 +137,7 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(80, 10, 10, 10);
         panelIzq.add(salida1, gridBagConstraints);
 
-        panelGeneral.add(panelIzq,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
-
-        panelDer.setBackground(new java.awt.Color(255, 204, 204));
-        panelDer.setOpaque(false);
-        panelDer.setPreferredSize(new java.awt.Dimension(500, 450));
-
-        Fondo.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
-        Fondo.setToolTipText("");
-
-        javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
-        panelDer.setLayout(panelDerLayout);
-        panelDerLayout.setHorizontalGroup(
-                panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDerLayout.createSequentialGroup()
-                                .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap()));
-        panelDerLayout.setVerticalGroup(
-                panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
-
-        panelGeneral.add(panelDer,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
-        panelDer.getAccessibleContext().setAccessibleDescription("");
+        panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
         barraTitulo.setBackground(new java.awt.Color(43, 41, 40));
         barraTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,37 +161,292 @@ public class Operador extends javax.swing.JFrame {
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
-                barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(barraTituloLayout.createSequentialGroup().addGap(395, 395, 395)
-                                .addComponent(jLabel1).addContainerGap(390, Short.MAX_VALUE)));
-        barraTituloLayout.setVerticalGroup(barraTituloLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                        barraTituloLayout.createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap()));
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraTituloLayout.createSequentialGroup()
+                .addGap(395, 395, 395)
+                .addComponent(jLabel1)
+                .addContainerGap(390, Short.MAX_VALUE))
+        );
+        barraTituloLayout.setVerticalGroup(
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraTituloLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
-        panelGeneral.add(barraTitulo,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
+        panelGeneral.add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 30));
+
+        panelDer.setBackground(new java.awt.Color(255,255,255,150));
+        panelDer.setPreferredSize(new java.awt.Dimension(500, 450));
+
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
+        Fondo.setToolTipText("");
+        Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        tabsPagoOperador.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+
+        tabPago.setBackground(new java.awt.Color(255, 255, 255, 150));
+        tabPago.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_registrarPago.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_registrarPago.setForeground(new java.awt.Color(0, 0, 0));
+        label_registrarPago.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_registrarPago.setText("Registrar Pago");
+        label_registrarPago.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tabPago.add(label_registrarPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 700, -1));
+
+        lbl_num_factura.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_num_factura.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_num_factura.setText("Seleccione numero de la facura:");
+        tabPago.add(lbl_num_factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 230, 30));
+
+        txf_buscar_factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_buscar_facturaActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_buscar_factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 130, -1));
+
+        lbl_num_contrato.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_num_contrato.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_num_contrato.setText("Numero de contrato");
+        tabPago.add(lbl_num_contrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 170, 30));
+
+        txf_num_contrato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_num_contratoActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_num_contrato, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 130, -1));
+
+        lbl_abonado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_abonado.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_abonado.setText("Abonado");
+        tabPago.add(lbl_abonado, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 230, 30));
+
+        txf_abonado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_abonadoActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_abonado, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 200, 230, -1));
+
+        txf_total_a_pagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_total_a_pagarActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_total_a_pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 230, -1));
+
+        lbl_expedido.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_expedido.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_expedido.setText("Expedido");
+        tabPago.add(lbl_expedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 70, 30));
+
+        txf_expedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_expedidoActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_expedido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 140, -1));
+
+        lbl_pagado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_pagado.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_pagado.setText("Pagado");
+        tabPago.add(lbl_pagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 60, 30));
+
+        txf_pagado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_pagadoActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_pagado, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 140, -1));
+
+        lbl_caduca.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_caduca.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_caduca.setText("Caduca");
+        tabPago.add(lbl_caduca, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 60, 30));
+
+        txf_caduca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_caducaActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_caduca, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, 140, -1));
+
+        buscar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        buscar.setText("Buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
+        tabPago.add(buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+
+        lbl_total_a_pagar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_total_a_pagar.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_total_a_pagar.setText("Total a pagar");
+        tabPago.add(lbl_total_a_pagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 230, 180, 30));
+
+        estado_factura.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        estado_factura.setForeground(new java.awt.Color(0, 0, 0));
+        estado_factura.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        tabPago.add(estado_factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, 230, 30));
+
+        abonar.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        abonar.setForeground(new java.awt.Color(0, 128, 0));
+        abonar.setText("$");
+        abonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abonarActionPerformed(evt);
+            }
+        });
+        tabPago.add(abonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 60, 30));
+
+        lbl_abonar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        lbl_abonar.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_abonar.setText("Abonar");
+        tabPago.add(lbl_abonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 230, 30));
+
+        txf_abonar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txf_abonarActionPerformed(evt);
+            }
+        });
+        tabPago.add(txf_abonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 180, 30));
+
+        tabsPagoOperador.addTab("tab1", tabPago);
+
+        javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
+        panelDer.setLayout(panelDerLayout);
+        panelDerLayout.setHorizontalGroup(
+            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabsPagoOperador, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addComponent(Fondo)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        panelDerLayout.setVerticalGroup(
+            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabsPagoOperador, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addComponent(Fondo)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                        panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE,
-                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                        panelGeneral, javax.swing.GroupLayout.Alignment.TRAILING,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txf_buscar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_buscar_facturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_buscar_facturaActionPerformed
+
+    private void txf_num_contratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_num_contratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_num_contratoActionPerformed
+
+    private void txf_total_a_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_total_a_pagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_total_a_pagarActionPerformed
+
+    private void txf_expedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_expedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_expedidoActionPerformed
+
+    private void txf_pagadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_pagadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_pagadoActionPerformed
+
+    private void txf_caducaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_caducaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_caducaActionPerformed
+
+    private void txf_abonadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_abonadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_abonadoActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        try {
+            // TODO add your handling code here:
+            rPago = new RegistroPago();
+            String[] datos = rPago.mostrarFactura( Integer.parseInt(txf_buscar_factura.getText()) );
+            
+            txf_buscar_factura.setText(datos[0]);
+            txf_num_contrato.setText(datos[1]);
+            txf_abonado.setText(datos[2]);
+            txf_total_a_pagar.setText(datos[3]);
+            txf_expedido.setText(datos[4]);
+            txf_pagado.setText(datos[5]);
+            txf_caduca.setText(datos[6]);
+            estado_factura.setText(datos[7]);
+            
+            if(datos[2].equals(datos[3]))
+            {
+                estado_factura.setForeground(new Color(0,128,0));
+                
+            }else 
+            {
+                estado_factura.setForeground(new Color(255,0,0));
+            }
+            
+            repaint();
+            revalidate();
+            
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void abonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abonarActionPerformed
+        // TODO add your handling code here:
+        
+                try {
+            // TODO add your handling code here:
+            rPago = new RegistroPago();
+            String [] datos = new String[2];
+            
+            datos[0] = txf_buscar_factura.getText();
+            datos[1] = txf_abonar.getText();
+            
+            System.out.println(datos[0]);
+            System.out.println(datos[1]);
+            
+            rPago.registrarPago(datos);
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_abonarActionPerformed
+
+    private void txf_abonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_abonarActionPerformed
+
+    }//GEN-LAST:event_txf_abonarActionPerformed
 
     private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_barraTituloMouseDragged
         // TODO add your handling code here:
@@ -265,8 +528,20 @@ public class Operador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
+    private javax.swing.JButton abonar;
     private javax.swing.JPanel barraTitulo;
+    private javax.swing.JButton buscar;
+    private javax.swing.JLabel estado_factura;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel label_registrarPago;
+    private javax.swing.JLabel lbl_abonado;
+    private javax.swing.JLabel lbl_abonar;
+    private javax.swing.JLabel lbl_caduca;
+    private javax.swing.JLabel lbl_expedido;
+    private javax.swing.JLabel lbl_num_contrato;
+    private javax.swing.JLabel lbl_num_factura;
+    private javax.swing.JLabel lbl_pagado;
+    private javax.swing.JLabel lbl_total_a_pagar;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
@@ -274,5 +549,15 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JButton registrarPago;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida1;
+    private javax.swing.JPanel tabPago;
+    private javax.swing.JTabbedPane tabsPagoOperador;
+    private javax.swing.JTextField txf_abonado;
+    private javax.swing.JTextField txf_abonar;
+    private javax.swing.JTextField txf_buscar_factura;
+    private javax.swing.JTextField txf_caduca;
+    private javax.swing.JTextField txf_expedido;
+    private javax.swing.JTextField txf_num_contrato;
+    private javax.swing.JTextField txf_pagado;
+    private javax.swing.JTextField txf_total_a_pagar;
     // End of variables declaration//GEN-END:variables
 }

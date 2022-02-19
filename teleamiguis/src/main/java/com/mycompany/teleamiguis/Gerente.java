@@ -264,6 +264,7 @@ public class Gerente extends javax.swing.JFrame {
         Fondo.setToolTipText("");
         Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        tabsClientes.setBackground(new java.awt.Color(0, 0, 0, 100));
         tabsClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabsClientes.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -271,6 +272,7 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
 
+        tabGestiosClientes.setBackground(new java.awt.Color(255, 255, 255, 150));
         tabGestiosClientes.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         tabGestiosClientes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -461,6 +463,7 @@ public class Gerente extends javax.swing.JFrame {
 
         tabsClientes.addTab("Gestion", tabGestiosClientes);
 
+        tabRegistroNumero.setBackground(new java.awt.Color(255, 255, 255, 150));
         tabRegistroNumero.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         tabRegistroNumero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -511,15 +514,19 @@ public class Gerente extends javax.swing.JFrame {
             }
         });
 
+        reporteGanancias.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteGanancias.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Ganancias", reporteGanancias);
 
+        reporteFactura.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteFactura.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Factura", reporteFactura);
 
+        reporteOperadores.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteOperadores.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Operadores", reporteOperadores);
 
+        reporteNose.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteNose.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Nose", reporteNose);
 
@@ -527,7 +534,7 @@ public class Gerente extends javax.swing.JFrame {
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(tabsClientes))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -537,11 +544,9 @@ public class Gerente extends javax.swing.JFrame {
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelDerLayout.createSequentialGroup()
-                    .addComponent(tabsClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(tabsClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addComponent(Fondo)

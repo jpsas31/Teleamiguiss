@@ -224,14 +224,12 @@ public class Administrador extends javax.swing.JFrame {
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
         panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
-        panelGeneral.add(panelIzq,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
+        panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
-        panelDer.setBackground(new java.awt.Color(255, 255, 255, 150));
+        panelDer.setBackground(new java.awt.Color(255, 255, 255,150));
         panelDer.setPreferredSize(new java.awt.Dimension(500, 450));
 
-        Fondo.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
         Fondo.setToolTipText("");
         Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -242,68 +240,60 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
 
+        tabGestiosUsuarios.setBackground(new java.awt.Color(255, 255, 255, 150));
         tabGestiosUsuarios.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         tabGestiosUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_id.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_id.setText("Identificación");
-        tabGestiosUsuarios.add(label_id,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 188, 160, -1));
+        tabGestiosUsuarios.add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 188, 160, -1));
         label_id.setVisible(false);
 
         label_nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_nombre.setText("Nombre");
-        tabGestiosUsuarios.add(label_nombre,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 188, 170, -1));
+        tabGestiosUsuarios.add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 188, 170, -1));
         label_nombre.setVisible(false);
 
         label_dir.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_dir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_dir.setText("Dirección");
-        tabGestiosUsuarios.add(label_dir,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 273, 160, -1));
+        tabGestiosUsuarios.add(label_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 273, 160, -1));
         label_dir.setVisible(false);
 
         label_tel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_tel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_tel.setText("Teléfono");
-        tabGestiosUsuarios.add(label_tel,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 273, 170, -1));
+        tabGestiosUsuarios.add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 273, 170, -1));
         label_tel.setVisible(false);
 
         label_mail.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_mail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_mail.setText("Correo ");
-        tabGestiosUsuarios.add(label_mail,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 273, 170, -1));
+        tabGestiosUsuarios.add(label_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 273, 170, -1));
         label_mail.setVisible(false);
 
         label_estado.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_estado.setText("Estado");
-        tabGestiosUsuarios.add(label_estado,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 349, 170, -1));
+        tabGestiosUsuarios.add(label_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 349, 170, -1));
         label_estado.setVisible(false);
 
         label_titulo.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_titulo.setText("Seleccione el documento de identidad:");
-        tabGestiosUsuarios.add(label_titulo,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
+        tabGestiosUsuarios.add(label_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
 
         label_cargo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_cargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_cargo.setText("Cargo");
-        tabGestiosUsuarios.add(label_cargo,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 188, 170, -1));
+        tabGestiosUsuarios.add(label_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 188, 170, -1));
         label_cargo.setVisible(false);
 
         label_resul_estado.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_resul_estado.setForeground(new java.awt.Color(0, 153, 51));
         label_resul_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tabGestiosUsuarios.add(label_resul_estado,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 374, 173, 36));
+        tabGestiosUsuarios.add(label_resul_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 374, 173, 36));
         label_resul_estado.setVisible(false);
 
         jTF_resul_nombre.setBackground(new java.awt.Color(255, 255, 255));
@@ -312,8 +302,7 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_nombre.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTF_resul_nombre.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_nombre,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 213, 173, 33));
+        tabGestiosUsuarios.add(jTF_resul_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 213, 173, 33));
         jTF_resul_nombre.setVisible(false);
 
         jTF_resul_dir.setBackground(new java.awt.Color(255, 255, 255));
@@ -321,8 +310,7 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_dir.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_dir.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_dir.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_dir,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 298, 170, 33));
+        tabGestiosUsuarios.add(jTF_resul_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 298, 170, 33));
         jTF_resul_dir.setVisible(false);
 
         jTF_resul_tel.setBackground(new java.awt.Color(255, 255, 255));
@@ -331,8 +319,7 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_tel.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_tel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTF_resul_tel.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_tel,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 298, 173, 33));
+        tabGestiosUsuarios.add(jTF_resul_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 298, 173, 33));
         jTF_resul_tel.setVisible(false);
 
         jTF_resul_mail.setBackground(new java.awt.Color(255, 255, 255));
@@ -340,14 +327,17 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_mail.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_mail.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_mail.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_mail,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 298, 173, 33));
+        tabGestiosUsuarios.add(jTF_resul_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 298, 173, 33));
         jTF_resul_mail.setVisible(false);
 
         jTF_resul_id.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_id.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        tabGestiosUsuarios.add(jTF_resul_id,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 213, 100, 33));
+        jTF_resul_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTF_resul_idActionPerformed(evt);
+            }
+        });
+        tabGestiosUsuarios.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 213, 100, 33));
 
         cambiarEstado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         cambiarEstado.setText("Activar/Desactivar");
@@ -356,15 +346,14 @@ public class Administrador extends javax.swing.JFrame {
                 cambiarEstadoActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(cambiarEstado,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 180, -1));
+        tabGestiosUsuarios.add(cambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 180, -1));
 
         try {
             AdministradorUsuarios admUser = new AdministradorUsuarios();
-            ArrayList<String[]> usuarios = admUser.mostrarListaUsuarios();
+            ArrayList<String[]> usuarios= admUser.mostrarListaUsuarios();
             DefaultComboBoxModel model = new DefaultComboBoxModel();
-            for (String[] usuario : usuarios) {
-                model.addElement(usuario[0] + " - " + usuario[2] + " - " + usuario[1]);
+            for (String[] usuario: usuarios){
+                model.addElement(usuario[0] +" - " + usuario[2] +" - " + usuario[1] );
             }
             campoConsultaUsuario.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
             campoConsultaUsuario.setModel(model);
@@ -377,9 +366,8 @@ public class Administrador extends javax.swing.JFrame {
                 campoConsultaUsuarioActionPerformed(evt);
             }
         });
-        AutoCompletion.enable(campoConsultaUsuario);
-        tabGestiosUsuarios.add(campoConsultaUsuario,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
+        AutoCompletion.enable(campoConsultaUsuario );
+        tabGestiosUsuarios.add(campoConsultaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
 
         actualiarInfo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         actualiarInfo.setText("Actualizar información");
@@ -388,8 +376,7 @@ public class Administrador extends javax.swing.JFrame {
                 actualiarInfoActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(actualiarInfo,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, -1));
+        tabGestiosUsuarios.add(actualiarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, -1));
 
         Registrar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         Registrar.setText("Registrar");
@@ -398,41 +385,34 @@ public class Administrador extends javax.swing.JFrame {
                 RegistrarActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(Registrar,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 180, -1));
+        tabGestiosUsuarios.add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 180, -1));
 
         label_notificacion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_notificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tabGestiosUsuarios.add(label_notificacion,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 380, 40));
+        tabGestiosUsuarios.add(label_notificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 380, 40));
 
         label_resulEstado2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_resulEstado2.setForeground(new java.awt.Color(0, 153, 51));
         label_resulEstado2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tabGestiosUsuarios.add(label_resulEstado2,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 330, 50));
+        tabGestiosUsuarios.add(label_resulEstado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 330, 50));
         label_resul_estado.setVisible(false);
 
         jTF_resul_tipoid.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_tipoid.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_tipoid.setForeground(new java.awt.Color(0, 0, 0));
-        jTF_resul_tipoid.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] {"C.C", "T.I", "NIT"}));
+        jTF_resul_tipoid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "C.C", "T.I", "NIT"}));
         jTF_resul_tipoid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTF_resul_tipoidActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(jTF_resul_tipoid,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
+        tabGestiosUsuarios.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
         jTF_resul_tipoid.setSelectedIndex(-1);
 
         this.setVisible(false);
-        label_imEstado.setIcon(new javax.swing.ImageIcon(
-                getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
+        label_imEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
         label_imEstado.setOpaque(true);
-        tabGestiosUsuarios.add(label_imEstado,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+        tabGestiosUsuarios.add(label_imEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
 
         Limpiar.setText("Limpiar");
         Limpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -440,21 +420,18 @@ public class Administrador extends javax.swing.JFrame {
                 LimpiarActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(Limpiar,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
+        tabGestiosUsuarios.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
 
         jTF_resul_cargo.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_cargo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_cargo.setForeground(new java.awt.Color(0, 0, 0));
-        jTF_resul_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] {"Administrador", "Operador", "Gerente"}));
+        jTF_resul_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrador", "Operador", "Gerente" }));
         jTF_resul_cargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTF_resul_cargoActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(jTF_resul_cargo,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
+        tabGestiosUsuarios.add(jTF_resul_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
         jTF_resul_cargo.setSelectedIndex(-1);
 
         tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
@@ -465,60 +442,55 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
 
+        reporteGanancias.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteGanancias.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Ganancias", reporteGanancias);
 
+        reporteFacturas.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteFacturas.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Facturas", reporteFacturas);
 
+        reporteOperadores.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteOperadores.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Operadores", reporteOperadores);
 
+        reporteNose.setBackground(new java.awt.Color(255, 255, 255, 150));
         reporteNose.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Nose", reporteNose);
 
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
-                panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 720,
-                                Short.MAX_VALUE)
-                        .addGroup(panelDerLayout
-                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(tabsUsuarios))
-                        .addGroup(panelDerLayout
-                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                        panelDerLayout.createSequentialGroup()
-                                                .addGap(0, 0, Short.MAX_VALUE).addComponent(Fondo,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 720,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))));
-        panelDerLayout.setVerticalGroup(panelDerLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 456,
-                        Short.MAX_VALUE)
-                .addGroup(panelDerLayout
-                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDerLayout.createSequentialGroup()
-                                .addComponent(tabsUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                .addGroup(panelDerLayout
-                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(panelDerLayout.createSequentialGroup()
-                                .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())));
+            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tabsUsuarios))
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(Fondo, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        panelDerLayout.setVerticalGroup(
+            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addComponent(tabsUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
 
-        // Colocar font a las ventanas
-        tabsUsuarios.setFont(new Font("Sansserif", Font.BOLD, 12));
-        // Poner invisible al inicio tab Usuarios
+        //Colocar font a las ventanas
+        tabsUsuarios.setFont( new Font("Sansserif", Font.BOLD, 12));
+        //Poner invisible al inicio tab Usuarios
         tabsUsuarios.setVisible(false);
-        // Poner invisible all inicio
+        //Poner invisible all inicio
         tabsReportes.setVisible(false);
 
-        panelGeneral.add(panelDer,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
+        panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
         panelDer.getAccessibleContext().setAccessibleDescription("");
 
         barraTitulo.setBackground(new java.awt.Color(43, 41, 40));
@@ -543,33 +515,37 @@ public class Administrador extends javax.swing.JFrame {
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
-                barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tituloSuperior, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE));
-        barraTituloLayout.setVerticalGroup(barraTituloLayout
-                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(barraTituloLayout.createSequentialGroup().addContainerGap()
-                        .addComponent(tituloSuperior)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(tituloSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+        );
+        barraTituloLayout.setVerticalGroup(
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tituloSuperior)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        panelGeneral.add(barraTitulo,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 30));
+        panelGeneral.add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                        panelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                        panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 480,
-                        javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTF_resul_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTF_resul_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTF_resul_idActionPerformed
 
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_usuariosActionPerformed
         tabsReportes.setVisible(false);
