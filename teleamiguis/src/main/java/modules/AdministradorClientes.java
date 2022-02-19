@@ -107,7 +107,15 @@ public class AdministradorClientes {
 
     public int registrarCliente(String[] atributos) throws IOException, SQLException {
         int confirmacion = 0;
-        if (atributos[0].matches("-?\\d+(\\.\\d+)?") && atributos[5].matches("-?\\d+(\\.\\d+)?")) {
+        
+        for (int i = 0; i < atributos.length; i++) {
+            if (atributos[i].isEmpty())
+            {
+                confirmacion = 2; 
+            }
+        }
+        
+        if (atributos[0].matches("-?\\d+(\\.\\d+)?") && atributos[5].matches("-?\\d+(\\.\\d+)?") && confirmacion != 2) {
             PreparedStatement stm;
 
             // Preparando el statement de la tabla trabajadores
@@ -124,7 +132,7 @@ public class AdministradorClientes {
             confirmacion = stm.executeUpdate();
             conn.commit();
 
-        } else {
+        } else if (confirmacion != 2){
             confirmacion = -1;
         }
 

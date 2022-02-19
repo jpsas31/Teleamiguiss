@@ -114,8 +114,15 @@ public class AdministradorUsuarios {
     // id, tipoI, cargo, nombre, direccion, telefono, correo
     public int registrarUsuario(String[] atributos) throws IOException, SQLException {
         int confirmacion = 0;
+        
+         for (int i = 0; i < atributos.length; i++) {
+            if (atributos[i].isEmpty())
+            {
+                confirmacion = 2; 
+            }
+        }
 
-        if (atributos[0].matches("-?\\d+(\\.\\d+)?") && atributos[5].matches("-?\\d+(\\.\\d+)?")) {
+        if (atributos[0].matches("-?\\d+(\\.\\d+)?") && atributos[5].matches("-?\\d+(\\.\\d+)?") && confirmacion != 2) {
             PreparedStatement stm;
 
 
@@ -152,7 +159,7 @@ public class AdministradorUsuarios {
             // Enviando el query INSERT usuarios
             stm.executeUpdate();
             conn.commit();
-        } else {
+        } else if (confirmacion != 2){
             confirmacion = -1;
         }
 

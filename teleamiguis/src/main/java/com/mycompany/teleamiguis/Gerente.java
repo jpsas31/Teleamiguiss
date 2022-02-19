@@ -864,6 +864,10 @@ public class Gerente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,
                         "No fue posible registrar al cliente ingresado, dato inválido",
                         "Notificación", JOptionPane.ERROR_MESSAGE);
+            } else if (confirmacion == 2) {
+                 JOptionPane.showMessageDialog(null,
+                        "No fue posible registrar al cliente ingresado, dato(s) vacio(s)",
+                        "Notificación", JOptionPane.ERROR_MESSAGE);
             } else {
                 ArrayList<String[]> usuarios = admClient.mostrarListaClientes();
                 DefaultComboBoxModel model = new DefaultComboBoxModel();
@@ -882,7 +886,6 @@ public class Gerente extends javax.swing.JFrame {
                         "Se registró la informacion basica del cliente ingresado, ahora escoja un plan para el cliente",
                         "Notificación", JOptionPane.INFORMATION_MESSAGE);
                 tabsClientes.setSelectedIndex(1);
-
             }
 
         } catch (IOException | SQLException e) {
