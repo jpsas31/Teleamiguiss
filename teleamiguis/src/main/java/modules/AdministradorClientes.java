@@ -276,10 +276,10 @@ public class AdministradorClientes {
     }
 
     // Inserta un nuevo numero para crear un contrato para un cliente
-    public String agregarNumero(int idPlan) throws SQLException {
+    public String agregarNumero(int idPlan,String numero) throws SQLException {
         PreparedStatement stm;
         // Escribimos el Query
-        String numeroTel = getNumber(10);
+        String numeroTel = numero;
         String inhabQuery =
                 "INSERT INTO numero (numero_tel, id_plan, minutos_usados, datos_usados, mensajes_usados) VALUES(?, ?, 0, 0, 0) RETURNING numero_tel;";
         stm = conn.prepareStatement(inhabQuery);
@@ -332,9 +332,9 @@ public class AdministradorClientes {
     }
 
     // Hace todo el proceso para agregar un plan a un cliente
-    public void agregarPlan(int plan, String id, String tipoid) throws SQLException {
+    public void agregarPlan(int plan, String id, String tipoid,String numero) throws SQLException {
         String numContrato = agregarContrato();
-        String numTel = agregarNumero(plan);
+        String numTel = agregarNumero(plan,numero);
         unirContratoNumero(numContrato, numTel);
         unirContratoClient(id, tipoid, numContrato);
     }

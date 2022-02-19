@@ -50,8 +50,9 @@ public class Gerente extends javax.swing.JFrame {
     private String tipoidActual;
     int xMouse;
     int yMouse;
-    String idUsuario;
-    String tipoidUsuario;
+    private String idUsuario;
+    private String tipoidUsuario;
+    private String numero;
 
 
     /**
@@ -190,6 +191,7 @@ public class Gerente extends javax.swing.JFrame {
 
         clientes.setBackground(new java.awt.Color(255, 255, 255));
         clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        clientes.setForeground(new java.awt.Color(0, 0, 0));
         clientes.setText("Registro clientes");
         clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -205,6 +207,7 @@ public class Gerente extends javax.swing.JFrame {
 
         estadoClientes.setBackground(new java.awt.Color(255, 255, 255));
         estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
         estadoClientes.setText("Estado cliente");
         estadoClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +223,7 @@ public class Gerente extends javax.swing.JFrame {
 
         reportes.setBackground(new java.awt.Color(255, 255, 255));
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
         reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -999,24 +1003,36 @@ public class Gerente extends javax.swing.JFrame {
         String info[] = String.valueOf(campoConsultaClientePlan.getSelectedItem()).split(" - ");
         String id = info[2];
         String tipoid = info[1];
-        admClient.agregarPlan(admClient.getIdPlan(plan), id, tipoid);
+        admClient.agregarPlan(admClient.getIdPlan(plan), id, tipoid,numero);
         paintPanelLista();
         agregarPlan.setVisible(false);
     }
 
     private void agregarNumeroActionPerformed(java.awt.event.ActionEvent evt) {
-        String info[] = String.valueOf(campoConsultaClientePlan.getSelectedItem()).split(" - ");
-        String id = info[2];
-        String tipoid = info[1];
-        int permitido = admClient.clientePermitido(id, tipoid);
-        if (permitido > 0) {
-            panelDialog.removeAll();
-            fillPlanes();
-            agregarPlan.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null,
-                    "El usuario es natural y por lo tanto solo puede tener hasta 3 planes",
-                    "Warning", JOptionPane.WARNING_MESSAGE);
+        int procede = 0;
+        
+        numero=JOptionPane.showInputDialog(null,"Digite el numero","Informacion",JOptionPane.INFORMATION_MESSAGE);
+        if (null != numero){
+            if (numero.matches("-?\\d+(\\.\\d+)?")){
+            procede = 1;
+            
+            }
+        }
+        
+        if (procede == 1){
+            String info[] = String.valueOf(campoConsultaClientePlan.getSelectedItem()).split(" - ");
+            String id = info[2];
+            String tipoid = info[1];
+            int permitido = admClient.clientePermitido(id, tipoid);
+            if (permitido > 0) {
+                panelDialog.removeAll();
+                fillPlanes();
+                agregarPlan.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "El usuario es natural y por lo tanto solo puede tener hasta 3 planes",
+                        "Warning", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 
