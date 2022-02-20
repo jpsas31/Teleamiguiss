@@ -53,6 +53,12 @@ public class Gerente extends javax.swing.JFrame {
     private String idUsuario;
     private String tipoidUsuario;
     private String numero;
+    private boolean flag;
+    private JLabel texto1;
+    private JLabel texto2;
+    private com.toedter.calendar.JDateChooser calendar;
+    private com.toedter.calendar.JDateChooser calendar1;
+    private JPanel panelCalendar;
 
 
     /**
@@ -74,8 +80,8 @@ public class Gerente extends javax.swing.JFrame {
         }
         estadoventanasEstadoCliente(false);
         estadoventanasConsultaClientes(true);
-        limpiar();
-
+        limpiar(); 
+        flag = false;
 
     }
 
@@ -121,7 +127,7 @@ public class Gerente extends javax.swing.JFrame {
         jTF_resul_id = new javax.swing.JTextField();
         cambiarEstado = new javax.swing.JButton();
         campoConsultaCliente = new javax.swing.JComboBox<>();
-        actualiarInfo = new javax.swing.JButton();
+        actualizarInfo = new javax.swing.JButton();
         Registrar = new javax.swing.JButton();
         label_notificacion = new javax.swing.JLabel();
         label_resulEstado2 = new javax.swing.JLabel();
@@ -168,7 +174,7 @@ public class Gerente extends javax.swing.JFrame {
         panelIzq.setPreferredSize(new java.awt.Dimension(300, 450));
         panelIzq.setLayout(new java.awt.GridBagLayout());
 
-        nombre.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
         nombre.setText("GERENTE");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -177,7 +183,7 @@ public class Gerente extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelIzq.add(nombre, gridBagConstraints);
 
-        rol.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        rol.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         rol.setForeground(new java.awt.Color(255, 255, 255));
         rol.setForeground(new java.awt.Color(255, 255, 255));
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
@@ -190,7 +196,7 @@ public class Gerente extends javax.swing.JFrame {
         panelIzq.add(rol, gridBagConstraints);
 
         clientes.setBackground(new java.awt.Color(255, 255, 255));
-        clientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        clientes.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         clientes.setForeground(new java.awt.Color(0, 0, 0));
         clientes.setText("Registro clientes");
         clientes.addActionListener(new java.awt.event.ActionListener() {
@@ -206,7 +212,7 @@ public class Gerente extends javax.swing.JFrame {
         panelIzq.add(clientes, gridBagConstraints);
 
         estadoClientes.setBackground(new java.awt.Color(255, 255, 255));
-        estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        estadoClientes.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
         estadoClientes.setText("Estado cliente");
         estadoClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +228,7 @@ public class Gerente extends javax.swing.JFrame {
         panelIzq.add(estadoClientes, gridBagConstraints);
 
         reportes.setBackground(new java.awt.Color(255, 255, 255));
-        reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        reportes.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
         reportes.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +244,7 @@ public class Gerente extends javax.swing.JFrame {
         panelIzq.add(reportes, gridBagConstraints);
 
         salida.setBackground(new java.awt.Color(102, 102, 102));
-        salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        salida.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         salida.setForeground(new java.awt.Color(255, 255, 255));
         salida.setText("Salida");
         salida.addActionListener(new java.awt.event.ActionListener() {
@@ -397,14 +403,14 @@ public class Gerente extends javax.swing.JFrame {
         AutoCompletion.enable(campoConsultaCliente );
         tabGestiosClientes.add(campoConsultaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
 
-        actualiarInfo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        actualiarInfo.setText("Actualizar información");
-        actualiarInfo.addActionListener(new java.awt.event.ActionListener() {
+        actualizarInfo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        actualizarInfo.setText("Actualizar información");
+        actualizarInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualiarInfoActionPerformed(evt);
+                actualizarInfoActionPerformed(evt);
             }
         });
-        tabGestiosClientes.add(actualiarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, -1));
+        tabGestiosClientes.add(actualizarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, -1));
 
         Registrar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         Registrar.setText("Registrar");
@@ -578,7 +584,7 @@ public class Gerente extends javax.swing.JFrame {
         });
 
         tituloSuperior.setBackground(new java.awt.Color(0, 0, 0));
-        tituloSuperior.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        tituloSuperior.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         tituloSuperior.setForeground(new java.awt.Color(255, 255, 255));
         tituloSuperior.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloSuperior.setText("Gerente");
@@ -659,6 +665,7 @@ public class Gerente extends javax.swing.JFrame {
     }// GEN-LAST:event_barraTituloMousePressed
 
     private void reportesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_reportesActionPerformed
+        flag = true;
         tabsReportes.setVisible(true);
         panelGeneral.repaint();
         panelGeneral.revalidate();
@@ -667,6 +674,8 @@ public class Gerente extends javax.swing.JFrame {
         reportes.setEnabled(false);
         clientes.setEnabled(true);
         estadoClientes.setEnabled(true);
+        tabsReportes.setSelectedIndex(1);
+        tabsReportes.setSelectedIndex(0);
 
     }// GEN-LAST:event_reportesActionPerformed
 
@@ -684,8 +693,26 @@ public class Gerente extends javax.swing.JFrame {
     }// GEN-LAST:event_estadoClientesActionPerformed
 
     private void tabsReportesStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tabsReportesStateChanged
-
-        if (tabsReportes.getSelectedIndex() == 0) {
+        if (tabsReportes.getSelectedIndex() == 0 && flag == true) {
+            
+            panelCalendar = new JPanel();
+            texto1 = new JLabel("Ingrese la fecha inicial:");
+            texto1.setFont(new java.awt.Font("SansSerif",Font.BOLD, 12)); 
+            calendar = new com.toedter.calendar.JDateChooser();
+            calendar.setDateFormatString("yyyy-MM-dd");
+            calendar.setBounds(0, 0, 171, 24);
+            texto2 = new JLabel("Ingrese la fecha final:");
+            texto2.setFont(new java.awt.Font("SansSerif",Font.BOLD, 12)); 
+            calendar1 = new com.toedter.calendar.JDateChooser();
+            calendar1.setDateFormatString("yyyy-MM-dd");
+            calendar.setBounds(0, 0, 171, 24);
+            panelCalendar.add(texto1);
+            panelCalendar.add(calendar);
+            panelCalendar.add(texto2);
+            panelCalendar.add(calendar1);
+            panelCalendar.setPreferredSize(new Dimension(60,120));
+         
+            JOptionPane.showMessageDialog(null,panelCalendar,"Información",JOptionPane.PLAIN_MESSAGE);
             try {
                 Connection conn = getConnection();
                 Map<String, Object> parameters = new HashMap<>();
@@ -699,6 +726,7 @@ public class Gerente extends javax.swing.JFrame {
             } catch (JRException | IOException | SQLException ex) {
                 Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
             }
+            flag = false;
         }
         // else{
         //
@@ -815,7 +843,7 @@ public class Gerente extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_campoConsultaClienteActionPerformed
 
-    private void actualiarInfoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_actualiarInfoActionPerformed
+    private void actualizarInfoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_actualiarInfoActionPerformed
         // tipo_cliente, nombre, direccion telefono, correo, estado,id_cliente, tipo_identificacion
         try {
             int returnCode;
@@ -1073,7 +1101,8 @@ public class Gerente extends javax.swing.JFrame {
         label_tel.setVisible(bol);
         label_mail.setVisible(bol);
         label_estado.setVisible(bol);
-
+        
+        
         // Aparecer los cuadros de consulta
         jTF_resul_id.setVisible(bol);
         jTF_resul_tipocliente.setVisible(bol);
@@ -1083,7 +1112,8 @@ public class Gerente extends javax.swing.JFrame {
         jTF_resul_mail.setVisible(bol);
         jTF_resul_tipoid.setVisible(bol);
         label_resul_estado.setVisible(bol);
-
+        revalidate();
+        repaint();
     }
 
     private void estadoventanasEstadoCliente(boolean bol) {
@@ -1094,6 +1124,7 @@ public class Gerente extends javax.swing.JFrame {
         // Aparecer los cuadros de consulta
         label_resulEstado2.setVisible(bol);
     }
+    
 
     /**
      * @param args the command line arguments
@@ -1142,7 +1173,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JButton Limpiar;
     private javax.swing.JLabel Logo;
     private javax.swing.JButton Registrar;
-    private javax.swing.JButton actualiarInfo;
+    private javax.swing.JButton actualizarInfo;
     private javax.swing.JButton agregarNumero;
     private javax.swing.JDialog agregarPlan;
     private javax.swing.JPanel barraTitulo;

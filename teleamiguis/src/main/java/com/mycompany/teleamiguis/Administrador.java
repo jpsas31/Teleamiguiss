@@ -80,9 +80,8 @@ public class Administrador extends javax.swing.JFrame {
         panelGeneral = new javax.swing.JPanel();
         panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
-        rol = new javax.swing.JLabel();
+        horaSesion = new javax.swing.JLabel();
         usuarios = new javax.swing.JButton();
-        estadoClientes = new javax.swing.JButton();
         reportes = new javax.swing.JButton();
         salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
@@ -144,16 +143,16 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelIzq.add(nombre, gridBagConstraints);
 
-        rol.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        rol.setForeground(new java.awt.Color(255, 255, 255));
+        horaSesion.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        horaSesion.setForeground(new java.awt.Color(255, 255, 255));
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
         LocalDateTime now = LocalDateTime.now();
-        rol.setText(dtf.format(now));
+        horaSesion.setText(dtf.format(now));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 5);
-        panelIzq.add(rol, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 15, 5);
+        panelIzq.add(horaSesion, gridBagConstraints);
 
         usuarios.setBackground(new java.awt.Color(255, 255, 255));
         usuarios.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -169,25 +168,8 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(10, 10, 6, 10);
+        gridBagConstraints.insets = new java.awt.Insets(34, 10, 6, 10);
         panelIzq.add(usuarios, gridBagConstraints);
-
-        estadoClientes.setBackground(new java.awt.Color(255, 255, 255));
-        estadoClientes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
-        estadoClientes.setText("Registro clientes");
-        estadoClientes.setFocusable(false);
-        estadoClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoClientesActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
-        panelIzq.add(estadoClientes, gridBagConstraints);
 
         reportes.setBackground(new java.awt.Color(255, 255, 255));
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
@@ -201,7 +183,7 @@ public class Administrador extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
         panelIzq.add(reportes, gridBagConstraints);
@@ -217,12 +199,14 @@ public class Administrador extends javax.swing.JFrame {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.insets = new java.awt.Insets(25, 10, 10, 10);
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(82, 10, 10, 10);
         panelIzq.add(salida, gridBagConstraints);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
-        panelIzq.add(Logo, new java.awt.GridBagConstraints());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 3, 0);
+        panelIzq.add(Logo, gridBagConstraints);
 
         panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
@@ -507,7 +491,7 @@ public class Administrador extends javax.swing.JFrame {
         });
 
         tituloSuperior.setBackground(new java.awt.Color(0, 0, 0));
-        tituloSuperior.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
+        tituloSuperior.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         tituloSuperior.setForeground(new java.awt.Color(255, 255, 255));
         tituloSuperior.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         tituloSuperior.setText("Administrador");
@@ -556,7 +540,6 @@ public class Administrador extends javax.swing.JFrame {
         panelDer.revalidate();
         reportes.setEnabled(true);
         usuarios.setEnabled(false);
-        estadoClientes.setEnabled(true);
 
     }// GEN-LAST:event_usuariosActionPerformed
 
@@ -595,7 +578,6 @@ public class Administrador extends javax.swing.JFrame {
         panelDer.revalidate();
         reportes.setEnabled(true);
         usuarios.setEnabled(true);
-        estadoClientes.setEnabled(false);
 
     }// GEN-LAST:event_estadoClientesActionPerformed
 
@@ -608,7 +590,6 @@ public class Administrador extends javax.swing.JFrame {
         panelDer.revalidate();
         reportes.setEnabled(false);
         usuarios.setEnabled(true);
-        estadoClientes.setEnabled(true);
 
     }// GEN-LAST:event_reportesActionPerformed
 
@@ -958,7 +939,7 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton cambiarEstado;
     private javax.swing.JComboBox<String> campoConsultaUsuario;
-    private javax.swing.JButton estadoClientes;
+    private javax.swing.JLabel horaSesion;
     private javax.swing.JComboBox<String> jTF_resul_cargo;
     private javax.swing.JTextField jTF_resul_dir;
     private javax.swing.JTextField jTF_resul_id;
@@ -987,7 +968,6 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel reporteNose;
     private javax.swing.JPanel reporteOperadores;
     private javax.swing.JButton reportes;
-    private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
     private javax.swing.JPanel tabGestiosUsuarios;
     private javax.swing.JTabbedPane tabsReportes;

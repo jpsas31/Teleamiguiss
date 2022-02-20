@@ -246,7 +246,7 @@ public class Login extends javax.swing.JFrame {
                         admin.setVisible(true);
                         break;
                     case "Operador":
-                        Operador operador = new Operador();
+                        Operador operador = new Operador(resul[2], resul[3], resul[4]);
                         operador.setVisible(true);
                         break;
                     case "Gerente":

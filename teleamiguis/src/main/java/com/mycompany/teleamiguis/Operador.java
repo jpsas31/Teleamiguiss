@@ -6,22 +6,37 @@ package com.mycompany.teleamiguis;
 import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modules.RegistroPago;
+import java.time.LocalDateTime;
+import modules.AdministradorUsuarios;
 
 /**
  *
  * @author gyron
  */
 public class Operador extends javax.swing.JFrame {
+    private AdministradorUsuarios admUser;
     int xMouse;
     int yMouse;
     private RegistroPago rPago;
+    String idUsuario;
+    String tipoidUsuario;
 
    
-    public Operador() {
+    public Operador(String id, String tipoid, String nombreUser) {
+        
         initComponents();
+        
+        
+        idUsuario = id;
+        tipoidUsuario = tipoid;
+
+        tituloSuperior.setText("Usuario " + nombreUser);
+        
+        
         txf_expedido.setEditable(false);
         txf_caduca.setEditable(false);
         txf_total_a_pagar.setEditable(false);
@@ -29,7 +44,13 @@ public class Operador extends javax.swing.JFrame {
         txf_pagado.setEditable(false);
         txf_abonado.setEditable(false);
         
-        
+        try {
+            // Hacemos invisibles todos los jlabel de abajo del tab de gestionUsuario
+            admUser = new AdministradorUsuarios(); // se crea una instancia de la clase
+                                                   // AdministradorUsuarios
+        } catch (IOException | SQLException e) {
+            System.out.println("Hubo un problema al crear la clase administradorUsuario");
+        }
     }
 
     /**
@@ -44,12 +65,12 @@ public class Operador extends javax.swing.JFrame {
         panelGeneral = new javax.swing.JPanel();
         panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
-        rol = new javax.swing.JLabel();
+        horaSesion = new javax.swing.JLabel();
         Logo = new javax.swing.JLabel();
         registrarPago = new javax.swing.JButton();
         salida1 = new javax.swing.JButton();
         barraTitulo = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        tituloSuperior = new javax.swing.JLabel();
         panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
         tabsPagoOperador = new javax.swing.JTabbedPane();
@@ -86,29 +107,33 @@ public class Operador extends javax.swing.JFrame {
         panelIzq.setPreferredSize(new java.awt.Dimension(300, 450));
         panelIzq.setLayout(new java.awt.GridBagLayout());
 
-        nombre.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
-        nombre.setText("NOMBRE");
+        nombre.setText("OPERADOR");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         panelIzq.add(nombre, gridBagConstraints);
 
-        rol.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        rol.setForeground(new java.awt.Color(255, 255, 255));
-        rol.setText("Operador");
+        horaSesion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        horaSesion.setForeground(new java.awt.Color(255, 255, 255));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        horaSesion.setText(dtf.format(now));
+        horaSesion.setText(dtf.format(now));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 77, 5);
-        panelIzq.add(rol, gridBagConstraints);
+        panelIzq.add(horaSesion, gridBagConstraints);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
         panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
         registrarPago.setBackground(new java.awt.Color(255, 255, 255));
-        registrarPago.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        registrarPago.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        registrarPago.setForeground(new java.awt.Color(0, 0, 0));
         registrarPago.setText("Registrar pago");
         registrarPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +148,7 @@ public class Operador extends javax.swing.JFrame {
         panelIzq.add(registrarPago, gridBagConstraints);
 
         salida1.setBackground(new java.awt.Color(102, 102, 102));
-        salida1.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        salida1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         salida1.setForeground(new java.awt.Color(255, 255, 255));
         salida1.setText("Salida");
         salida1.addActionListener(new java.awt.event.ActionListener() {
@@ -153,25 +178,23 @@ public class Operador extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel1.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Operador");
+        tituloSuperior.setBackground(new java.awt.Color(0, 0, 0));
+        tituloSuperior.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        tituloSuperior.setForeground(new java.awt.Color(255, 255, 255));
+        tituloSuperior.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        tituloSuperior.setText("Operador");
 
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(barraTituloLayout.createSequentialGroup()
-                .addGap(395, 395, 395)
-                .addComponent(jLabel1)
-                .addContainerGap(390, Short.MAX_VALUE))
+            .addComponent(tituloSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
         );
         barraTituloLayout.setVerticalGroup(
             barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraTituloLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tituloSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -476,6 +499,11 @@ public class Operador extends javax.swing.JFrame {
     private void salida1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_salida1ActionPerformed
         // TODO add your handling code here:
         dispose();
+        try {
+            admUser.cerrarConexion(idUsuario, tipoidUsuario);
+        } catch (SQLException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Login login = new Login();
         login.setVisible(true);
 
@@ -520,7 +548,7 @@ public class Operador extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Operador().setVisible(true);
+                new Operador("2141234","C.C","papito pierna larga").setVisible(true);
             }
         });
     }
@@ -532,7 +560,7 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton buscar;
     private javax.swing.JLabel estado_factura;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel horaSesion;
     private javax.swing.JLabel label_registrarPago;
     private javax.swing.JLabel lbl_abonado;
     private javax.swing.JLabel lbl_abonar;
@@ -547,10 +575,10 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
     private javax.swing.JButton registrarPago;
-    private javax.swing.JLabel rol;
     private javax.swing.JButton salida1;
     private javax.swing.JPanel tabPago;
     private javax.swing.JTabbedPane tabsPagoOperador;
+    private javax.swing.JLabel tituloSuperior;
     private javax.swing.JTextField txf_abonado;
     private javax.swing.JTextField txf_abonar;
     private javax.swing.JTextField txf_buscar_factura;
