@@ -316,13 +316,13 @@ public class Operador extends javax.swing.JFrame {
         });
         tabPago.add(txf_abonar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 180, 30));
 
-        tabsPagoOperador.addTab("tab1", tabPago);
+        tabsPagoOperador.addTab("Registro de pago", tabPago);
 
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPagoOperador, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(tabsPagoOperador)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addComponent(Fondo)

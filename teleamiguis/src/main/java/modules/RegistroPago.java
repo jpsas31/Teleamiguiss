@@ -75,8 +75,8 @@ public class RegistroPago {
         StringBuilder totalpagarS = new StringBuilder(datos[3]);
         totalpagarS.deleteCharAt(0);
         totalpagarS.deleteCharAt(totalpagarS.length()-1);
-        totalpagarS.deleteCharAt(totalpagarS.length()-2);
-        totalpagarS.deleteCharAt(totalpagarS.length()-3);
+        totalpagarS.deleteCharAt(totalpagarS.length()-1);
+        totalpagarS.deleteCharAt(totalpagarS.length()-1);
         
         String totalpagarS2 = totalpagarS.toString();
         
@@ -84,12 +84,15 @@ public class RegistroPago {
         
         int totalPagar = Integer.parseInt(replace);
         
+        
+        System.out.println(datos[2].length());
+        
         //convertir cantidad pagada de Money a int
         StringBuilder totalpagarSII = new StringBuilder(datos[2]);
         totalpagarSII.deleteCharAt(0);
         totalpagarSII.deleteCharAt(totalpagarSII.length()-1);
-        totalpagarSII.deleteCharAt(totalpagarSII.length()-2);
-        totalpagarSII.deleteCharAt(totalpagarSII.length()-3);
+        totalpagarSII.deleteCharAt(totalpagarSII.length()-1);
+        totalpagarSII.deleteCharAt(totalpagarSII.length()-1);
         
         String totalpagarSII2 = totalpagarSII.toString();
         
