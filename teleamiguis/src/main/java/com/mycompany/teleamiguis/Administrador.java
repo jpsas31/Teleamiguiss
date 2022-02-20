@@ -81,10 +81,13 @@ public class Administrador extends javax.swing.JFrame {
         panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
         horaSesion = new javax.swing.JLabel();
-        usuarios = new javax.swing.JButton();
-        reportes = new javax.swing.JButton();
-        salida = new javax.swing.JButton();
         Logo = new javax.swing.JLabel();
+        cont_us = new javax.swing.JPanel();
+        usuarios = new javax.swing.JButton();
+        cont_rep = new javax.swing.JPanel();
+        reportes = new javax.swing.JButton();
+        cont_sal = new javax.swing.JPanel();
+        salida = new javax.swing.JButton();
         panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
         tabsUsuarios = new javax.swing.JTabbedPane();
@@ -103,16 +106,20 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_tel = new javax.swing.JTextField();
         jTF_resul_mail = new javax.swing.JTextField();
         jTF_resul_id = new javax.swing.JTextField();
-        cambiarEstado = new javax.swing.JButton();
         campoConsultaUsuario = new javax.swing.JComboBox<>();
-        actualiarInfo = new javax.swing.JButton();
-        Registrar = new javax.swing.JButton();
         label_notificacion = new javax.swing.JLabel();
         label_resulEstado2 = new javax.swing.JLabel();
         jTF_resul_tipoid = new javax.swing.JComboBox<>();
         label_imEstado = new javax.swing.JLabel();
-        Limpiar = new javax.swing.JButton();
         jTF_resul_cargo = new javax.swing.JComboBox<>();
+        cont_act = new javax.swing.JPanel();
+        actualiarInfo = new javax.swing.JButton();
+        cont_reg = new javax.swing.JPanel();
+        Registrar = new javax.swing.JButton();
+        cont_acti = new javax.swing.JPanel();
+        cambiarEstado = new javax.swing.JButton();
+        cont_limp = new javax.swing.JPanel();
+        Limpiar = new javax.swing.JButton();
         tabsReportes = new javax.swing.JTabbedPane();
         reporteGanancias = new javax.swing.JPanel();
         reporteFacturas = new javax.swing.JPanel();
@@ -154,59 +161,107 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 15, 5);
         panelIzq.add(horaSesion, gridBagConstraints);
 
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 3, 0);
+        panelIzq.add(Logo, gridBagConstraints);
+
+        cont_us.setBackground(new java.awt.Color(189, 210, 219));
+        cont_us.setForeground(new java.awt.Color(0, 0, 0));
+        cont_us.setPreferredSize(new java.awt.Dimension(91, 25));
+        cont_us.setLayout(new java.awt.BorderLayout());
+
         usuarios.setBackground(new java.awt.Color(255, 255, 255));
         usuarios.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         usuarios.setForeground(new java.awt.Color(0, 0, 0));
         usuarios.setText("Usuarios");
+        usuarios.setContentAreaFilled(false);
+        usuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         usuarios.setFocusPainted(false);
+        usuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                usuariosMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                usuariosMouseExited(evt);
+            }
+        });
         usuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuariosActionPerformed(evt);
             }
         });
+        cont_us.add(usuarios, java.awt.BorderLayout.CENTER);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(34, 10, 6, 10);
-        panelIzq.add(usuarios, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        panelIzq.add(cont_us, gridBagConstraints);
+
+        cont_rep.setBackground(new java.awt.Color(189, 210, 219));
+        cont_rep.setPreferredSize(new java.awt.Dimension(92, 25));
+        cont_rep.setLayout(new java.awt.BorderLayout());
 
         reportes.setBackground(new java.awt.Color(255, 255, 255));
         reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
+        reportes.setContentAreaFilled(false);
+        reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         reportes.setFocusable(false);
+        reportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                reportesMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                reportesMouseExited(evt);
+            }
+        });
         reportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 reportesActionPerformed(evt);
             }
         });
+        cont_rep.add(reportes, java.awt.BorderLayout.CENTER);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.insets = new java.awt.Insets(6, 10, 6, 10);
-        panelIzq.add(reportes, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
+        panelIzq.add(cont_rep, gridBagConstraints);
+
+        cont_sal.setBackground(new java.awt.Color(102, 102, 102));
+        cont_sal.setLayout(new java.awt.BorderLayout());
 
         salida.setBackground(new java.awt.Color(102, 102, 102));
         salida.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         salida.setForeground(new java.awt.Color(255, 255, 255));
         salida.setText("Salida");
+        salida.setContentAreaFilled(false);
+        salida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                salidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salidaMouseExited(evt);
+            }
+        });
         salida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salidaActionPerformed(evt);
             }
         });
+        cont_sal.add(salida, java.awt.BorderLayout.CENTER);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
-        gridBagConstraints.insets = new java.awt.Insets(82, 10, 10, 10);
-        panelIzq.add(salida, gridBagConstraints);
-
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 3, 0);
-        panelIzq.add(Logo, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(60, 0, 8, 0);
+        panelIzq.add(cont_sal, gridBagConstraints);
 
         panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
@@ -323,15 +378,6 @@ public class Administrador extends javax.swing.JFrame {
         });
         tabGestiosUsuarios.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 213, 100, 33));
 
-        cambiarEstado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        cambiarEstado.setText("Activar/Desactivar");
-        cambiarEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cambiarEstadoActionPerformed(evt);
-            }
-        });
-        tabGestiosUsuarios.add(cambiarEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 180, -1));
-
         try {
             AdministradorUsuarios admUser = new AdministradorUsuarios();
             ArrayList<String[]> usuarios= admUser.mostrarListaUsuarios();
@@ -352,24 +398,6 @@ public class Administrador extends javax.swing.JFrame {
         });
         AutoCompletion.enable(campoConsultaUsuario );
         tabGestiosUsuarios.add(campoConsultaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
-
-        actualiarInfo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        actualiarInfo.setText("Actualizar información");
-        actualiarInfo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualiarInfoActionPerformed(evt);
-            }
-        });
-        tabGestiosUsuarios.add(actualiarInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, -1));
-
-        Registrar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        Registrar.setText("Registrar");
-        Registrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RegistrarActionPerformed(evt);
-            }
-        });
-        tabGestiosUsuarios.add(Registrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 180, -1));
 
         label_notificacion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_notificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -398,14 +426,6 @@ public class Administrador extends javax.swing.JFrame {
         label_imEstado.setOpaque(true);
         tabGestiosUsuarios.add(label_imEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
 
-        Limpiar.setText("Limpiar");
-        Limpiar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LimpiarActionPerformed(evt);
-            }
-        });
-        tabGestiosUsuarios.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, -1, -1));
-
         jTF_resul_cargo.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_cargo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_cargo.setForeground(new java.awt.Color(0, 0, 0));
@@ -417,6 +437,110 @@ public class Administrador extends javax.swing.JFrame {
         });
         tabGestiosUsuarios.add(jTF_resul_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
         jTF_resul_cargo.setSelectedIndex(-1);
+
+        cont_act.setBackground(new java.awt.Color(0, 10, 85));
+        cont_act.setPreferredSize(new java.awt.Dimension(159, 22));
+        cont_act.setLayout(new java.awt.BorderLayout());
+
+        actualiarInfo.setBackground(new java.awt.Color(0, 10, 85));
+        actualiarInfo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        actualiarInfo.setForeground(new java.awt.Color(255, 255, 255));
+        actualiarInfo.setText("Actualizar información");
+        actualiarInfo.setContentAreaFilled(false);
+        actualiarInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        actualiarInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                actualiarInfoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                actualiarInfoMouseExited(evt);
+            }
+        });
+        actualiarInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualiarInfoActionPerformed(evt);
+            }
+        });
+        cont_act.add(actualiarInfo, java.awt.BorderLayout.CENTER);
+
+        tabGestiosUsuarios.add(cont_act, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, 30));
+
+        cont_reg.setBackground(new java.awt.Color(0, 10, 85));
+        cont_reg.setForeground(new java.awt.Color(255, 255, 255));
+        cont_reg.setLayout(new java.awt.BorderLayout());
+
+        Registrar.setBackground(new java.awt.Color(0, 10, 85));
+        Registrar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        Registrar.setForeground(new java.awt.Color(255, 255, 255));
+        Registrar.setText("Registrar");
+        Registrar.setContentAreaFilled(false);
+        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                RegistrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                RegistrarMouseExited(evt);
+            }
+        });
+        Registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegistrarActionPerformed(evt);
+            }
+        });
+        cont_reg.add(Registrar, java.awt.BorderLayout.CENTER);
+
+        tabGestiosUsuarios.add(cont_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 180, 30));
+
+        cont_acti.setBackground(new java.awt.Color(0, 10, 85));
+        cont_acti.setLayout(new java.awt.BorderLayout());
+
+        cambiarEstado.setBackground(new java.awt.Color(0, 10, 85));
+        cambiarEstado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        cambiarEstado.setForeground(new java.awt.Color(255, 255, 255));
+        cambiarEstado.setText("Activar/Desactivar");
+        cambiarEstado.setContentAreaFilled(false);
+        cambiarEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cambiarEstado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                cambiarEstadoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cambiarEstadoMouseExited(evt);
+            }
+        });
+        cambiarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cambiarEstadoActionPerformed(evt);
+            }
+        });
+        cont_acti.add(cambiarEstado, java.awt.BorderLayout.CENTER);
+
+        tabGestiosUsuarios.add(cont_acti, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 180, 30));
+
+        cont_limp.setBackground(new java.awt.Color(102, 102, 102));
+        cont_limp.setLayout(new java.awt.BorderLayout());
+
+        Limpiar.setForeground(new java.awt.Color(255, 255, 255));
+        Limpiar.setText("Limpiar");
+        Limpiar.setContentAreaFilled(false);
+        Limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Limpiar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LimpiarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LimpiarMouseExited(evt);
+            }
+        });
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
+        cont_limp.add(Limpiar, java.awt.BorderLayout.CENTER);
+
+        tabGestiosUsuarios.add(cont_limp, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, 72, 22));
 
         tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
 
@@ -531,6 +655,92 @@ public class Administrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTF_resul_idActionPerformed
 
+    private void usuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariosMouseEntered
+        // TODO add your handling code here:
+        cont_us.setBackground(new Color(0, 10, 85));
+        usuarios.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_usuariosMouseEntered
+
+    private void usuariosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usuariosMouseExited
+        // TODO add your handling code here:
+        cont_us.setBackground(new Color(189, 210, 219)); 
+        usuarios.setForeground(new Color(0, 0, 0)); 
+    }//GEN-LAST:event_usuariosMouseExited
+
+    private void reportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesMouseEntered
+        // TODO add your handling code here:
+        cont_rep.setBackground(new Color(0, 10, 85));
+        reportes.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_reportesMouseEntered
+
+    private void reportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesMouseExited
+        // TODO add your handling code here:
+        cont_rep.setBackground(new Color(189, 210, 219));
+        reportes.setForeground(new Color(0,0,0)); 
+    }//GEN-LAST:event_reportesMouseExited
+
+    private void salidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseEntered
+        // TODO add your handling code here:
+        cont_sal.setBackground(new Color(0, 0, 0));
+        salida.setForeground(new Color(255,255,255)); 
+    }//GEN-LAST:event_salidaMouseEntered
+
+    private void salidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseExited
+        // TODO add your handling code here:
+        cont_sal.setBackground(new Color(102, 102, 102));
+        salida.setForeground(new Color(255,255,255)); 
+    }//GEN-LAST:event_salidaMouseExited
+
+    private void actualiarInfoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualiarInfoMouseEntered
+        // TODO add your handling code here:
+        cont_act.setBackground(new Color(41, 35, 92)); 
+        actualiarInfo.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_actualiarInfoMouseEntered
+
+    private void actualiarInfoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_actualiarInfoMouseExited
+        // TODO add your handling code here:
+        cont_act.setBackground(new Color(0, 10, 85)); 
+        actualiarInfo.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_actualiarInfoMouseExited
+
+    private void RegistrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseEntered
+        // TODO add your handling code here:
+       cont_reg.setBackground(new Color(41, 35, 92)); 
+        Registrar.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_RegistrarMouseEntered
+
+    private void RegistrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegistrarMouseExited
+        // TODO add your handling code here:
+         cont_reg.setBackground(new Color(0, 10, 85)); 
+        Registrar.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_RegistrarMouseExited
+
+    private void cambiarEstadoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarEstadoMouseEntered
+        // TODO add your handling code here:
+        cont_acti.setBackground(new Color(41, 35, 92)); 
+        cambiarEstado.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_cambiarEstadoMouseEntered
+
+    private void cambiarEstadoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cambiarEstadoMouseExited
+        // TODO add your handling code here:
+        cont_acti.setBackground(new Color(0, 10, 85)); 
+        cambiarEstado.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_cambiarEstadoMouseExited
+
+    private void LimpiarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseEntered
+        // TODO add your handling code here:
+        cont_limp.setBackground(new Color(0, 0, 0));
+        Limpiar.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_LimpiarMouseEntered
+
+    private void LimpiarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LimpiarMouseExited
+        // TODO add your handling code here:
+        cont_limp.setBackground(new Color(102, 102, 102)); 
+        Limpiar.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_LimpiarMouseExited
+
+    
+    
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_usuariosActionPerformed
         tabsReportes.setVisible(false);
         tabsUsuarios.setVisible(true);
@@ -939,6 +1149,13 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton cambiarEstado;
     private javax.swing.JComboBox<String> campoConsultaUsuario;
+    private javax.swing.JPanel cont_act;
+    private javax.swing.JPanel cont_acti;
+    private javax.swing.JPanel cont_limp;
+    private javax.swing.JPanel cont_reg;
+    private javax.swing.JPanel cont_rep;
+    private javax.swing.JPanel cont_sal;
+    private javax.swing.JPanel cont_us;
     private javax.swing.JLabel horaSesion;
     private javax.swing.JComboBox<String> jTF_resul_cargo;
     private javax.swing.JTextField jTF_resul_dir;

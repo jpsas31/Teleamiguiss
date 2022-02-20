@@ -4,6 +4,7 @@
  */
 package com.mycompany.teleamiguis;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -49,9 +50,11 @@ public class Login extends javax.swing.JFrame {
         LoginIcon = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         password = new javax.swing.JPasswordField();
-        salida = new javax.swing.JButton();
-        iniciarsesion = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        cont_sal = new javax.swing.JPanel();
+        salida = new javax.swing.JButton();
+        cont_ent1 = new javax.swing.JPanel();
+        iniciarsesion = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         fondologin = new javax.swing.JLabel();
 
@@ -84,20 +87,21 @@ public class Login extends javax.swing.JFrame {
         javax.swing.GroupLayout barraTituloLayout = new javax.swing.GroupLayout(barraTitulo);
         barraTitulo.setLayout(barraTituloLayout);
         barraTituloLayout.setHorizontalGroup(
-                barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                barraTituloLayout.createSequentialGroup()
-                                        .addContainerGap(195, Short.MAX_VALUE).addComponent(jLabel2)
-                                        .addGap(185, 185, 185)));
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraTituloLayout.createSequentialGroup()
+                .addContainerGap(195, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(185, 185, 185))
+        );
         barraTituloLayout.setVerticalGroup(
-                barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(barraTituloLayout.createSequentialGroup().addContainerGap()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap()));
+            barraTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(barraTituloLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
-        panelGeneral.add(barraTitulo,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        panelGeneral.add(barraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         loginelement.setBackground(new java.awt.Color(22, 49, 92, 220));
         loginelement.setPreferredSize(new java.awt.Dimension(208, 400));
@@ -108,13 +112,10 @@ public class Login extends javax.swing.JFrame {
         nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nombre.setText("Usuario");
         nombre.setPreferredSize(new java.awt.Dimension(138, 21));
-        loginelement.add(nombre,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 100, 30));
+        loginelement.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 100, 30));
 
-        LoginIcon.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/usedPictures/login.png"))); // NOI18N
-        loginelement.add(LoginIcon,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
+        LoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/login.png"))); // NOI18N
+        loginelement.add(LoginIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
         username.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         username.setPreferredSize(new java.awt.Dimension(207, 26));
@@ -123,8 +124,7 @@ public class Login extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
-        loginelement.add(username,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 180, 31));
+        loginelement.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 180, 31));
 
         password.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         password.addActionListener(new java.awt.event.ActionListener() {
@@ -132,14 +132,33 @@ public class Login extends javax.swing.JFrame {
                 passwordActionPerformed(evt);
             }
         });
-        loginelement.add(password,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 180, 29));
+        loginelement.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 180, 29));
 
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Contraseña");
+        loginelement.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 100, 30));
+
+        cont_sal.setBackground(new java.awt.Color(189, 210, 219));
+        cont_sal.setPreferredSize(new java.awt.Dimension(72, 27));
+        cont_sal.setLayout(new java.awt.BorderLayout());
+
+        salida.setBackground(new java.awt.Color(255, 255, 255));
         salida.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 18)); // NOI18N
+        salida.setForeground(new java.awt.Color(0, 0, 0));
         salida.setText("Salir");
+        salida.setContentAreaFilled(false);
+        salida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 salidaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                salidaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                salidaMouseExited(evt);
             }
         });
         salida.addActionListener(new java.awt.event.ActionListener() {
@@ -147,56 +166,91 @@ public class Login extends javax.swing.JFrame {
                 salidaActionPerformed(evt);
             }
         });
-        loginelement.add(salida,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+        cont_sal.add(salida, java.awt.BorderLayout.CENTER);
 
+        loginelement.add(cont_sal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+
+        cont_ent1.setBackground(new java.awt.Color(189, 210, 219));
+        cont_ent1.setPreferredSize(new java.awt.Dimension(72, 27));
+        cont_ent1.setLayout(new java.awt.BorderLayout());
+
+        iniciarsesion.setBackground(new java.awt.Color(255, 255, 255));
         iniciarsesion.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 18)); // NOI18N
+        iniciarsesion.setForeground(new java.awt.Color(0, 0, 0));
         iniciarsesion.setText("Entrar");
+        iniciarsesion.setContentAreaFilled(false);
+        iniciarsesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iniciarsesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                iniciarsesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                iniciarsesionMouseExited(evt);
+            }
+        });
         iniciarsesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarsesionActionPerformed(evt);
             }
         });
-        loginelement.add(iniciarsesion,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
+        cont_ent1.add(iniciarsesion, java.awt.BorderLayout.CENTER);
 
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium Cond", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Contraseña");
-        loginelement.add(jLabel1,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 100, 30));
+        loginelement.add(cont_ent1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, -1, -1));
+        cont_ent1.getAccessibleContext().setAccessibleName("");
 
-        panelGeneral.add(loginelement,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 65, 327, 460));
+        panelGeneral.add(loginelement, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 65, 327, 460));
 
         loginPanel.setBackground(new java.awt.Color(98, 197, 255));
         loginPanel.setPreferredSize(new java.awt.Dimension(415, 550));
         loginPanel.setLayout(new java.awt.GridBagLayout());
 
-        fondologin.setIcon(
-                new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Fondo.png"))); // NOI18N
+        fondologin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Fondo.png"))); // NOI18N
         loginPanel.add(fondologin, new java.awt.GridBagConstraints());
 
-        panelGeneral.add(loginPanel,
-                new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 591));
+        panelGeneral.add(loginPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 591));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                        panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE,
-                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                        panelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void salidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseEntered
+        // TODO add your handling code here:
+        cont_sal.setBackground(new Color(0, 10, 85));
+        salida.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_salidaMouseEntered
+
+    private void salidaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseExited
+        // TODO add your handling code here:
+        cont_sal.setBackground(new Color(189, 210, 219)); 
+        salida.setForeground(new Color(0, 0, 0)); 
+    
+    }//GEN-LAST:event_salidaMouseExited
+
+    private void iniciarsesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarsesionMouseEntered
+        // TODO add your handling code here:
+        cont_ent1.setBackground(new Color(0, 10, 85));
+        iniciarsesion.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_iniciarsesionMouseEntered
+
+    private void iniciarsesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciarsesionMouseExited
+        // TODO add your handling code here:
+        cont_ent1.setBackground(new Color(189, 210, 219));
+        iniciarsesion.setForeground(new Color(0, 0, 0)); 
+    }//GEN-LAST:event_iniciarsesionMouseExited
+
+    
+    
     private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_barraTituloMouseDragged
         // TODO add your handling code here:
         int x = evt.getXOnScreen();
@@ -310,6 +364,8 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LoginIcon;
     private javax.swing.JPanel barraTitulo;
+    private javax.swing.JPanel cont_ent1;
+    private javax.swing.JPanel cont_sal;
     private javax.swing.JLabel fondologin;
     private javax.swing.JButton iniciarsesion;
     private javax.swing.JLabel jLabel1;
