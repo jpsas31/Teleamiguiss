@@ -417,19 +417,62 @@ public class AdministradorClientes {
         return -1;
     }
 
-    public static void main(String args[]) throws SQLException, IOException {
+    public int[] estadisticasPlanes(String fechaInicial, String fechaFinal) throws SQLException{
+        
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT pl.id_plan, sum(fac.cantidad_pagada) FROM factura fac,contratos con, contratos_telefonos ct, numero num, planes pl\n" +
+                                                                            "WHERE cantidad_pagada = total_a_pagar and \n" +
+                                                                            "		fecha_pago <= '" + fechaFinal + "' and \n" +
+                                                                            "			fecha_pago >= '" + fechaInicial + "' and\n" +
+                                                                            "				fac.num_contrato = con.num_contrato and\n" +
+                                                                            "					con.num_contrato = ct.num_contrato and\n" +
+                                                                            "						ct.numero_tel = num.numero_tel and\n" +
+                                                                            "							num.id_plan = pl.id_plan\n" +
+                                                                            "GROUP BY pl.id_plan ORDER BY pl.id_plan");
+        
+        int arr[] = new int[8];
+         
+        int j = 0;
+        while (result.next()) {
+            int y = 0;
+            for (int i = j; i < j+2; i++) {
+                  if (y == 1){
+                        StringBuilder ganancia = new StringBuilder(result.getString(y + 1));
+                        ganancia.deleteCharAt(0);
+                        ganancia.deleteCharAt(ganancia.length()-1);
+                        ganancia.deleteCharAt(ganancia.length()-1);
+                        ganancia.deleteCharAt(ganancia.length()-1);
+                        String ganancia1 = ganancia.toString();
+                        String ganancia2 = ganancia1.replace(",", "");
+                        arr[i] = Integer.parseInt(ganancia2);
+                        //System.out.println(arr[i]);
+                  }else {
+                        arr[i] = Integer.parseInt(result.getString(y + 1));
+                        //System.out.println(arr[i]);
+                  }
+                  y++;
+            }
+            j = j + 2;
+        }
+        
+        return arr;
+    }
+
+
+public static void main(String args[]) throws SQLException, IOException {
         AdministradorClientes prueba = new AdministradorClientes();
+        prueba.estadisticasPlanes("2022-01-19", "2022-12-19");
         // String numContrato = prueba.agregarContrato();
         // String numTel = prueba.agregarNumero(4);
         // prueba.unirContratoNumero(numContrato,numTel);
         // prueba.unirContratoClient("31482384", "C.C", numContrato);
-        System.out.println(prueba.getIdPlan(
-                "<html>ID: 4 <br> Nombre: Plan Rojo <br> Precio: $100.00 <br> Limite de minutos: 100 <br> Limite de datos: 100 GB <br> Limite de mensajes: 100 <br> Descripcion: Plan para sasuki</html>"));
+        //System.out.println(prueba.getIdPlan(
+        //        "<html>ID: 4 <br> Nombre: Plan Rojo <br> Precio: $100.00 <br> Limite de minutos: 100 <br> Limite de datos: 100 GB <br> Limite de mensajes: 100 <br> Descripcion: Plan para sasuki</html>"));
         // for( String plan:prueba.getPlanesCliente("31482384", "C.C")){
         // System.out.println(plan);
         // }
-        prueba.clientePermitido("31482384", "C.C");
-
+        //prueba.clientePermitido("31482384", "C.C");
+        
         // for (String plan: prueba.getPlanesCliente("31482384", "C.C")){
         // System.out.println(plan);
         // }

@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -964,6 +965,31 @@ public class Gerente extends javax.swing.JFrame {
             panelCalendar.setPreferredSize(new Dimension(60,120));
          
             JOptionPane.showMessageDialog(null,panelCalendar,"Información",JOptionPane.PLAIN_MESSAGE);
+            
+            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaInicial = formato.format(calendar.getDate());
+            String fechaFinal = formato.format(calendar1.getDate());
+            
+            try {
+                int arr[] = admClient.estadisticasPlanes(fechaInicial,fechaFinal);
+                int planes[] = new int[arr.length/2];
+                int ganancias[] = new int[arr.length/2];
+                        
+                int j = 0;
+                for(int i = 0; i< arr.length;i=i+2){
+                    planes[j] = arr[i];
+                    ganancias[j] = arr[i+1];
+                    System.out.println(planes[j]);
+                    System.out.println(ganancias[j]);
+                    j++;
+                }
+                
+                
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             try {
                 Connection conn = getConnection();
                 Map<String, Object> parameters = new HashMap<>();
