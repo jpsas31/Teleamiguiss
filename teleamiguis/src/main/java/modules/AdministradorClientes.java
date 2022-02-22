@@ -418,7 +418,7 @@ public class AdministradorClientes {
     }
 
     public int[] estadisticasPlanes(String fechaInicial, String fechaFinal) throws SQLException{
-        
+        System.out.println(fechaInicial + "  " + fechaFinal);
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT pl.id_plan, sum(fac.cantidad_pagada) FROM factura fac,contratos con, contratos_telefonos ct, numero num, planes pl\n" +
                                                                             "WHERE cantidad_pagada = total_a_pagar and \n" +

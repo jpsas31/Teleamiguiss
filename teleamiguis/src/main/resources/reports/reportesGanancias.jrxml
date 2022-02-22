@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Simple_Blue" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c1b5b48-95b9-421d-a708-235560e6f280">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<parameter name="FechaInicial" class="java.lang.String"/>
+	<parameter name="FechaFinal" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[          
+SELECT CAST(pl.id_plan as  varchar), sum(fac.cantidad_pagada)::money::numeric FROM factura fac,contratos con, contratos_telefonos ct, numero num, planes pl
+WHERE cantidad_pagada = total_a_pagar and 
+		fecha_pago <= to_date($P{FechaFinal},'YYY-MM-DD') and 
+			fecha_pago >= to_date($P{FechaInicial},'YYY-MM-DD') and
+				fac.num_contrato = con.num_contrato and
+					con.num_contrato = ct.num_contrato and
+						ct.numero_tel = num.numero_tel and
+							num.id_plan = pl.id_plan
+GROUP BY pl.id_plan ORDER BY pl.id_plan]]>
+	</queryString>
+	<field name="id_plan" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="id_plan"/>
+		<property name="com.jaspersoft.studio.field.label" value="id_plan"/>
+	</field>
+	<field name="sum" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="sum"/>
+		<property name="com.jaspersoft.studio.field.label" value="sum"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="7363b950-e9fa-46d7-995e-5c527f8b02b9"/>
+				<staticText>
+					<reportElement x="10" y="27" width="195" height="52" forecolor="#FFFFFF" uuid="f8797e01-98c2-43ec-8cd4-46406724f792"/>
+					<textElement>
+						<font size="37"/>
+					</textElement>
+					<text><![CDATA[Ganancias]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="250" y="40" width="340" height="30" forecolor="#FFFFFF" uuid="105673ee-a717-4826-94c8-5b150a8298b0"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Periodo: " + $P{FechaInicial}+" - "+$P{FechaFinal} ]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="503">
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="10" y="15" width="530" height="480" uuid="86d9f24d-44b4-41d5-b500-897537624f36"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset resetType="Report"/>
+					<keyExpression><![CDATA["Plan " + $F{id_plan}]]></keyExpression>
+					<valueExpression><![CDATA[$F{sum}]]></valueExpression>
+					<labelExpression><![CDATA[String.valueOf($F{sum}) + "$"]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="21">
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="a60be003-a889-48ad-95ab-7e0857b0aac4"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="43d0b93a-9c02-403f-af8f-7eacb3a91dc6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

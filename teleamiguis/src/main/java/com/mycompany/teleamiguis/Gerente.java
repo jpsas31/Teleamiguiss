@@ -994,7 +994,9 @@ public class Gerente extends javax.swing.JFrame {
                 Connection conn = getConnection();
                 Map<String, Object> parameters = new HashMap<>();
                 parameters.put("title", "Soy un titulo mamon");
-                String jrxml = "/reports/reportes.jrxml";
+                parameters.put("FechaInicial", String.valueOf(fechaInicial));
+                parameters.put("FechaFinal",  String.valueOf(fechaFinal));
+                String jrxml = "/reports/reportesGanancias.jrxml";
                 JasperPrint print = createPrint(parameters, jrxml, conn);
                 JRViewer view = createReportView(print);
                 reporteGanancias.add(view);
