@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modules.RegistroPago;
 import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 import modules.AdministradorUsuarios;
 
 /**
@@ -495,32 +496,13 @@ public class Operador extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             rPago = new RegistroPago();
-            String[] datos = rPago.mostrarFactura( Integer.parseInt(txf_buscar_factura.getText()) );
-            
-            txf_buscar_factura.setText(datos[0]);
-            txf_num_contrato.setText(datos[1]);
-            txf_abonado.setText(datos[2]);
-            txf_total_a_pagar.setText(datos[3]);
-            txf_expedido.setText(datos[4]);
-            txf_pagado.setText(datos[5]);
-            txf_caduca.setText(datos[6]);
-            estado_factura.setText(datos[7]);
-            
-            if(datos[2].equals(datos[3]))
-            {
-                estado_factura.setForeground(new Color(0,128,0));
-                
-            }else 
-            {
-                estado_factura.setForeground(new Color(255,0,0));
+            if ( !txf_buscar_factura.getText().isEmpty()  && txf_buscar_factura.getText().matches("-?\\d+(\\.\\d+)?") ) { // Confirmacion de que no se ingresen datos vacios 
+
+                actualizaPago(txf_buscar_factura.getText()); 
+            } else {
+                JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
+                        "Advertencia", JOptionPane.ERROR_MESSAGE);
             }
-            
-            repaint();
-            revalidate();
-            
-            
-            
-            
         } catch (IOException ex) {
             Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -528,6 +510,29 @@ public class Operador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_buscarActionPerformed
 
+    
+    private void actualizaPago(String id_factura) throws SQLException {
+        String[] datos = rPago.mostrarFactura(Integer.parseInt(id_factura));
+
+                txf_buscar_factura.setText(datos[0]);
+                txf_num_contrato.setText(datos[1]);
+                txf_abonado.setText(datos[2]);
+                txf_total_a_pagar.setText(datos[3]);
+                txf_expedido.setText(datos[4]);
+                txf_pagado.setText(datos[5]);
+                txf_caduca.setText(datos[6]);
+                estado_factura.setText(datos[7]);
+
+                if (datos[2].equals(datos[3])) {
+                    estado_factura.setForeground(new Color(0, 128, 0));
+
+                } else {
+                    estado_factura.setForeground(new Color(255, 0, 0));
+                }
+
+                repaint();
+                revalidate();
+    }
     private void abonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abonarActionPerformed
         // TODO add your handling code here:
         
@@ -539,10 +544,23 @@ public class Operador extends javax.swing.JFrame {
             datos[0] = txf_buscar_factura.getText();
             datos[1] = txf_abonar.getText();
             
-            System.out.println(datos[0]);
-            System.out.println(datos[1]);
+            //System.out.println(datos[0]);
+            //System.out.println(datos[1]);
             
-            rPago.registrarPago(datos);
+            if (datos[0].isEmpty() || datos[1].isEmpty() || !datos[0].matches("-?\\d+(\\.\\d+)?") || !datos[1].matches("-?\\d+(\\.\\d+)?")) {
+                 JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
+                        "Advertencia", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (rPago.registrarPago(datos) ==  1) {
+                    JOptionPane.showMessageDialog(null, "Su abono de " + datos[1] +" se ha realizado correctamente",
+                        "Notificacion", JOptionPane.INFORMATION_MESSAGE);
+                    actualizaPago(datos[0]); 
+                } else {
+                    JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
+                        "Advertencia", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+               
             
         } catch (IOException ex) {
             Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);

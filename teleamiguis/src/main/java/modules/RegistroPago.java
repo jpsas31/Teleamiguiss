@@ -101,22 +101,16 @@ public class RegistroPago {
         int cantidadPagada = Integer.parseInt(replaceII);
         
         
-        System.out.println("Abonado " + abono);
-        System.out.println("total a pagar " + totalPagar);
-        System.out.println("Pagado Total " + cantidadPagada);
+        //System.out.println("Abonado " + abono);
+        //System.out.println("total a pagar " + totalPagar);
+        //System.out.println("Pagado Total " + cantidadPagada);
          
         if (abono > totalPagar)
         {
             confirmacion = 2;
             JOptionPane.showConfirmDialog(null, 
                 "Monto demasiado alto", "Advertencia", JOptionPane.DEFAULT_OPTION);
-        }else if (abono < 10000)
-        {
-            confirmacion = 2;
-            JOptionPane.showConfirmDialog(null, 
-                "Monto demasiado bajo", "Advertencia", JOptionPane.DEFAULT_OPTION);
-            
-        }else if (abono + cantidadPagada > totalPagar)
+        } else if (abono + cantidadPagada > totalPagar)
         {
             confirmacion = 2;
             JOptionPane.showConfirmDialog(null, 
@@ -155,12 +149,13 @@ public class RegistroPago {
 
             // envviando el query INSERT registro
             confirmacion = stm.executeUpdate();
+            //System.out.println(confirmacion); 
             conn.commit();
 
         } else if (confirmacion != 2){
             confirmacion = -1;
         }
-
+         
         return confirmacion;
     }
     
