@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import modules.RegistroPago;
+import modules.OperadorClientes;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import modules.AdministradorUsuarios;
@@ -22,7 +22,7 @@ public class Operador extends javax.swing.JFrame {
     private AdministradorUsuarios admUser;
     int xMouse;
     int yMouse;
-    private RegistroPago rPago;
+    private OperadorClientes rPago;
     String idUsuario;
     String tipoidUsuario;
 
@@ -495,7 +495,7 @@ public class Operador extends javax.swing.JFrame {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         try {
             // TODO add your handling code here:
-            rPago = new RegistroPago();
+            rPago = new OperadorClientes();
             if ( !txf_buscar_factura.getText().isEmpty()  && txf_buscar_factura.getText().matches("-?\\d+(\\.\\d+)?") ) { // Confirmacion de que no se ingresen datos vacios 
 
                 actualizaPago(txf_buscar_factura.getText()); 
@@ -538,7 +538,7 @@ public class Operador extends javax.swing.JFrame {
         
                 try {
             // TODO add your handling code here:
-            rPago = new RegistroPago();
+            rPago = new OperadorClientes();
             String [] datos = new String[2];
             
             datos[0] = txf_buscar_factura.getText();
