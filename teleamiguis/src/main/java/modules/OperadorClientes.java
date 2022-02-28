@@ -4,10 +4,7 @@
  */
 package modules;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -18,18 +15,20 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author gyron
  */
-public class RegistroPago {
+public class OperadorClientes {
     
         private Connection conn;
 
-    public RegistroPago() throws IOException, SQLException {
+    public OperadorClientes() throws IOException, SQLException {
         conn = getConnection();
 
     }
@@ -196,9 +195,77 @@ public class RegistroPago {
     }
         
      
+    public void generarGastos() throws SQLException, IOException{
+        File archivo;
+        FileWriter w;
+        BufferedWriter bw;
+        PrintWriter pwr;
+        
+        
+        archivo = new File("./src/main/java/services/gastos.txt");
+        w = new FileWriter(archivo);
+        bw = new BufferedWriter(w);
+        pwr = new PrintWriter(bw);
+        
+        
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT numero_tel FROM numero");
+        
+        String valores = "";
+        while (result.next()){
+            Random random = new Random();
+            String numero = result.getString("numero_tel");
+            String  minutos = String.valueOf(random.nextInt(2000));
+            String datos = String.valueOf(random.nextInt(100000));
+            String mensajes = String.valueOf(random.nextInt(5000));
+            valores += numero + "," + minutos + "," +datos+ "," + mensajes + "\n";
+        }
+        
+        
+        pwr.write(valores);
+        
+        
+        
+        pwr.close();
+        bw.close();
+        
+        if (archivo.createNewFile()){
+            System.out.println("Se ha creado el archivo ");
+        }
+    }
+    
+    public void guardarGastos() throws SQLException, IOException{
+           FileReader archivo;
+           BufferedReader lector;
+           PreparedStatement stm;
+           int confirmacion;
+
+           
+           archivo = new FileReader("./src/main/java/services/gastos.txt");
+           
+           if (archivo.ready()){
+               System.out.println("El archivo puede ser leido");
+               lector = new BufferedReader (archivo);
+               String cadena;
+               while ((cadena = lector.readLine()) != null){
+                   String[] partes = cadena.split(",");
+                   stm = conn.prepareStatement("UPDATE numero SET \n" +
+                                                                                "minutos_usados = "+ partes[1]+" ,\n" +
+                                                                                "datos_usados = "+ partes[2]+" ,\n" +
+                                                                                "mensajes_usados = "+ partes[3]+" \n" +
+                                                                                "WHERE numero_tel = '"+ partes[0]+"' ");
+                   confirmacion = stm.executeUpdate();
+                   conn.commit();
+               }
+           }else {
+               System.out.println("El archivo no pudo ser leído");
+           }
+           
+    
+    }
     
     public static void main(String args[]) throws SQLException, IOException{
-        RegistroPago prueba = new RegistroPago();
+        OperadorClientes prueba = new OperadorClientes();
         
         /*String atributos[] = 
         {
@@ -206,7 +273,9 @@ public class RegistroPago {
         };
         prueba.registrarPago(atributos);*/
         
-        prueba.mostrarFactura(1006);
+        //prueba.mostrarFactura(1006);
+        //prueba.generarGastos();
+        //prueba.guardarGastos();
     }
     
 }
