@@ -156,6 +156,14 @@ public class Gerente extends javax.swing.JFrame {
         reporteFactura = new javax.swing.JPanel();
         reporteOperadores = new javax.swing.JPanel();
         reporteNose = new javax.swing.JPanel();
+        tabsFinanzasClientes = new javax.swing.JTabbedPane();
+        tabEstFinanciero = new javax.swing.JPanel();
+        label_titulo3 = new javax.swing.JLabel();
+        campoConsultaClientePlan1 = new javax.swing.JComboBox<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        panelLista1 = new javax.swing.JPanel();
+        cont_agg1 = new javax.swing.JPanel();
+        agregarNumero1 = new javax.swing.JButton();
         barraTitulo = new javax.swing.JPanel();
         tituloSuperior = new javax.swing.JLabel();
 
@@ -691,6 +699,78 @@ public class Gerente extends javax.swing.JFrame {
         reporteNose.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Nose", reporteNose);
 
+        tabsFinanzasClientes.setBackground(new java.awt.Color(0, 0, 0, 100));
+        tabsFinanzasClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabsFinanzasClientes.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabsFinanzasClientesStateChanged(evt);
+            }
+        });
+
+        tabEstFinanciero.setBackground(new java.awt.Color(255, 255, 255, 150));
+        tabEstFinanciero.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        tabEstFinanciero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_titulo3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_titulo3.setText("Seleccione el documento de identidad:");
+        tabEstFinanciero.add(label_titulo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
+
+        try {
+            AdministradorClientes admClient = new AdministradorClientes();
+            campoConsultaClientePlan1.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
+            campoConsultaClientePlan1.setModel(model);
+        } catch (IOException | SQLException e) {
+            System.out.println("No fue posible crear la clase administradorClientes");
+        }
+        campoConsultaClientePlan.setSelectedIndex(-1);
+        campoConsultaClientePlan1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoConsultaClientePlan1ActionPerformed(evt);
+            }
+        });
+        AutoCompletion.enable(campoConsultaClientePlan);
+        tabEstFinanciero.add(campoConsultaClientePlan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
+
+        panelLista1.setLayout(new javax.swing.BoxLayout(panelLista1, javax.swing.BoxLayout.PAGE_AXIS));
+        jScrollPane3.setViewportView(panelLista1);
+        //try {
+            //        paintPanelLista();
+            //} catch (SQLException ex) {
+            //   Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+
+        tabEstFinanciero.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 660, 260));
+
+        cont_agg1.setBackground(new java.awt.Color(0, 10, 85));
+        cont_agg1.setForeground(new java.awt.Color(255, 255, 255));
+        cont_agg1.setLayout(new java.awt.BorderLayout());
+
+        agregarNumero1.setBackground(new java.awt.Color(255, 255, 255));
+        agregarNumero1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        agregarNumero1.setForeground(new java.awt.Color(255, 255, 255));
+        agregarNumero1.setText("Agregar Numero");
+        agregarNumero1.setContentAreaFilled(false);
+        agregarNumero1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        agregarNumero1.setEnabled(false);
+        agregarNumero1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                agregarNumero1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                agregarNumero1MouseExited(evt);
+            }
+        });
+        agregarNumero1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarNumero1ActionPerformed(evt);
+            }
+        });
+        cont_agg1.add(agregarNumero1, java.awt.BorderLayout.CENTER);
+
+        tabEstFinanciero.add(cont_agg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 50));
+
+        tabsFinanzasClientes.addTab("Registro de Numero", tabEstFinanciero);
+
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
@@ -702,6 +782,11 @@ public class Gerente extends javax.swing.JFrame {
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addComponent(Fondo)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(tabsFinanzasClientes)
+                    .addContainerGap()))
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -712,6 +797,11 @@ public class Gerente extends javax.swing.JFrame {
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addComponent(Fondo)
                     .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelDerLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(tabsFinanzasClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         //Colocar font a las ventanas
@@ -720,6 +810,10 @@ public class Gerente extends javax.swing.JFrame {
         tabsClientes.setVisible(false);
         //Iniciar el componente en modo oculto
         tabsReportes.setVisible(false);
+        //Colocar font a las ventanas
+        tabsClientes.setFont( new Font("Sansserif", Font.BOLD, 12));
+        //Poner invisible al inicio tab Usuarios
+        tabsClientes.setVisible(false);
 
         panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
         panelDer.getAccessibleContext().setAccessibleDescription("");
@@ -875,6 +969,26 @@ public class Gerente extends javax.swing.JFrame {
         cont_agg.setBackground(new Color(0, 10, 85)); 
     }//GEN-LAST:event_agregarNumeroMouseExited
 
+    private void campoConsultaClientePlan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoConsultaClientePlan1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoConsultaClientePlan1ActionPerformed
+
+    private void agregarNumero1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarNumero1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarNumero1MouseEntered
+
+    private void agregarNumero1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarNumero1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarNumero1MouseExited
+
+    private void agregarNumero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNumero1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agregarNumero1ActionPerformed
+
+    private void tabsFinanzasClientesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsFinanzasClientesStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tabsFinanzasClientesStateChanged
+
     
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_clientesActionPerformed
 
@@ -934,6 +1048,8 @@ public class Gerente extends javax.swing.JFrame {
     private void estadoClientesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_estadoClientesActionPerformed
         // panelDer.removeAll();
         tabsReportes.setVisible(false);
+        tabsClientes.setVisible(false);
+        tabsFinanzasClientes.setVisible(true);
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
@@ -941,6 +1057,7 @@ public class Gerente extends javax.swing.JFrame {
         reportes.setEnabled(true);
         clientes.setEnabled(true);
         estadoClientes.setEnabled(false);
+        System.out.println("asdasdasdasdas");
 
     }// GEN-LAST:event_estadoClientesActionPerformed
 
@@ -1454,15 +1571,18 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JButton Registrar;
     private javax.swing.JButton actualizarInfo;
     private javax.swing.JButton agregarNumero;
+    private javax.swing.JButton agregarNumero1;
     private javax.swing.JDialog agregarPlan;
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton cambiarEstado;
     private javax.swing.JComboBox<String> campoConsultaCliente;
     private javax.swing.JComboBox<String> campoConsultaClientePlan;
+    private javax.swing.JComboBox<String> campoConsultaClientePlan1;
     private javax.swing.JButton clientes;
     private javax.swing.JPanel cont_act;
     private javax.swing.JPanel cont_acti;
     private javax.swing.JPanel cont_agg;
+    private javax.swing.JPanel cont_agg1;
     private javax.swing.JPanel cont_est;
     private javax.swing.JPanel cont_limp;
     private javax.swing.JPanel cont_reg;
@@ -1472,6 +1592,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JButton estadoClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTF_resul_dir;
     private javax.swing.JTextField jTF_resul_id;
     private javax.swing.JTextField jTF_resul_mail;
@@ -1492,12 +1613,14 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JLabel label_tel;
     private javax.swing.JLabel label_titulo;
     private javax.swing.JLabel label_titulo1;
+    private javax.swing.JLabel label_titulo3;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelDialog;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
     private javax.swing.JPanel panelLista;
+    private javax.swing.JPanel panelLista1;
     private javax.swing.JPanel reporteFactura;
     private javax.swing.JPanel reporteGanancias;
     private javax.swing.JPanel reporteNose;
@@ -1506,9 +1629,11 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;
     private javax.swing.JScrollPane scrollDialog;
+    private javax.swing.JPanel tabEstFinanciero;
     private javax.swing.JPanel tabGestiosClientes;
     private javax.swing.JPanel tabRegistroNumero;
     private javax.swing.JTabbedPane tabsClientes;
+    private javax.swing.JTabbedPane tabsFinanzasClientes;
     private javax.swing.JTabbedPane tabsReportes;
     private javax.swing.JLabel tituloSuperior;
     // End of variables declaration//GEN-END:variables
