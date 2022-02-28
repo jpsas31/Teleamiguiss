@@ -72,7 +72,7 @@ public class FinanzasClientes {
 
         for(int i =0; i <resultados.size(); i++)
         {
-            for(int j =0; j <4;j++){System.out.println(resultados.get(i).get(j));}
+            for(int j =0; j <5;j++){System.out.println(resultados.get(i).get(j));}
         }
         
          
