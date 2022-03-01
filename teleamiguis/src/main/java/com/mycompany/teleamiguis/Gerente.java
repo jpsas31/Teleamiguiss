@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import net.sf.jasperreports.engine.JRException;
@@ -39,6 +41,7 @@ import static services.Reportes.createReportView;
 import static services.Reportes.getConnection;
 import modules.AdministradorClientes;
 import modules.AutoCompletion;
+import modules.FinanzasClientes;
 
 /**
  *
@@ -99,6 +102,7 @@ public class Gerente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         scrollDialog = new javax.swing.JScrollPane();
         panelDialog = new javax.swing.JPanel();
+        finanzasDialog = new javax.swing.JDialog();
         panelGeneral = new javax.swing.JPanel();
         panelIzq = new javax.swing.JPanel();
         nombre = new javax.swing.JLabel();
@@ -107,7 +111,6 @@ public class Gerente extends javax.swing.JFrame {
         cont_reg = new javax.swing.JPanel();
         clientes = new javax.swing.JButton();
         cont_est = new javax.swing.JPanel();
-        estadoClientes = new javax.swing.JButton();
         cont_rep = new javax.swing.JPanel();
         reportes = new javax.swing.JButton();
         cont_sal = new javax.swing.JPanel();
@@ -115,6 +118,15 @@ public class Gerente extends javax.swing.JFrame {
         panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
         tabsClientes = new javax.swing.JTabbedPane();
+        tabEstFinanciero = new javax.swing.JPanel();
+        label_tituloEsttFinanciero = new javax.swing.JLabel();
+        jScrollPaneEstFinanciero = new javax.swing.JScrollPane();
+        panelListaEstFinanciero = new javax.swing.JPanel();
+        campoConsultaEstFinanciero = new javax.swing.JComboBox<>();
+        label_abonado = new javax.swing.JLabel();
+        label_id2 = new javax.swing.JLabel();
+        jTF_abonado = new javax.swing.JTextField();
+        jTF_aPagar = new javax.swing.JTextField();
         tabGestiosClientes = new javax.swing.JPanel();
         label_id = new javax.swing.JLabel();
         label_nombre = new javax.swing.JLabel();
@@ -156,14 +168,6 @@ public class Gerente extends javax.swing.JFrame {
         reporteFactura = new javax.swing.JPanel();
         reporteOperadores = new javax.swing.JPanel();
         reporteNose = new javax.swing.JPanel();
-        tabsFinanzasClientes = new javax.swing.JTabbedPane();
-        tabEstFinanciero = new javax.swing.JPanel();
-        label_titulo3 = new javax.swing.JLabel();
-        campoConsultaClientePlan1 = new javax.swing.JComboBox<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        panelLista1 = new javax.swing.JPanel();
-        cont_agg1 = new javax.swing.JPanel();
-        agregarNumero1 = new javax.swing.JButton();
         barraTitulo = new javax.swing.JPanel();
         tituloSuperior = new javax.swing.JLabel();
 
@@ -180,6 +184,17 @@ public class Gerente extends javax.swing.JFrame {
         scrollDialog.setViewportView(panelDialog);
 
         agregarPlan.getContentPane().add(scrollDialog, java.awt.BorderLayout.CENTER);
+
+        javax.swing.GroupLayout finanzasDialogLayout = new javax.swing.GroupLayout(finanzasDialog.getContentPane());
+        finanzasDialog.getContentPane().setLayout(finanzasDialogLayout);
+        finanzasDialogLayout.setHorizontalGroup(
+            finanzasDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        finanzasDialogLayout.setVerticalGroup(
+            finanzasDialogLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setUndecorated(true);
         setResizable(false);
@@ -223,7 +238,7 @@ public class Gerente extends javax.swing.JFrame {
         clientes.setBackground(new java.awt.Color(255, 255, 255));
         clientes.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         clientes.setForeground(new java.awt.Color(0, 0, 0));
-        clientes.setText("Registro clientes");
+        clientes.setText("Cliente");
         clientes.setContentAreaFilled(false);
         clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -250,28 +265,6 @@ public class Gerente extends javax.swing.JFrame {
         cont_est.setBackground(new java.awt.Color(189, 210, 219));
         cont_est.setPreferredSize(new java.awt.Dimension(146, 25));
         cont_est.setLayout(new java.awt.BorderLayout());
-
-        estadoClientes.setBackground(new java.awt.Color(255, 255, 255));
-        estadoClientes.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        estadoClientes.setForeground(new java.awt.Color(0, 0, 0));
-        estadoClientes.setText("Estado cliente");
-        estadoClientes.setContentAreaFilled(false);
-        estadoClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        estadoClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                estadoClientesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                estadoClientesMouseExited(evt);
-            }
-        });
-        estadoClientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                estadoClientesActionPerformed(evt);
-            }
-        });
-        cont_est.add(estadoClientes, java.awt.BorderLayout.CENTER);
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -357,6 +350,74 @@ public class Gerente extends javax.swing.JFrame {
                 tabsClientesStateChanged(evt);
             }
         });
+
+        tabEstFinanciero.setBackground(new java.awt.Color(255, 255, 255, 150));
+        tabEstFinanciero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_tituloEsttFinanciero.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_tituloEsttFinanciero.setText("Seleccione el documento de identidad:");
+        tabEstFinanciero.add(label_tituloEsttFinanciero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
+
+        panelListaEstFinanciero.setLayout(new javax.swing.BoxLayout(panelListaEstFinanciero, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPaneEstFinanciero.setViewportView(panelListaEstFinanciero);
+        //try {
+            //        paintPanelLista();
+            //} catch (SQLException ex) {
+            //   Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+
+        tabEstFinanciero.add(jScrollPaneEstFinanciero, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 140, 250, 260));
+
+        DefaultComboBoxModel modelFinanzas = new DefaultComboBoxModel();
+        try {
+            AdministradorClientes admClient = new AdministradorClientes();
+            ArrayList<String[]> usuarios= admClient.mostrarListaClientes();
+            for (String[] usuario: usuarios){
+                modelFinanzas.addElement(usuario[0] +" - " + usuario[2] +" - " + usuario[1] );
+            }
+            campoConsultaEstFinanciero.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
+            campoConsultaEstFinanciero.setModel(modelFinanzas);
+        } catch (IOException | SQLException e) {
+            System.out.println("No fue posible crear la clase administradorClientes");
+        }
+        campoConsultaCliente.setSelectedIndex(-1);
+        campoConsultaEstFinanciero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoConsultaEstFinancieroActionPerformed(evt);
+            }
+        });
+        AutoCompletion.enable(campoConsultaCliente );
+        tabEstFinanciero.add(campoConsultaEstFinanciero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 390, 50));
+
+        label_abonado.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_abonado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_abonado.setText("Total abonado");
+        tabEstFinanciero.add(label_abonado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 220, -1));
+        label_id.setVisible(false);
+
+        label_id2.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_id2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_id2.setText("Total a pagar");
+        tabEstFinanciero.add(label_id2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, 200, -1));
+        label_id.setVisible(false);
+
+        jTF_abonado.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_abonado.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_abonado.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_abonado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTF_abonado.setOpaque(true);
+        tabEstFinanciero.add(jTF_abonado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 173, 33));
+        jTF_resul_nombre.setVisible(false);
+
+        jTF_aPagar.setBackground(new java.awt.Color(255, 255, 255));
+        jTF_aPagar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jTF_aPagar.setForeground(new java.awt.Color(0, 0, 0));
+        jTF_aPagar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTF_aPagar.setOpaque(true);
+        tabEstFinanciero.add(jTF_aPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 160, 173, 33));
+        jTF_resul_nombre.setVisible(false);
+
+        tabsClientes.addTab("Estado Financiero", tabEstFinanciero);
 
         tabGestiosClientes.setBackground(new java.awt.Color(255, 255, 255, 150));
         tabGestiosClientes.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -699,78 +760,6 @@ public class Gerente extends javax.swing.JFrame {
         reporteNose.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Nose", reporteNose);
 
-        tabsFinanzasClientes.setBackground(new java.awt.Color(0, 0, 0, 100));
-        tabsFinanzasClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tabsFinanzasClientes.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                tabsFinanzasClientesStateChanged(evt);
-            }
-        });
-
-        tabEstFinanciero.setBackground(new java.awt.Color(255, 255, 255, 150));
-        tabEstFinanciero.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        tabEstFinanciero.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        label_titulo3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        label_titulo3.setText("Seleccione el documento de identidad:");
-        tabEstFinanciero.add(label_titulo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
-
-        try {
-            AdministradorClientes admClient = new AdministradorClientes();
-            campoConsultaClientePlan1.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
-            campoConsultaClientePlan1.setModel(model);
-        } catch (IOException | SQLException e) {
-            System.out.println("No fue posible crear la clase administradorClientes");
-        }
-        campoConsultaClientePlan.setSelectedIndex(-1);
-        campoConsultaClientePlan1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoConsultaClientePlan1ActionPerformed(evt);
-            }
-        });
-        AutoCompletion.enable(campoConsultaClientePlan);
-        tabEstFinanciero.add(campoConsultaClientePlan1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
-
-        panelLista1.setLayout(new javax.swing.BoxLayout(panelLista1, javax.swing.BoxLayout.PAGE_AXIS));
-        jScrollPane3.setViewportView(panelLista1);
-        //try {
-            //        paintPanelLista();
-            //} catch (SQLException ex) {
-            //   Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-            //}
-
-        tabEstFinanciero.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 660, 260));
-
-        cont_agg1.setBackground(new java.awt.Color(0, 10, 85));
-        cont_agg1.setForeground(new java.awt.Color(255, 255, 255));
-        cont_agg1.setLayout(new java.awt.BorderLayout());
-
-        agregarNumero1.setBackground(new java.awt.Color(255, 255, 255));
-        agregarNumero1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        agregarNumero1.setForeground(new java.awt.Color(255, 255, 255));
-        agregarNumero1.setText("Agregar Numero");
-        agregarNumero1.setContentAreaFilled(false);
-        agregarNumero1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        agregarNumero1.setEnabled(false);
-        agregarNumero1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                agregarNumero1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                agregarNumero1MouseExited(evt);
-            }
-        });
-        agregarNumero1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarNumero1ActionPerformed(evt);
-            }
-        });
-        cont_agg1.add(agregarNumero1, java.awt.BorderLayout.CENTER);
-
-        tabEstFinanciero.add(cont_agg1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 150, 50));
-
-        tabsFinanzasClientes.addTab("Registro de Numero", tabEstFinanciero);
-
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
@@ -782,26 +771,16 @@ public class Gerente extends javax.swing.JFrame {
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addComponent(Fondo)
                     .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelDerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(tabsFinanzasClientes)
-                    .addContainerGap()))
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(tabsClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                .addComponent(tabsClientes))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addComponent(Fondo)
                     .addGap(0, 0, Short.MAX_VALUE)))
-            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelDerLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(tabsFinanzasClientes, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
 
         //Colocar font a las ventanas
@@ -810,10 +789,6 @@ public class Gerente extends javax.swing.JFrame {
         tabsClientes.setVisible(false);
         //Iniciar el componente en modo oculto
         tabsReportes.setVisible(false);
-        //Colocar font a las ventanas
-        tabsClientes.setFont( new Font("Sansserif", Font.BOLD, 12));
-        //Poner invisible al inicio tab Usuarios
-        tabsClientes.setVisible(false);
 
         panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
         panelDer.getAccessibleContext().setAccessibleDescription("");
@@ -895,18 +870,6 @@ public class Gerente extends javax.swing.JFrame {
         clientes.setForeground(new Color(0, 0, 0)); 
     }//GEN-LAST:event_clientesMouseExited
 
-    private void estadoClientesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadoClientesMouseEntered
-        // TODO add your handling code here:
-        cont_est.setBackground(new Color(0, 10, 85)); 
-        estadoClientes.setForeground(new Color(255, 255, 255)); 
-    }//GEN-LAST:event_estadoClientesMouseEntered
-
-    private void estadoClientesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadoClientesMouseExited
-        // TODO add your handling code here:
-        cont_est.setBackground(new Color(189, 210, 219)); 
-        estadoClientes.setForeground(new Color(0, 0, 0));
-    }//GEN-LAST:event_estadoClientesMouseExited
-
     private void reportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesMouseEntered
         // TODO add your handling code here:
         cont_rep.setBackground(new  Color(0, 10, 85)); 
@@ -969,25 +932,123 @@ public class Gerente extends javax.swing.JFrame {
         cont_agg.setBackground(new Color(0, 10, 85)); 
     }//GEN-LAST:event_agregarNumeroMouseExited
 
-    private void campoConsultaClientePlan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoConsultaClientePlan1ActionPerformed
+    private void campoConsultaEstFinancieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoConsultaEstFinancieroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoConsultaClientePlan1ActionPerformed
+        
+        panelListaEstFinanciero.removeAll();
+        String info[] = String.valueOf(campoConsultaEstFinanciero.getSelectedItem()).split(" - ");
+        String id = info[2];
+        String tipoid = info[1];
+        
+        
+        System.out.println(id);
+        System.out.println(tipoid);
+        
+        try {
+            FinanzasClientes finanzas = new FinanzasClientes();
+            ArrayList<ArrayList<String>> datos = finanzas.mostrarEstadoFinanciero(id, tipoid);
+            for (int i = 0; i < datos.size();i++)
+            {
+                JPanel panelLocal = new JPanel();
+                panelLocal.setLayout(new GridLayout(5,2));
+                
+                JLabel contratoJL = new JLabel();
+                contratoJL.setText("Contrato");
+                JTextField contratoJTF = new JTextField();
+                contratoJTF.setText(datos.get(i).get(0));
+                contratoJTF.setEditable(false);
+                panelLocal.add(contratoJL);
+                panelLocal.add(contratoJTF);
+                
+                JLabel numeroJL = new JLabel();
+                numeroJL.setText("Telefono");
+                JTextField numeroJTF = new JTextField();
+                numeroJTF.setText(datos.get(i).get(1));
+                numeroJTF.setEditable(false);
+                panelLocal.add(numeroJL);
+                panelLocal.add(numeroJTF);
+                
+                JLabel fechaJL = new JLabel();
+                fechaJL.setText("Fecha");
+                JTextField fechaJTF = new JTextField();
+                fechaJTF.setText(datos.get(i).get(2));
+                fechaJTF.setEditable(false);
+                panelLocal.add(fechaJL);
+                panelLocal.add(fechaJTF);
+                
+                JLabel abonadoJL = new JLabel();
+                abonadoJL.setText("Abonado");
+                JTextField abonadoJTF = new JTextField();
+                abonadoJTF.setText(datos.get(i).get(3));
+                abonadoJTF.setEditable(false);
+                panelLocal.add(abonadoJL);
+                panelLocal.add(abonadoJTF);
 
-    private void agregarNumero1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarNumero1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_agregarNumero1MouseEntered
-
-    private void agregarNumero1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarNumero1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_agregarNumero1MouseExited
-
-    private void agregarNumero1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarNumero1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_agregarNumero1ActionPerformed
-
-    private void tabsFinanzasClientesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabsFinanzasClientesStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tabsFinanzasClientesStateChanged
+                JLabel apagarJL = new JLabel();
+                apagarJL.setText("A pagar");
+                JTextField apagarJTF = new JTextField();
+                apagarJTF.setText(datos.get(i).get(4));
+                apagarJTF.setEditable(false);
+                panelLocal.add(apagarJL);
+                panelLocal.add(apagarJTF);
+                
+                panelLocal.setVisible(true);
+                
+                
+                JLabel separador = new JLabel();
+                separador.setText(" ");
+                panelListaEstFinanciero.add(panelLocal);
+                panelListaEstFinanciero.add(separador);
+                
+                
+            }
+            
+            
+            int totalesAPagar = 0;
+            for(int j = 0; j < datos.size(); j++)
+            {
+                StringBuilder totalpagarS = new StringBuilder(datos.get(j).get(4));
+                totalpagarS.deleteCharAt(0);
+                totalpagarS.deleteCharAt(totalpagarS.length()-1);
+                totalpagarS.deleteCharAt(totalpagarS.length()-1);
+                totalpagarS.deleteCharAt(totalpagarS.length()-1);
+        
+                String totalpagarS2 = totalpagarS.toString();
+        
+                String replace = totalpagarS2.replace(",","");
+        
+                totalesAPagar = totalesAPagar + Integer.parseInt(replace);
+            }
+            jTF_aPagar.setText("$"+totalesAPagar+".00");
+            totalesAPagar = 0;
+            
+            int totalesAbonado = 0;
+            for(int j = 0; j < datos.size(); j++)
+            {
+                StringBuilder totalpagarS = new StringBuilder(datos.get(j).get(3));
+                totalpagarS.deleteCharAt(0);
+                totalpagarS.deleteCharAt(totalpagarS.length()-1);
+                totalpagarS.deleteCharAt(totalpagarS.length()-1);
+                totalpagarS.deleteCharAt(totalpagarS.length()-1);
+        
+                String totalpagarS2 = totalpagarS.toString();
+        
+                String replace = totalpagarS2.replace(",","");
+        
+                totalesAbonado = totalesAbonado + Integer.parseInt(replace);
+            }
+            jTF_abonado.setText("$"+totalesAbonado+".00");
+            totalesAbonado = 0;
+            
+            panelListaEstFinanciero.repaint();
+            panelListaEstFinanciero.revalidate();
+        } catch (IOException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }//GEN-LAST:event_campoConsultaEstFinancieroActionPerformed
 
     
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_clientesActionPerformed
@@ -999,7 +1060,7 @@ public class Gerente extends javax.swing.JFrame {
         panelDer.repaint();
         panelDer.revalidate();
         reportes.setEnabled(true);
-        estadoClientes.setEnabled(true);
+        
 
     }// GEN-LAST:event_clientesActionPerformed
 
@@ -1039,7 +1100,7 @@ public class Gerente extends javax.swing.JFrame {
         panelDer.revalidate();
         reportes.setEnabled(false);
         clientes.setEnabled(true);
-        estadoClientes.setEnabled(true);
+       
         tabsReportes.setSelectedIndex(1);
         tabsReportes.setSelectedIndex(0);
 
@@ -1049,14 +1110,16 @@ public class Gerente extends javax.swing.JFrame {
         // panelDer.removeAll();
         tabsReportes.setVisible(false);
         tabsClientes.setVisible(false);
-        tabsFinanzasClientes.setVisible(true);
+        tabEstFinanciero.setVisible(true);
         panelGeneral.repaint();
         panelGeneral.revalidate();
+        tabEstFinanciero.repaint();
+        tabEstFinanciero.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
         reportes.setEnabled(true);
         clientes.setEnabled(true);
-        estadoClientes.setEnabled(false);
+        
         System.out.println("asdasdasdasdas");
 
     }// GEN-LAST:event_estadoClientesActionPerformed
@@ -1410,7 +1473,8 @@ public class Gerente extends javax.swing.JFrame {
             panelLista.repaint();
         }
     }
-
+    
+    
     private void cancelarPlanActionPerformed(java.awt.event.ActionEvent evt) throws SQLException {
         JButton boton = (JButton) evt.getSource();
         JPanel padre = (JPanel) boton.getParent();
@@ -1520,6 +1584,7 @@ public class Gerente extends javax.swing.JFrame {
         // Aparecer los cuadros de consulta
         label_resulEstado2.setVisible(bol);
     }
+   
     
 
     /**
@@ -1571,28 +1636,28 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JButton Registrar;
     private javax.swing.JButton actualizarInfo;
     private javax.swing.JButton agregarNumero;
-    private javax.swing.JButton agregarNumero1;
     private javax.swing.JDialog agregarPlan;
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton cambiarEstado;
     private javax.swing.JComboBox<String> campoConsultaCliente;
     private javax.swing.JComboBox<String> campoConsultaClientePlan;
-    private javax.swing.JComboBox<String> campoConsultaClientePlan1;
+    private javax.swing.JComboBox<String> campoConsultaEstFinanciero;
     private javax.swing.JButton clientes;
     private javax.swing.JPanel cont_act;
     private javax.swing.JPanel cont_acti;
     private javax.swing.JPanel cont_agg;
-    private javax.swing.JPanel cont_agg1;
     private javax.swing.JPanel cont_est;
     private javax.swing.JPanel cont_limp;
     private javax.swing.JPanel cont_reg;
     private javax.swing.JPanel cont_reg1;
     private javax.swing.JPanel cont_rep;
     private javax.swing.JPanel cont_sal;
-    private javax.swing.JButton estadoClientes;
+    private javax.swing.JDialog finanzasDialog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPaneEstFinanciero;
+    private javax.swing.JTextField jTF_aPagar;
+    private javax.swing.JTextField jTF_abonado;
     private javax.swing.JTextField jTF_resul_dir;
     private javax.swing.JTextField jTF_resul_id;
     private javax.swing.JTextField jTF_resul_mail;
@@ -1600,10 +1665,12 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_resul_tel;
     private javax.swing.JComboBox<String> jTF_resul_tipocliente;
     private javax.swing.JComboBox<String> jTF_resul_tipoid;
+    private javax.swing.JLabel label_abonado;
     private javax.swing.JLabel label_cargo;
     private javax.swing.JLabel label_dir;
     private javax.swing.JLabel label_estado;
     private javax.swing.JLabel label_id;
+    private javax.swing.JLabel label_id2;
     private javax.swing.JLabel label_imEstado;
     private javax.swing.JLabel label_mail;
     private javax.swing.JLabel label_nombre;
@@ -1613,14 +1680,14 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JLabel label_tel;
     private javax.swing.JLabel label_titulo;
     private javax.swing.JLabel label_titulo1;
-    private javax.swing.JLabel label_titulo3;
+    private javax.swing.JLabel label_tituloEsttFinanciero;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelDialog;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
     private javax.swing.JPanel panelLista;
-    private javax.swing.JPanel panelLista1;
+    private javax.swing.JPanel panelListaEstFinanciero;
     private javax.swing.JPanel reporteFactura;
     private javax.swing.JPanel reporteGanancias;
     private javax.swing.JPanel reporteNose;
@@ -1633,7 +1700,6 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JPanel tabGestiosClientes;
     private javax.swing.JPanel tabRegistroNumero;
     private javax.swing.JTabbedPane tabsClientes;
-    private javax.swing.JTabbedPane tabsFinanzasClientes;
     private javax.swing.JTabbedPane tabsReportes;
     private javax.swing.JLabel tituloSuperior;
     // End of variables declaration//GEN-END:variables
