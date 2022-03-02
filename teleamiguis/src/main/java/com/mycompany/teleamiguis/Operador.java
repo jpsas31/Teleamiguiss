@@ -4,21 +4,40 @@
  */
 package com.mycompany.teleamiguis;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modules.OperadorClientes;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import modules.AdministradorClientes;
 import modules.AdministradorUsuarios;
+import modules.AutoCompletion;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.swing.JRViewer;
+import static services.Reportes.createPrint;
+import static services.Reportes.createReportView;
+import static services.Reportes.getConnection;
 
 /**
  *
  * @author gyron
  */
 public class Operador extends javax.swing.JFrame {
+    private AdministradorClientes admClient;
     private AdministradorUsuarios admUser;
     int xMouse;
     int yMouse;
@@ -36,7 +55,13 @@ public class Operador extends javax.swing.JFrame {
         tipoidUsuario = tipoid;
 
         tituloSuperior.setText("Usuario " + nombreUser);
-        
+         try {
+            // Hacemos invisibles todos los jlabel de abajo del tab de gestionUsuario
+            admUser = new AdministradorUsuarios(); // se crea una instancia de la clase
+                                                   // AdministradorUsuarios
+        } catch (IOException | SQLException e) {
+            System.out.println("Hubo un problema al crear la clase administradorUsuario");
+        }
         
         txf_expedido.setEditable(false);
         txf_caduca.setEditable(false);
@@ -45,13 +70,6 @@ public class Operador extends javax.swing.JFrame {
         txf_pagado.setEditable(false);
         txf_abonado.setEditable(false);
         
-        try {
-            // Hacemos invisibles todos los jlabel de abajo del tab de gestionUsuario
-            admUser = new AdministradorUsuarios(); // se crea una instancia de la clase
-                                                   // AdministradorUsuarios
-        } catch (IOException | SQLException e) {
-            System.out.println("Hubo un problema al crear la clase administradorUsuario");
-        }
     }
 
     /**
@@ -65,6 +83,8 @@ public class Operador extends javax.swing.JFrame {
 
         panelGeneral = new javax.swing.JPanel();
         panelIzq = new javax.swing.JPanel();
+        cont_fac = new javax.swing.JPanel();
+        factura = new javax.swing.JButton();
         nombre = new javax.swing.JLabel();
         horaSesion = new javax.swing.JLabel();
         Logo = new javax.swing.JLabel();
@@ -72,12 +92,13 @@ public class Operador extends javax.swing.JFrame {
         registrarPago = new javax.swing.JButton();
         cont_sal = new javax.swing.JPanel();
         salida1 = new javax.swing.JButton();
-        panel_inv = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
         tituloSuperior = new javax.swing.JLabel();
         panelDer = new javax.swing.JPanel();
-        Fondo = new javax.swing.JLabel();
-        tabsPagoOperador = new javax.swing.JTabbedPane();
+        verFactura = new javax.swing.JPanel();
+        label_titulo1 = new javax.swing.JLabel();
+        campoConsultaCliente = new javax.swing.JComboBox<>();
+        panelFactura = new javax.swing.JPanel();
         tabPago = new javax.swing.JPanel();
         label_registrarPago = new javax.swing.JLabel();
         lbl_num_factura = new javax.swing.JLabel();
@@ -101,6 +122,7 @@ public class Operador extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         cont_pag = new javax.swing.JPanel();
         abonar = new javax.swing.JButton();
+        Fondo = new javax.swing.JLabel();
 
         setUndecorated(true);
         setResizable(false);
@@ -112,6 +134,38 @@ public class Operador extends javax.swing.JFrame {
         panelIzq.setBackground(new java.awt.Color(22, 49, 92));
         panelIzq.setPreferredSize(new java.awt.Dimension(300, 450));
         panelIzq.setLayout(new java.awt.GridBagLayout());
+
+        cont_fac.setBackground(new java.awt.Color(189, 210, 219));
+        cont_fac.setForeground(new java.awt.Color(0, 0, 0));
+        cont_fac.setPreferredSize(new java.awt.Dimension(131, 25));
+        cont_fac.setLayout(new java.awt.BorderLayout());
+
+        factura.setBackground(new java.awt.Color(255, 255, 255));
+        factura.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        factura.setForeground(new java.awt.Color(0, 0, 0));
+        factura.setText("Facturas");
+        factura.setContentAreaFilled(false);
+        factura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        factura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                facturaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                facturaMouseExited(evt);
+            }
+        });
+        factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facturaActionPerformed(evt);
+            }
+        });
+        cont_fac.add(factura, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(9, 0, 28, 0);
+        panelIzq.add(cont_fac, gridBagConstraints);
 
         nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         nombre.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,7 +185,7 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 36, 5);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 24, 5);
         panelIzq.add(horaSesion, gridBagConstraints);
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
@@ -147,7 +201,7 @@ public class Operador extends javax.swing.JFrame {
         registrarPago.setForeground(new java.awt.Color(0, 0, 0));
         registrarPago.setText("Registrar pago");
         registrarPago.setContentAreaFilled(false);
-        registrarPago.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registrarPago.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         registrarPago.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 registrarPagoMouseEntered(evt);
@@ -166,7 +220,7 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
+        gridBagConstraints.insets = new java.awt.Insets(19, 0, 10, 0);
         panelIzq.add(cont_reg, gridBagConstraints);
 
         cont_sal.setBackground(new java.awt.Color(102, 102, 102));
@@ -178,7 +232,7 @@ public class Operador extends javax.swing.JFrame {
         salida1.setForeground(new java.awt.Color(255, 255, 255));
         salida1.setText("Salida");
         salida1.setContentAreaFilled(false);
-        salida1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salida1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         salida1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 salida1MouseEntered(evt);
@@ -196,26 +250,9 @@ public class Operador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.insets = new java.awt.Insets(18, 0, 18, 0);
         panelIzq.add(cont_sal, gridBagConstraints);
-
-        javax.swing.GroupLayout panel_invLayout = new javax.swing.GroupLayout(panel_inv);
-        panel_inv.setLayout(panel_invLayout);
-        panel_invLayout.setHorizontalGroup(
-            panel_invLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panel_invLayout.setVerticalGroup(
-            panel_invLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(30, 0, 30, 0);
-        panelIzq.add(panel_inv, gridBagConstraints);
 
         panelGeneral.add(panelIzq, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 150, 450));
 
@@ -257,15 +294,53 @@ public class Operador extends javax.swing.JFrame {
 
         panelDer.setBackground(new java.awt.Color(255,255,255,150));
         panelDer.setPreferredSize(new java.awt.Dimension(500, 450));
+        panelDer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
-        Fondo.setToolTipText("");
-        Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        verFactura.setBackground(new java.awt.Color(255, 255, 255, 150));
+        verFactura.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        verFactura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        verFactura.setVisible(false);
 
-        tabsPagoOperador.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        label_titulo1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_titulo1.setText("Seleccione el documento de identidad:");
+        verFactura.add(label_titulo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 400, 40));
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        try {
+            admClient = new AdministradorClientes();
+            ArrayList<String[]> usuarios= admClient.mostrarListaClientes();
+            for (String[] usuario: usuarios){
+                model.addElement(usuario[0] +" - " + usuario[2] +" - " + usuario[1] );
+            }
+            campoConsultaCliente.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
+            campoConsultaCliente.setModel(model);
+        } catch (IOException | SQLException e) {
+            System.out.println("No fue posible crear la clase administradorClientes");
+        }
+        campoConsultaCliente.setSelectedIndex(-1);
+        campoConsultaCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoConsultaClienteActionPerformed(evt);
+            }
+        });
+        AutoCompletion.enable(campoConsultaCliente);
+        verFactura.add(campoConsultaCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 300, 50));
+
+        panelFactura.setLayout(new java.awt.BorderLayout());
+        verFactura.add(panelFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 680, 310));
+        //try {
+            //        paintPanelLista();
+            //} catch (SQLException ex) {
+            //   Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            //}
+
+        panelDer.add(verFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 420));
 
         tabPago.setBackground(new java.awt.Color(255, 255, 255, 150));
+        tabPago.setMinimumSize(new java.awt.Dimension(680, 400));
+        tabPago.setPreferredSize(new java.awt.Dimension(680, 400));
         tabPago.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        tabPago.setVisible(false);
 
         label_registrarPago.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_registrarPago.setForeground(new java.awt.Color(0, 0, 0));
@@ -383,7 +458,7 @@ public class Operador extends javax.swing.JFrame {
         buscar.setForeground(new java.awt.Color(255, 255, 255));
         buscar.setText("Buscar");
         buscar.setContentAreaFilled(false);
-        buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buscarMouseEntered(evt);
@@ -408,7 +483,7 @@ public class Operador extends javax.swing.JFrame {
         abonar.setForeground(new java.awt.Color(0, 128, 0));
         abonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/pagar.png"))); // NOI18N
         abonar.setContentAreaFilled(false);
-        abonar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        abonar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         abonar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 abonarMouseEntered(evt);
@@ -426,28 +501,14 @@ public class Operador extends javax.swing.JFrame {
 
         tabPago.add(cont_pag, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 110, 60, 30));
 
-        tabsPagoOperador.addTab("Registro de pago", tabPago);
+        panelDer.add(tabPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 420));
 
-        javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
-        panelDer.setLayout(panelDerLayout);
-        panelDerLayout.setHorizontalGroup(
-            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPagoOperador)
-            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelDerLayout.createSequentialGroup()
-                    .addComponent(Fondo)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        panelDerLayout.setVerticalGroup(
-            panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsPagoOperador, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-            .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelDerLayout.createSequentialGroup()
-                    .addComponent(Fondo)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
+        Fondo.setToolTipText("");
+        Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelDer.add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
+        panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 420));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -457,58 +518,12 @@ public class Operador extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGeneral, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+            .addComponent(panelGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txf_buscar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_buscar_facturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txf_buscar_facturaActionPerformed
-
-    private void txf_num_contratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_num_contratoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txf_num_contratoActionPerformed
-
-    private void txf_total_a_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_total_a_pagarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txf_total_a_pagarActionPerformed
-
-    private void txf_expedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_expedidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txf_expedidoActionPerformed
-
-    private void txf_pagadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_pagadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txf_pagadoActionPerformed
-
-    private void txf_caducaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_caducaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txf_caducaActionPerformed
-
-    private void txf_abonadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_abonadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txf_abonadoActionPerformed
-
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        try {
-            // TODO add your handling code here:
-            rPago = new OperadorClientes();
-            if ( !txf_buscar_factura.getText().isEmpty()  && txf_buscar_factura.getText().matches("-?\\d+(\\.\\d+)?") ) { // Confirmacion de que no se ingresen datos vacios 
-
-                actualizaPago(txf_buscar_factura.getText()); 
-            } else {
-                JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
-                        "Advertencia", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_buscarActionPerformed
 
     
     private void actualizaPago(String id_factura) throws SQLException {
@@ -533,48 +548,6 @@ public class Operador extends javax.swing.JFrame {
                 repaint();
                 revalidate();
     }
-    private void abonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abonarActionPerformed
-        // TODO add your handling code here:
-        
-                try {
-            // TODO add your handling code here:
-            rPago = new OperadorClientes();
-            String [] datos = new String[2];
-            
-            datos[0] = txf_buscar_factura.getText();
-            datos[1] = txf_abonar.getText();
-            
-            //System.out.println(datos[0]);
-            //System.out.println(datos[1]);
-            
-            if (datos[0].isEmpty() || datos[1].isEmpty() || !datos[0].matches("-?\\d+(\\.\\d+)?") || !datos[1].matches("-?\\d+(\\.\\d+)?")) {
-                 JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
-                        "Advertencia", JOptionPane.ERROR_MESSAGE);
-            } else {
-                if (rPago.registrarPago(datos) ==  1) {
-                    JOptionPane.showMessageDialog(null, "Su abono de " + datos[1] +" se ha realizado correctamente",
-                        "Notificacion", JOptionPane.INFORMATION_MESSAGE);
-                    actualizaPago(datos[0]); 
-                } else {
-                    JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
-                        "Advertencia", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-               
-            
-        } catch (IOException ex) {
-            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }//GEN-LAST:event_abonarActionPerformed
-
-    private void txf_abonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_abonarActionPerformed
-
-    }//GEN-LAST:event_txf_abonarActionPerformed
-
     private void registrarPagoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarPagoMouseEntered
         // TODO add your handling code here:
         cont_reg.setBackground(new Color(0, 10, 85));
@@ -599,27 +572,164 @@ public class Operador extends javax.swing.JFrame {
         salida1.setForeground(new Color(255, 255, 255)); 
     }//GEN-LAST:event_salida1MouseExited
 
-    private void buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseEntered
-        // TODO add your handling code here:
-        cont_bus.setBackground(new Color(41, 35, 92)); 
-        buscar.setForeground(new Color(255, 255, 255));
-    }//GEN-LAST:event_buscarMouseEntered
+    private void facturaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaMouseEntered
+      
+        cont_fac.setBackground(new Color(0, 10, 85));
+        factura.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_facturaMouseEntered
 
-    private void buscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseExited
-        // TODO add your handling code here:
-        cont_bus.setBackground(new Color(0, 10, 85)); 
-    }//GEN-LAST:event_buscarMouseExited
+    private void facturaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaMouseExited
+       
+        cont_fac.setBackground(new Color(189, 210, 219));
+        factura.setForeground(new Color(0, 0, 0));
+    }//GEN-LAST:event_facturaMouseExited
 
-    private void abonarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abonarMouseEntered
+    private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
+ 
+        factura.setEnabled(false);
+        tabPago.setVisible(false);
+        verFactura.setVisible(true);
+        registrarPago.setEnabled(true);
+        panelDer.repaint();
+        panelDer.revalidate();
+        panelGeneral.repaint();
+        panelGeneral.revalidate();
+    }//GEN-LAST:event_facturaActionPerformed
+
+    private void campoConsultaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoConsultaClienteActionPerformed
+       
+            try {
+                String info[] = String.valueOf(campoConsultaCliente.getSelectedItem()).split(" - ");
+                String id = info[2];
+                String tipoid = info[1];
+                System.out.println(id + " "+ tipoid);
+                Connection conn = getConnection();
+                Map<String, Object> parameters = new HashMap<>();
+                parameters.put("title", "Soy un titulo mamon");
+                parameters.put("id", id);
+                parameters.put("tipoId", tipoid);
+                String jrxml = "/reports/Factura.jrxml";
+                JasperPrint print = createPrint(parameters, jrxml, conn);
+                JRViewer view = createReportView(print);
+                panelFactura.removeAll();
+                panelFactura.add(view);
+                panelFactura.revalidate();
+                panelFactura.repaint();
+                conn.close();
+
+            } catch (JRException | IOException | SQLException ex) {
+                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+    }//GEN-LAST:event_campoConsultaClienteActionPerformed
+
+    private void abonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abonarActionPerformed
         // TODO add your handling code here:
-        cont_pag.setBackground(new Color(41, 35, 92)); 
-    }//GEN-LAST:event_abonarMouseEntered
+
+        try {
+            // TODO add your handling code here:
+            rPago = new OperadorClientes();
+            String [] datos = new String[2];
+
+            datos[0] = txf_buscar_factura.getText();
+            datos[1] = txf_abonar.getText();
+
+            //System.out.println(datos[0]);
+            //System.out.println(datos[1]);
+
+            if (datos[0].isEmpty() || datos[1].isEmpty() || !datos[0].matches("-?\\d+(\\.\\d+)?") || !datos[1].matches("-?\\d+(\\.\\d+)?")) {
+                JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            } else {
+                if (rPago.registrarPago(datos) ==  1) {
+                    JOptionPane.showMessageDialog(null, "Su abono de " + datos[1] +" se ha realizado correctamente",
+                        "Notificacion", JOptionPane.INFORMATION_MESSAGE);
+                    actualizaPago(datos[0]);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
+                        "Advertencia", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_abonarActionPerformed
 
     private void abonarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abonarMouseExited
         // TODO add your handling code here:
         cont_pag.setBackground(new Color(0, 10, 85));
     }//GEN-LAST:event_abonarMouseExited
 
+    private void abonarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_abonarMouseEntered
+        // TODO add your handling code here:
+        cont_pag.setBackground(new Color(41, 35, 92));
+    }//GEN-LAST:event_abonarMouseEntered
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        try {
+            // TODO add your handling code here:
+            rPago = new OperadorClientes();
+            if ( !txf_buscar_factura.getText().isEmpty()  && txf_buscar_factura.getText().matches("-?\\d+(\\.\\d+)?") ) { // Confirmacion de que no se ingresen datos vacios
+
+                actualizaPago(txf_buscar_factura.getText());
+            } else {
+                JOptionPane.showMessageDialog(null, "No fue posible encontrar su factura, datos invalidos",
+                    "Advertencia", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
+
+    private void buscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseExited
+        // TODO add your handling code here:
+        cont_bus.setBackground(new Color(0, 10, 85));
+    }//GEN-LAST:event_buscarMouseExited
+
+    private void buscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseEntered
+        // TODO add your handling code here:
+        cont_bus.setBackground(new Color(41, 35, 92));
+        buscar.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_buscarMouseEntered
+
+    private void txf_abonarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_abonarActionPerformed
+
+    }//GEN-LAST:event_txf_abonarActionPerformed
+
+    private void txf_caducaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_caducaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_caducaActionPerformed
+
+    private void txf_pagadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_pagadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_pagadoActionPerformed
+
+    private void txf_expedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_expedidoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_expedidoActionPerformed
+
+    private void txf_total_a_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_total_a_pagarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_total_a_pagarActionPerformed
+
+    private void txf_abonadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_abonadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_abonadoActionPerformed
+
+    private void txf_num_contratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_num_contratoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_num_contratoActionPerformed
+
+    private void txf_buscar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_buscar_facturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txf_buscar_facturaActionPerformed
+    
     
     private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_barraTituloMouseDragged
         // TODO add your handling code here:
@@ -637,12 +747,14 @@ public class Operador extends javax.swing.JFrame {
 
     private void registrarPagoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_registrarPagoActionPerformed
 
-
+        factura.setEnabled(true);
+        tabPago.setVisible(true);
+        verFactura.setVisible(false);
+        registrarPago.setEnabled(false);
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
-        registrarPago.setEnabled(false);
 
     }// GEN-LAST:event_registrarPagoActionPerformed
 
@@ -709,13 +821,17 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JButton abonar;
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton buscar;
+    private javax.swing.JComboBox<String> campoConsultaCliente;
     private javax.swing.JPanel cont_bus;
+    private javax.swing.JPanel cont_fac;
     private javax.swing.JPanel cont_pag;
     private javax.swing.JPanel cont_reg;
     private javax.swing.JPanel cont_sal;
     private javax.swing.JLabel estado_factura;
+    private javax.swing.JButton factura;
     private javax.swing.JLabel horaSesion;
     private javax.swing.JLabel label_registrarPago;
+    private javax.swing.JLabel label_titulo1;
     private javax.swing.JLabel lbl_abonado;
     private javax.swing.JLabel lbl_abonar;
     private javax.swing.JLabel lbl_caduca;
@@ -726,13 +842,12 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_total_a_pagar;
     private javax.swing.JLabel nombre;
     private javax.swing.JPanel panelDer;
+    private javax.swing.JPanel panelFactura;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
-    private javax.swing.JPanel panel_inv;
     private javax.swing.JButton registrarPago;
     private javax.swing.JButton salida1;
     private javax.swing.JPanel tabPago;
-    private javax.swing.JTabbedPane tabsPagoOperador;
     private javax.swing.JLabel tituloSuperior;
     private javax.swing.JTextField txf_abonado;
     private javax.swing.JTextField txf_abonar;
@@ -742,5 +857,6 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JTextField txf_num_contrato;
     private javax.swing.JTextField txf_pagado;
     private javax.swing.JTextField txf_total_a_pagar;
+    private javax.swing.JPanel verFactura;
     // End of variables declaration//GEN-END:variables
 }
