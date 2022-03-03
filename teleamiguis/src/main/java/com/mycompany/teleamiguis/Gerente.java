@@ -57,12 +57,12 @@ public class Gerente extends javax.swing.JFrame {
     private String idUsuario;
     private String tipoidUsuario;
     private String numero;
-    private boolean flag;
     private JLabel texto1;
     private JLabel texto2;
     private com.toedter.calendar.JDateChooser calendar;
     private com.toedter.calendar.JDateChooser calendar1;
-    private JPanel panelCalendar;
+    private String fechaInicial;
+    private String fechaFinal;
 
 
     /**
@@ -85,7 +85,7 @@ public class Gerente extends javax.swing.JFrame {
         estadoventanasEstadoCliente(false);
         estadoventanasConsultaClientes(true);
         limpiar(); 
-        flag = false;
+        
 
     }
 
@@ -165,6 +165,9 @@ public class Gerente extends javax.swing.JFrame {
         agregarNumero = new javax.swing.JButton();
         tabsReportes = new javax.swing.JTabbedPane();
         reporteGanancias = new javax.swing.JPanel();
+        reporteGananciasUp = new javax.swing.JPanel();
+        buttonGeneraGanancias = new javax.swing.JButton();
+        reporteGananciasDown = new javax.swing.JPanel();
         reporteTelefonos = new javax.swing.JPanel();
         reporteTipoUsuarios = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
@@ -239,7 +242,7 @@ public class Gerente extends javax.swing.JFrame {
         clientes.setForeground(new java.awt.Color(0, 0, 0));
         clientes.setText("Cliente");
         clientes.setContentAreaFilled(false);
-        clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         clientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 clientesMouseEntered(evt);
@@ -279,7 +282,7 @@ public class Gerente extends javax.swing.JFrame {
         reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
         reportes.setContentAreaFilled(false);
-        reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         reportes.setPreferredSize(new java.awt.Dimension(128, 25));
         reportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -311,7 +314,7 @@ public class Gerente extends javax.swing.JFrame {
         salida.setForeground(new java.awt.Color(255, 255, 255));
         salida.setText("Salida");
         salida.setContentAreaFilled(false);
-        salida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        salida.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         salida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 salidaMouseEntered(evt);
@@ -579,7 +582,7 @@ public class Gerente extends javax.swing.JFrame {
         actualizarInfo.setForeground(new java.awt.Color(255, 255, 255));
         actualizarInfo.setText("Actualizar información");
         actualizarInfo.setContentAreaFilled(false);
-        actualizarInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        actualizarInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         actualizarInfo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 actualizarInfoMouseEntered(evt);
@@ -604,7 +607,7 @@ public class Gerente extends javax.swing.JFrame {
         Registrar.setForeground(new java.awt.Color(255, 255, 255));
         Registrar.setText("Registrar");
         Registrar.setContentAreaFilled(false);
-        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 RegistrarMouseEntered(evt);
@@ -629,7 +632,7 @@ public class Gerente extends javax.swing.JFrame {
         cambiarEstado.setForeground(new java.awt.Color(255, 255, 255));
         cambiarEstado.setText("Activar/Desactivar");
         cambiarEstado.setContentAreaFilled(false);
-        cambiarEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cambiarEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cambiarEstado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 cambiarEstadoMouseEntered(evt);
@@ -653,7 +656,7 @@ public class Gerente extends javax.swing.JFrame {
         Limpiar.setForeground(new java.awt.Color(255, 255, 255));
         Limpiar.setText("Limpiar");
         Limpiar.setContentAreaFilled(false);
-        Limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         Limpiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LimpiarMouseEntered(evt);
@@ -716,7 +719,7 @@ public class Gerente extends javax.swing.JFrame {
         agregarNumero.setForeground(new java.awt.Color(255, 255, 255));
         agregarNumero.setText("Agregar Numero");
         agregarNumero.setContentAreaFilled(false);
-        agregarNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        agregarNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         agregarNumero.setEnabled(false);
         agregarNumero.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -744,7 +747,23 @@ public class Gerente extends javax.swing.JFrame {
         });
 
         reporteGanancias.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteGanancias.setLayout(new java.awt.BorderLayout());
+        reporteGanancias.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        buttonGeneraGanancias.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        buttonGeneraGanancias.setText("Generar");
+        buttonGeneraGanancias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonGeneraGananciasActionPerformed(evt);
+            }
+        });
+        reporteGananciasUp.add(buttonGeneraGanancias);
+        reporteGananciasUp.remove(buttonGeneraGanancias);
+
+        reporteGanancias.add(reporteGananciasUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 40));
+
+        reporteGananciasDown.setLayout(new java.awt.BorderLayout());
+        reporteGanancias.add(reporteGananciasDown, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 700, 380));
+
         tabsReportes.addTab("Ganancias", reporteGanancias);
 
         reporteTelefonos.setBackground(new java.awt.Color(255, 255, 255, 150));
@@ -759,7 +778,7 @@ public class Gerente extends javax.swing.JFrame {
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addComponent(tabsReportes)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(tabsClientes))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -769,7 +788,7 @@ public class Gerente extends javax.swing.JFrame {
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addComponent(tabsReportes)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(tabsClientes))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1045,6 +1064,33 @@ public class Gerente extends javax.swing.JFrame {
        
     }//GEN-LAST:event_campoConsultaEstFinancieroActionPerformed
 
+    private void buttonGeneraGananciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGeneraGananciasActionPerformed
+        // TODO add your handling code here:
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+         fechaInicial = formato.format(calendar.getDate());
+         fechaFinal = formato.format(calendar1.getDate());
+         
+          try {
+                Connection conn = getConnection();
+                Map<String, Object> parameters = new HashMap<>();
+                parameters.put("FechaInicial", String.valueOf(fechaInicial));
+                parameters.put("FechaFinal",  String.valueOf(fechaFinal));
+                String jrxml = "/reports/reportesGanancias.jrxml";
+                JasperPrint print = createPrint(parameters, jrxml, conn);
+                JRViewer view = createReportView(print);
+                reporteGananciasDown.removeAll();
+                reporteGananciasDown.add(view);
+               
+                reporteGananciasDown.revalidate();
+                reporteGananciasDown.repaint();
+                reporteGananciasDown.setVisible(true);
+                conn.close();
+
+            } catch (JRException | IOException | SQLException ex) {
+                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_buttonGeneraGananciasActionPerformed
+
     
     private void clientesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_clientesActionPerformed
 
@@ -1087,7 +1133,6 @@ public class Gerente extends javax.swing.JFrame {
     }// GEN-LAST:event_barraTituloMousePressed
 
     private void reportesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_reportesActionPerformed
-        flag = true;
         tabsReportes.setVisible(true);
         panelGeneral.repaint();
         panelGeneral.revalidate();
@@ -1119,88 +1164,65 @@ public class Gerente extends javax.swing.JFrame {
 
     }// GEN-LAST:event_estadoClientesActionPerformed
 
-    private void tabsReportesStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tabsReportesStateChanged
-        if (tabsReportes.getSelectedIndex() == 0 && flag == true) {
-            
-            panelCalendar = new JPanel();
-            texto1 = new JLabel("Ingrese la fecha inicial:");
-            texto1.setFont(new java.awt.Font("SansSerif",Font.BOLD, 12)); 
-            calendar = new com.toedter.calendar.JDateChooser();
-            calendar.setDateFormatString("yyyy-MM-dd");
-            calendar.setBounds(0, 0, 171, 24);
-            texto2 = new JLabel("Ingrese la fecha final:");
-            texto2.setFont(new java.awt.Font("SansSerif",Font.BOLD, 12)); 
-            calendar1 = new com.toedter.calendar.JDateChooser();
-            calendar1.setDateFormatString("yyyy-MM-dd");
-            calendar.setBounds(0, 0, 171, 24);
-            panelCalendar.add(texto1);
-            panelCalendar.add(calendar);
-            panelCalendar.add(texto2);
-            panelCalendar.add(calendar1);
-            panelCalendar.setPreferredSize(new Dimension(60,120));
-         
-            JOptionPane.showMessageDialog(null,panelCalendar,"Información",JOptionPane.PLAIN_MESSAGE);
-            
-            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-            String fechaInicial = formato.format(calendar.getDate());
-            String fechaFinal = formato.format(calendar1.getDate());
-            
-            try {
-                Connection conn = getConnection();
-                Map<String, Object> parameters = new HashMap<>();
-                parameters.put("FechaInicial", String.valueOf(fechaInicial));
-                parameters.put("FechaFinal",  String.valueOf(fechaFinal));
-                String jrxml = "/reports/reportesGanancias.jrxml";
-                JasperPrint print = createPrint(parameters, jrxml, conn);
-                JRViewer view = createReportView(print);
-                reporteGanancias.removeAll();
-                reporteGanancias.add(view);
-                reporteGanancias.revalidate();
-                reporteGanancias.repaint();
-                conn.close();
-
-            } catch (JRException | IOException | SQLException ex) {
-                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            flag = false;
+    private void tabsReportesStateChanged(javax.swing.event.ChangeEvent evt) { // GEN-FIRST:event_tabsReportesStateChanged
+        switch (tabsReportes.getSelectedIndex()) {
+            case 0:
+                reporteGananciasUp.removeAll();
+                reporteGananciasUp.revalidate();
+                reporteGananciasUp.repaint();
+                texto1 = new JLabel("Ingrese la fecha inicial:");
+                texto1.setFont(new java.awt.Font("SansSerif",Font.BOLD, 12));
+                calendar = new com.toedter.calendar.JDateChooser();
+                calendar.setDateFormatString("yyyy-MM-dd");
+                calendar.setBounds(0, 0, 171, 24);
+                texto2 = new JLabel("Ingrese la fecha final:");
+                texto2.setFont(new java.awt.Font("SansSerif",Font.BOLD, 12));
+                calendar1 = new com.toedter.calendar.JDateChooser();
+                calendar1.setDateFormatString("yyyy-MM-dd");
+                calendar.setBounds(0, 0, 171, 24);
+                reporteGananciasUp.add(texto1);
+                reporteGananciasUp.add(calendar);
+                reporteGananciasUp.add(texto2);
+                reporteGananciasUp.add(calendar1);
+                reporteGananciasUp.revalidate();
+                reporteGananciasUp.repaint();
+                reporteGananciasUp.add(buttonGeneraGanancias);
+                break;
+            case 1:
+                try {
+                    Connection conn = getConnection();
+                    Map<String, Object> parameters = new HashMap<>();
+                    String jrxml = "/reports/reportesUsuariosPorPlan.jrxml";
+                    JasperPrint print = createPrint(parameters, jrxml, conn);
+                    JRViewer view = createReportView(print);
+                    reporteTelefonos.removeAll();
+                    reporteTelefonos.add(view);
+                    tabsReportes.revalidate();
+                    tabsReportes.repaint();
+                    conn.close();
+                    
+                } catch (JRException | IOException | SQLException ex) {
+                    Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+                }   break;
+            case 2:
+                try {
+                    Connection conn = getConnection();
+                    Map<String, Object> parameters = new HashMap<>();
+                    String jrxml = "/reports/reportesUsuariosPorTipo.jrxml";
+                    JasperPrint print = createPrint(parameters, jrxml, conn);
+                    JRViewer view = createReportView(print);
+                    reporteTipoUsuarios.removeAll();
+                    reporteTipoUsuarios.add(view);
+                    tabsReportes.revalidate();
+                    tabsReportes.repaint();
+                    conn.close();
+                    
+                } catch (JRException | IOException | SQLException ex) {
+                    Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+                }   break;
+            default:
+                break;
         }
-        else if(tabsReportes.getSelectedIndex() == 1){
-                flag=true;
-                try {
-                Connection conn = getConnection();
-                Map<String, Object> parameters = new HashMap<>();
-                String jrxml = "/reports/reportesUsuariosPorPlan.jrxml";
-                JasperPrint print = createPrint(parameters, jrxml, conn);
-                JRViewer view = createReportView(print);
-                reporteTelefonos.removeAll();
-                reporteTelefonos.add(view);
-                tabsReportes.revalidate();
-                tabsReportes.repaint();
-                conn.close();
-
-            } catch (JRException | IOException | SQLException ex) {
-                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-         }else if(tabsReportes.getSelectedIndex() == 2){
-                flag=true;
-                try {
-                Connection conn = getConnection();
-                Map<String, Object> parameters = new HashMap<>();
-                String jrxml = "/reports/reportesUsuariosPorTipo.jrxml";
-                JasperPrint print = createPrint(parameters, jrxml, conn);
-                JRViewer view = createReportView(print);
-                reporteTipoUsuarios.removeAll();
-                reporteTipoUsuarios.add(view);
-                tabsReportes.revalidate();
-                tabsReportes.repaint();
-                conn.close();
-
-            } catch (JRException | IOException | SQLException ex) {
-                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-         }
 
     }// GEN-LAST:event_tabsReportesStateChanged
 
@@ -1649,6 +1671,7 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JButton agregarNumero;
     private javax.swing.JDialog agregarPlan;
     private javax.swing.JPanel barraTitulo;
+    private javax.swing.JButton buttonGeneraGanancias;
     private javax.swing.JButton cambiarEstado;
     private javax.swing.JComboBox<String> campoConsultaCliente;
     private javax.swing.JComboBox<String> campoConsultaClientePlan;
@@ -1700,6 +1723,8 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JPanel panelLista;
     private javax.swing.JPanel panelListaEstFinanciero;
     private javax.swing.JPanel reporteGanancias;
+    private javax.swing.JPanel reporteGananciasDown;
+    private javax.swing.JPanel reporteGananciasUp;
     private javax.swing.JPanel reporteTelefonos;
     private javax.swing.JPanel reporteTipoUsuarios;
     private javax.swing.JButton reportes;
