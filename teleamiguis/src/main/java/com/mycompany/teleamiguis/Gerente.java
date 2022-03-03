@@ -165,9 +165,8 @@ public class Gerente extends javax.swing.JFrame {
         agregarNumero = new javax.swing.JButton();
         tabsReportes = new javax.swing.JTabbedPane();
         reporteGanancias = new javax.swing.JPanel();
-        reporteFactura = new javax.swing.JPanel();
-        reporteOperadores = new javax.swing.JPanel();
-        reporteNose = new javax.swing.JPanel();
+        reporteTelefonos = new javax.swing.JPanel();
+        reporteTipoUsuarios = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
         tituloSuperior = new javax.swing.JLabel();
 
@@ -386,7 +385,7 @@ public class Gerente extends javax.swing.JFrame {
                 campoConsultaEstFinancieroActionPerformed(evt);
             }
         });
-        AutoCompletion.enable(campoConsultaCliente );
+        AutoCompletion.enable(campoConsultaEstFinanciero );
         tabEstFinanciero.add(campoConsultaEstFinanciero, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 390, 50));
 
         label_abonado.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -748,17 +747,13 @@ public class Gerente extends javax.swing.JFrame {
         reporteGanancias.setLayout(new java.awt.BorderLayout());
         tabsReportes.addTab("Ganancias", reporteGanancias);
 
-        reporteFactura.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteFactura.setLayout(new java.awt.BorderLayout());
-        tabsReportes.addTab("Factura", reporteFactura);
+        reporteTelefonos.setBackground(new java.awt.Color(255, 255, 255, 150));
+        reporteTelefonos.setLayout(new java.awt.BorderLayout());
+        tabsReportes.addTab("Usuarios por plan", reporteTelefonos);
 
-        reporteOperadores.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteOperadores.setLayout(new java.awt.BorderLayout());
-        tabsReportes.addTab("Operadores", reporteOperadores);
-
-        reporteNose.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteNose.setLayout(new java.awt.BorderLayout());
-        tabsReportes.addTab("Nose", reporteNose);
+        reporteTipoUsuarios.setBackground(new java.awt.Color(255, 255, 255, 150));
+        reporteTipoUsuarios.setLayout(new java.awt.BorderLayout());
+        tabsReportes.addTab("Tipos de usuarios", reporteTipoUsuarios);
 
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
@@ -1151,35 +1146,17 @@ public class Gerente extends javax.swing.JFrame {
             String fechaFinal = formato.format(calendar1.getDate());
             
             try {
-                int arr[] = admClient.estadisticasPlanes(fechaInicial,fechaFinal);
-                int planes[] = new int[arr.length/2];
-                int ganancias[] = new int[arr.length/2];
-                        
-                int j = 0;
-                for(int i = 0; i< arr.length;i=i+2){
-                    planes[j] = arr[i];
-                    ganancias[j] = arr[i+1];
-                    System.out.println(planes[j]);
-                    System.out.println(ganancias[j]);
-                    j++;
-                }
-                
-                
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            try {
                 Connection conn = getConnection();
                 Map<String, Object> parameters = new HashMap<>();
-                parameters.put("title", "Soy un titulo mamon");
                 parameters.put("FechaInicial", String.valueOf(fechaInicial));
                 parameters.put("FechaFinal",  String.valueOf(fechaFinal));
                 String jrxml = "/reports/reportesGanancias.jrxml";
                 JasperPrint print = createPrint(parameters, jrxml, conn);
                 JRViewer view = createReportView(print);
+                reporteGanancias.removeAll();
                 reporteGanancias.add(view);
+                reporteGanancias.revalidate();
+                reporteGanancias.repaint();
                 conn.close();
 
             } catch (JRException | IOException | SQLException ex) {
@@ -1187,9 +1164,43 @@ public class Gerente extends javax.swing.JFrame {
             }
             flag = false;
         }
-        // else{
-        //
-        // }
+        else if(tabsReportes.getSelectedIndex() == 1){
+                flag=true;
+                try {
+                Connection conn = getConnection();
+                Map<String, Object> parameters = new HashMap<>();
+                String jrxml = "/reports/reportesUsuariosPorPlan.jrxml";
+                JasperPrint print = createPrint(parameters, jrxml, conn);
+                JRViewer view = createReportView(print);
+                reporteTelefonos.removeAll();
+                reporteTelefonos.add(view);
+                tabsReportes.revalidate();
+                tabsReportes.repaint();
+                conn.close();
+
+            } catch (JRException | IOException | SQLException ex) {
+                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+         }else if(tabsReportes.getSelectedIndex() == 2){
+                flag=true;
+                try {
+                Connection conn = getConnection();
+                Map<String, Object> parameters = new HashMap<>();
+                String jrxml = "/reports/reportesUsuariosPorTipo.jrxml";
+                JasperPrint print = createPrint(parameters, jrxml, conn);
+                JRViewer view = createReportView(print);
+                reporteTipoUsuarios.removeAll();
+                reporteTipoUsuarios.add(view);
+                tabsReportes.revalidate();
+                tabsReportes.repaint();
+                conn.close();
+
+            } catch (JRException | IOException | SQLException ex) {
+                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+         }
 
     }// GEN-LAST:event_tabsReportesStateChanged
 
@@ -1688,10 +1699,9 @@ public class Gerente extends javax.swing.JFrame {
     private javax.swing.JPanel panelIzq;
     private javax.swing.JPanel panelLista;
     private javax.swing.JPanel panelListaEstFinanciero;
-    private javax.swing.JPanel reporteFactura;
     private javax.swing.JPanel reporteGanancias;
-    private javax.swing.JPanel reporteNose;
-    private javax.swing.JPanel reporteOperadores;
+    private javax.swing.JPanel reporteTelefonos;
+    private javax.swing.JPanel reporteTipoUsuarios;
     private javax.swing.JButton reportes;
     private javax.swing.JLabel rol;
     private javax.swing.JButton salida;

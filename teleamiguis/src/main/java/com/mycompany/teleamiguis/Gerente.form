@@ -485,7 +485,7 @@
                         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
                         <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="} catch (IOException | SQLException e) {&#xa;            System.out.println(&quot;No fue posible crear la clase administradorClientes&quot;);&#xa;}&#xa;campoConsultaCliente.setSelectedIndex(-1);"/>
                         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="DefaultComboBoxModel modelFinanzas = new DefaultComboBoxModel();&#xa;try {  &#xa;AdministradorClientes admClient = new AdministradorClientes();&#xa;ArrayList&lt;String[]&gt; usuarios= admClient.mostrarListaClientes();&#xa;for (String[] usuario: usuarios){&#xa;    modelFinanzas.addElement(usuario[0] +&quot; - &quot; + usuario[2] +&quot; - &quot; + usuario[1] );&#xa;}"/>
-                        <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="AutoCompletion.enable(campoConsultaCliente );"/>
+                        <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="AutoCompletion.enable(campoConsultaEstFinanciero );"/>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                       <Constraints>
@@ -1302,7 +1302,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                 </Container>
-                <Container class="javax.swing.JPanel" name="reporteFactura">
+                <Container class="javax.swing.JPanel" name="reporteTelefonos">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new java.awt.Color(255, 255, 255, 150)" type="code"/>
@@ -1310,15 +1310,15 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Factura">
-                        <Property name="tabTitle" type="java.lang.String" value="Factura"/>
+                      <JTabbedPaneConstraints tabName="Usuarios por plan">
+                        <Property name="tabTitle" type="java.lang.String" value="Usuarios por plan"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
                 </Container>
-                <Container class="javax.swing.JPanel" name="reporteOperadores">
+                <Container class="javax.swing.JPanel" name="reporteTipoUsuarios">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                       <Connection code="new java.awt.Color(255, 255, 255, 150)" type="code"/>
@@ -1326,24 +1326,8 @@
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Operadores">
-                        <Property name="tabTitle" type="java.lang.String" value="Operadores"/>
-                      </JTabbedPaneConstraints>
-                    </Constraint>
-                  </Constraints>
-
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
-                </Container>
-                <Container class="javax.swing.JPanel" name="reporteNose">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new java.awt.Color(255, 255, 255, 150)" type="code"/>
-                    </Property>
-                  </Properties>
-                  <Constraints>
-                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="Nose">
-                        <Property name="tabTitle" type="java.lang.String" value="Nose"/>
+                      <JTabbedPaneConstraints tabName="Tipos de usuarios">
+                        <Property name="tabTitle" type="java.lang.String" value="Tipos de usuarios"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
