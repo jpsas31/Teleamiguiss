@@ -175,13 +175,12 @@ public class BancoClientes {
       } 
       
       public void actualizar() throws IOException, FileNotFoundException, SQLException{
-          //leerVouchers(new File("./src/main/java/services/banco.xlsx")); 
+          leerVouchers(new File("./src/main/java/services/banco.xlsx")); 
           PreparedStatement stm;
           String sql = "SELECT voucherfactura()"; 
           stm = conn.prepareStatement(sql); 
           stm.executeUpdate(); 
           conn.commit(); 
-          
       }; 
       
       
@@ -196,9 +195,9 @@ public class BancoClientes {
       
     public static void main(String args[]) throws SQLException, IOException{
         BancoClientes prueba = new BancoClientes(); 
+        prueba.actualizar(); 
+        //prueba.generarVouchers(); 
         //prueba.leerVouchers(new File("./src/main/java/services/banco.xlsx"));
-        prueba.actualizar();
-        
     }
   
   
