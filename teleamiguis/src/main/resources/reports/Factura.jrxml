@@ -130,13 +130,14 @@
 	<detail>
 		<band height="269" splitType="Stretch">
 			<textField>
-				<reportElement mode="Opaque" x="2" y="0" width="553" height="50" forecolor="#FFFFFF" backcolor="#006699" uuid="47f51ff8-e03d-48e1-b9c3-ffa08fb834e8"/>
+				<reportElement mode="Opaque" x="2" y="1" width="553" height="60" forecolor="#FFFFFF" backcolor="#006699" uuid="47f51ff8-e03d-48e1-b9c3-ffa08fb834e8"/>
 				<textFieldExpression><![CDATA["Numero: "+ $F{telefono} + "\n"+
 "Plan: "+ $F{nomplan} + "\n"+
-"Numero de contrato: "+$F{numcontrato}]]></textFieldExpression>
+"Numero de contrato: "+$F{numcontrato}  + "\n"+
+"Numero de factura" + $F{numfactura}]]></textFieldExpression>
 			</textField>
 			<frame>
-				<reportElement x="2" y="60" width="150" height="80" uuid="f1806d01-3875-435a-a64f-bdeb3e1280ef"/>
+				<reportElement x="2" y="68" width="150" height="80" uuid="f1806d01-3875-435a-a64f-bdeb3e1280ef"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
@@ -145,17 +146,17 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
 				</box>
 				<image>
-					<reportElement x="48" y="0" width="50" height="50" uuid="5b3920a1-5cce-43a5-bb41-35bc4c38b73f"/>
+					<reportElement x="48" y="8" width="50" height="50" uuid="5b3920a1-5cce-43a5-bb41-35bc4c38b73f"/>
 					<imageExpression><![CDATA["./usedPictures/telefono.png"]]></imageExpression>
 				</image>
 				<textField>
-					<reportElement x="0" y="50" width="150" height="30" uuid="a89301d7-95a8-406d-867e-dc30ebabb8e1"/>
+					<reportElement x="0" y="58" width="150" height="30" uuid="a89301d7-95a8-406d-867e-dc30ebabb8e1"/>
 					<textElement textAlignment="Center"/>
-					<textFieldExpression><![CDATA["Minutos hablados: "+$F{minutos_consum}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["MInutos hablados: "+$F{minutos_consum}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="204" y="60" width="150" height="80" uuid="e78ecabf-7c52-4d72-b9db-42b6c7ff31f4"/>
+				<reportElement x="204" y="68" width="150" height="80" uuid="e78ecabf-7c52-4d72-b9db-42b6c7ff31f4"/>
 				<box>
 					<pen lineColor="#006699"/>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
@@ -164,17 +165,17 @@
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
 				</box>
 				<image>
-					<reportElement x="50" y="0" width="50" height="50" uuid="a50a2e3e-403a-42de-b1c0-00ab40c4209d"/>
+					<reportElement x="50" y="6" width="50" height="50" uuid="a50a2e3e-403a-42de-b1c0-00ab40c4209d"/>
 					<imageExpression><![CDATA["./usedPictures/sms.png"]]></imageExpression>
 				</image>
 				<textField>
-					<reportElement x="0" y="50" width="150" height="30" uuid="69024d62-1c83-4fc0-84da-f2fbc7770f84"/>
+					<reportElement x="0" y="56" width="150" height="30" uuid="69024d62-1c83-4fc0-84da-f2fbc7770f84"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA["MB gastados" + $F{mensajes_consum}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="403" y="60" width="150" height="80" uuid="5f4ec409-a981-47ec-8f9b-627d75b96b2b"/>
+				<reportElement x="403" y="68" width="150" height="80" uuid="5f4ec409-a981-47ec-8f9b-627d75b96b2b"/>
 				<box>
 					<pen lineColor="#006699"/>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#006699"/>
@@ -193,7 +194,7 @@
 				</textField>
 			</frame>
 			<textField>
-				<reportElement x="0" y="150" width="200" height="30" uuid="27817d67-19e1-4cbd-bb45-362cd5601828"/>
+				<reportElement x="0" y="161" width="200" height="30" uuid="27817d67-19e1-4cbd-bb45-362cd5601828"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -203,7 +204,7 @@
 				<textFieldExpression><![CDATA["Costo mensual=" +$F{total_factura} + "$"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="180" width="200" height="30" uuid="361d663c-d650-4824-9c0b-258495128855"/>
+				<reportElement x="0" y="191" width="200" height="30" uuid="361d663c-d650-4824-9c0b-258495128855"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -213,7 +214,7 @@
 				<textFieldExpression><![CDATA["Recargo= "+ new Double($F{total_pagar} - $F{total_factura}) + "$"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="210" width="200" height="30" uuid="5381f474-ec2e-4dbd-b541-1829b1b7ffe0"/>
+				<reportElement x="0" y="221" width="200" height="30" uuid="5381f474-ec2e-4dbd-b541-1829b1b7ffe0"/>
 				<box>
 					<pen lineWidth="2.0" lineStyle="Solid" lineColor="#FF0905"/>
 					<topPen lineWidth="2.0" lineStyle="Solid" lineColor="#FF0905"/>
