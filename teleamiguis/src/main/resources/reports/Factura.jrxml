@@ -134,7 +134,7 @@
 				<textFieldExpression><![CDATA["Numero: "+ $F{telefono} + "\n"+
 "Plan: "+ $F{nomplan} + "\n"+
 "Numero de contrato: "+$F{numcontrato}  + "\n"+
-"Numero de factura" + $F{numfactura}]]></textFieldExpression>
+"Numero de factura: " + $F{numfactura}]]></textFieldExpression>
 			</textField>
 			<frame>
 				<reportElement x="2" y="68" width="150" height="80" uuid="f1806d01-3875-435a-a64f-bdeb3e1280ef"/>
