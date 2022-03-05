@@ -89,7 +89,7 @@ public class Administrador extends javax.swing.JFrame {
         panelDer = new javax.swing.JPanel();
         Fondo = new javax.swing.JLabel();
         tabsUsuarios = new javax.swing.JTabbedPane();
-        tabGestiosUsuarios = new javax.swing.JPanel();
+        tabGestionUsuarios = new javax.swing.JPanel();
         label_id = new javax.swing.JLabel();
         label_nombre = new javax.swing.JLabel();
         label_dir = new javax.swing.JLabel();
@@ -240,60 +240,60 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
 
-        tabGestiosUsuarios.setBackground(new java.awt.Color(255, 255, 255, 150));
-        tabGestiosUsuarios.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        tabGestiosUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        tabGestionUsuarios.setBackground(new java.awt.Color(255, 255, 255, 150));
+        tabGestionUsuarios.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        tabGestionUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label_id.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_id.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_id.setText("Identificación");
-        tabGestiosUsuarios.add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 188, 160, -1));
+        tabGestionUsuarios.add(label_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(67, 188, 160, -1));
         label_id.setVisible(false);
 
         label_nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_nombre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_nombre.setText("Nombre");
-        tabGestiosUsuarios.add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 188, 170, -1));
+        tabGestionUsuarios.add(label_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(466, 188, 170, -1));
         label_nombre.setVisible(false);
 
         label_dir.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_dir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_dir.setText("Dirección");
-        tabGestiosUsuarios.add(label_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 273, 160, -1));
+        tabGestionUsuarios.add(label_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 273, 160, -1));
         label_dir.setVisible(false);
 
         label_tel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_tel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_tel.setText("Teléfono");
-        tabGestiosUsuarios.add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 273, 170, -1));
+        tabGestionUsuarios.add(label_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 273, 170, -1));
         label_tel.setVisible(false);
 
         label_mail.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_mail.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_mail.setText("Correo ");
-        tabGestiosUsuarios.add(label_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 273, 170, -1));
+        tabGestionUsuarios.add(label_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 273, 170, -1));
         label_mail.setVisible(false);
 
         label_estado.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_estado.setText("Estado");
-        tabGestiosUsuarios.add(label_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 349, 170, -1));
+        tabGestionUsuarios.add(label_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 349, 170, -1));
         label_estado.setVisible(false);
 
         label_titulo.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_titulo.setText("Seleccione el documento de identidad:");
-        tabGestiosUsuarios.add(label_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
+        tabGestionUsuarios.add(label_titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 400, -1));
 
         label_cargo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_cargo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label_cargo.setText("Cargo");
-        tabGestiosUsuarios.add(label_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 188, 170, -1));
+        tabGestionUsuarios.add(label_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(265, 188, 170, -1));
         label_cargo.setVisible(false);
 
         label_resul_estado.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_resul_estado.setForeground(new java.awt.Color(0, 153, 51));
         label_resul_estado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tabGestiosUsuarios.add(label_resul_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 374, 173, 36));
+        tabGestionUsuarios.add(label_resul_estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 374, 173, 36));
         label_resul_estado.setVisible(false);
 
         jTF_resul_nombre.setBackground(new java.awt.Color(255, 255, 255));
@@ -302,7 +302,7 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_nombre.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTF_resul_nombre.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 213, 173, 33));
+        tabGestionUsuarios.add(jTF_resul_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 213, 173, 33));
         jTF_resul_nombre.setVisible(false);
 
         jTF_resul_dir.setBackground(new java.awt.Color(255, 255, 255));
@@ -310,7 +310,7 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_dir.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_dir.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_dir.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 298, 170, 33));
+        tabGestionUsuarios.add(jTF_resul_dir, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 298, 170, 33));
         jTF_resul_dir.setVisible(false);
 
         jTF_resul_tel.setBackground(new java.awt.Color(255, 255, 255));
@@ -319,7 +319,7 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_tel.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_tel.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTF_resul_tel.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 298, 173, 33));
+        tabGestionUsuarios.add(jTF_resul_tel, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 298, 173, 33));
         jTF_resul_tel.setVisible(false);
 
         jTF_resul_mail.setBackground(new java.awt.Color(255, 255, 255));
@@ -327,7 +327,7 @@ public class Administrador extends javax.swing.JFrame {
         jTF_resul_mail.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jTF_resul_mail.setForeground(new java.awt.Color(0, 0, 0));
         jTF_resul_mail.setOpaque(true);
-        tabGestiosUsuarios.add(jTF_resul_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 298, 173, 33));
+        tabGestionUsuarios.add(jTF_resul_mail, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 298, 173, 33));
         jTF_resul_mail.setVisible(false);
 
         jTF_resul_id.setBackground(new java.awt.Color(255, 255, 255));
@@ -337,7 +337,7 @@ public class Administrador extends javax.swing.JFrame {
                 jTF_resul_idActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 213, 100, 33));
+        tabGestionUsuarios.add(jTF_resul_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 213, 100, 33));
 
         try {
             AdministradorUsuarios admUser = new AdministradorUsuarios();
@@ -358,16 +358,16 @@ public class Administrador extends javax.swing.JFrame {
             }
         });
         AutoCompletion.enable(campoConsultaUsuario );
-        tabGestiosUsuarios.add(campoConsultaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
+        tabGestionUsuarios.add(campoConsultaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 300, 50));
 
         label_notificacion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         label_notificacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        tabGestiosUsuarios.add(label_notificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 380, 40));
+        tabGestionUsuarios.add(label_notificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 380, 40));
 
         label_resulEstado2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         label_resulEstado2.setForeground(new java.awt.Color(0, 153, 51));
         label_resulEstado2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        tabGestiosUsuarios.add(label_resulEstado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 330, 50));
+        tabGestionUsuarios.add(label_resulEstado2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 330, 50));
         label_resul_estado.setVisible(false);
 
         jTF_resul_tipoid.setBackground(new java.awt.Color(255, 255, 255));
@@ -379,13 +379,13 @@ public class Administrador extends javax.swing.JFrame {
                 jTF_resul_tipoidActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
+        tabGestionUsuarios.add(jTF_resul_tipoid, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 213, 60, 33));
         jTF_resul_tipoid.setSelectedIndex(-1);
 
         this.setVisible(false);
         label_imEstado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/estado_usuario.png"))); // NOI18N
         label_imEstado.setOpaque(true);
-        tabGestiosUsuarios.add(label_imEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+        tabGestionUsuarios.add(label_imEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
 
         jTF_resul_cargo.setBackground(new java.awt.Color(255, 255, 255));
         jTF_resul_cargo.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -396,7 +396,7 @@ public class Administrador extends javax.swing.JFrame {
                 jTF_resul_cargoActionPerformed(evt);
             }
         });
-        tabGestiosUsuarios.add(jTF_resul_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
+        tabGestionUsuarios.add(jTF_resul_cargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(262, 213, 173, 33));
         jTF_resul_cargo.setSelectedIndex(-1);
 
         cont_act.setBackground(new java.awt.Color(0, 10, 85));
@@ -424,7 +424,7 @@ public class Administrador extends javax.swing.JFrame {
         });
         cont_act.add(actualiarInfo, java.awt.BorderLayout.CENTER);
 
-        tabGestiosUsuarios.add(cont_act, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, 30));
+        tabGestionUsuarios.add(cont_act, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 170, 30));
 
         cont_reg.setBackground(new java.awt.Color(0, 10, 85));
         cont_reg.setForeground(new java.awt.Color(255, 255, 255));
@@ -451,7 +451,7 @@ public class Administrador extends javax.swing.JFrame {
         });
         cont_reg.add(Registrar, java.awt.BorderLayout.CENTER);
 
-        tabGestiosUsuarios.add(cont_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 180, 30));
+        tabGestionUsuarios.add(cont_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 180, 30));
 
         cont_acti.setBackground(new java.awt.Color(0, 10, 85));
         cont_acti.setLayout(new java.awt.BorderLayout());
@@ -477,7 +477,7 @@ public class Administrador extends javax.swing.JFrame {
         });
         cont_acti.add(cambiarEstado, java.awt.BorderLayout.CENTER);
 
-        tabGestiosUsuarios.add(cont_acti, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 180, 30));
+        tabGestionUsuarios.add(cont_acti, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 180, 30));
 
         cont_limp.setBackground(new java.awt.Color(102, 102, 102));
         cont_limp.setLayout(new java.awt.BorderLayout());
@@ -501,9 +501,9 @@ public class Administrador extends javax.swing.JFrame {
         });
         cont_limp.add(Limpiar, java.awt.BorderLayout.CENTER);
 
-        tabGestiosUsuarios.add(cont_limp, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, 72, 22));
+        tabGestionUsuarios.add(cont_limp, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 390, 72, 22));
 
-        tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
+        tabsUsuarios.addTab("Gestion", tabGestionUsuarios);
 
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
@@ -825,6 +825,10 @@ public class Administrador extends javax.swing.JFrame {
                     estadoventanasEstadoUsuario(false);
                 }
             }
+            panelDer.repaint();
+            tabGestionUsuarios.revalidate();
+            tabGestionUsuarios.repaint();
+            panelDer.revalidate();
         } catch (SQLException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1071,7 +1075,7 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
     private javax.swing.JButton salida;
-    private javax.swing.JPanel tabGestiosUsuarios;
+    private javax.swing.JPanel tabGestionUsuarios;
     private javax.swing.JTabbedPane tabsUsuarios;
     private javax.swing.JLabel tituloSuperior;
     private javax.swing.JButton usuarios;

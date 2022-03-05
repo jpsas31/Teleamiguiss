@@ -382,7 +382,7 @@ public class Gerente extends javax.swing.JFrame {
         } catch (IOException | SQLException e) {
             System.out.println("No fue posible crear la clase administradorClientes");
         }
-        campoConsultaCliente.setSelectedIndex(-1);
+        campoConsultaEstFinanciero.setSelectedIndex(-1);
         campoConsultaEstFinanciero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoConsultaEstFinancieroActionPerformed(evt);
@@ -953,10 +953,7 @@ public class Gerente extends javax.swing.JFrame {
         String info[] = String.valueOf(campoConsultaEstFinanciero.getSelectedItem()).split(" - ");
         String id = info[2];
         String tipoid = info[1];
-        
-        
-        System.out.println(id);
-        System.out.println(tipoid);
+       
         
         try {
             FinanzasClientes finanzas = new FinanzasClientes();
@@ -1414,7 +1411,7 @@ public class Gerente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,
                         "Se registró la informacion basica del cliente ingresado, ahora escoja un plan para el cliente",
                         "Notificación", JOptionPane.INFORMATION_MESSAGE);
-                tabsClientes.setSelectedIndex(1);
+                tabsClientes.setSelectedIndex(2);
             }
 
         } catch (IOException | SQLException e) {

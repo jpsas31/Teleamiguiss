@@ -209,15 +209,15 @@ public class OperadorClientes {
         
         
         Statement stmt = conn.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT numero_tel FROM numero");
+        ResultSet result = stmt.executeQuery("SELECT numero_tel, minutos_usados, datos_usados, mensajes_usados FROM numero");
         
         String valores = "";
         while (result.next()){
             Random random = new Random();
             String numero = result.getString("numero_tel");
-            String  minutos = String.valueOf(random.nextInt(2000));
-            String datos = String.valueOf(random.nextInt(100000));
-            String mensajes = String.valueOf(random.nextInt(5000));
+            String  minutos = String.valueOf(random.nextInt(200) + Integer.parseInt(result.getString("minutos_usados")));
+            String datos = String.valueOf(random.nextInt(10000)+ Integer.parseInt(result.getString("datos_usados")));
+            String mensajes = String.valueOf(random.nextInt(500)+ Integer.parseInt(result.getString("mensajes_usados")));
             valores += numero + "," + minutos + "," +datos+ "," + mensajes + "\n";
         }
         
@@ -274,8 +274,8 @@ public class OperadorClientes {
         prueba.registrarPago(atributos);*/
         
         //prueba.mostrarFactura(1006);
-        //prueba.generarGastos();
-        //prueba.guardarGastos();
+        prueba.generarGastos();
+        prueba.guardarGastos();
     }
     
 }

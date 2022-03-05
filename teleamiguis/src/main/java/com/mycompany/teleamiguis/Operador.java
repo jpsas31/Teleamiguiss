@@ -602,7 +602,7 @@ public class Operador extends javax.swing.JFrame {
                 String info[] = String.valueOf(campoConsultaCliente.getSelectedItem()).split(" - ");
                 String id = info[2];
                 String tipoid = info[1];
-                System.out.println(id + " "+ tipoid);
+//                System.out.println(id + " "+ tipoid);
                 Connection conn = getConnection();
                 Map<String, Object> parameters = new HashMap<>();
                 parameters.put("title", "Soy un titulo mamon");

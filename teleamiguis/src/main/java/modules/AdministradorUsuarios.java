@@ -186,6 +186,19 @@ public class AdministradorUsuarios {
         // Ejecutamos la sentencia
         confirmacion = stm.executeUpdate();
         conn.commit();
+        inhabQuery =
+                "UPDATE usuarios  SET  isactive =  CAST( ? AS boolean ) WHERE id_trabajador = ? AND tipo_identificacion = ?";
+        stm = conn.prepareStatement(inhabQuery);
+
+        // Seteamos los parametros del query teniendo en cuenta los parametros de la funcion
+        
+        stm.setString(1, String.valueOf(!Boolean.parseBoolean(status)));       
+        stm.setString(2, id);
+        stm.setString(3, tipoid);
+
+        // Ejecutamos la sentencia
+        confirmacion = stm.executeUpdate();
+        conn.commit();
         return confirmacion;
     }
 
