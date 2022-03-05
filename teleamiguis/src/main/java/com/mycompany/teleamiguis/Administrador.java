@@ -84,8 +84,6 @@ public class Administrador extends javax.swing.JFrame {
         Logo = new javax.swing.JLabel();
         cont_us = new javax.swing.JPanel();
         usuarios = new javax.swing.JButton();
-        cont_rep = new javax.swing.JPanel();
-        reportes = new javax.swing.JButton();
         cont_sal = new javax.swing.JPanel();
         salida = new javax.swing.JButton();
         panelDer = new javax.swing.JPanel();
@@ -120,11 +118,6 @@ public class Administrador extends javax.swing.JFrame {
         cambiarEstado = new javax.swing.JButton();
         cont_limp = new javax.swing.JPanel();
         Limpiar = new javax.swing.JButton();
-        tabsReportes = new javax.swing.JTabbedPane();
-        reporteGanancias = new javax.swing.JPanel();
-        reporteFacturas = new javax.swing.JPanel();
-        reporteOperadores = new javax.swing.JPanel();
-        reporteNose = new javax.swing.JPanel();
         barraTitulo = new javax.swing.JPanel();
         tituloSuperior = new javax.swing.JLabel();
 
@@ -200,38 +193,6 @@ public class Administrador extends javax.swing.JFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
         panelIzq.add(cont_us, gridBagConstraints);
-
-        cont_rep.setBackground(new java.awt.Color(189, 210, 219));
-        cont_rep.setPreferredSize(new java.awt.Dimension(92, 25));
-        cont_rep.setLayout(new java.awt.BorderLayout());
-
-        reportes.setBackground(new java.awt.Color(255, 255, 255));
-        reportes.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
-        reportes.setForeground(new java.awt.Color(0, 0, 0));
-        reportes.setText("Reportes");
-        reportes.setContentAreaFilled(false);
-        reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        reportes.setFocusable(false);
-        reportes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                reportesMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                reportesMouseExited(evt);
-            }
-        });
-        reportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportesActionPerformed(evt);
-            }
-        });
-        cont_rep.add(reportes, java.awt.BorderLayout.CENTER);
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 0);
-        panelIzq.add(cont_rep, gridBagConstraints);
 
         cont_sal.setBackground(new java.awt.Color(102, 102, 102));
         cont_sal.setLayout(new java.awt.BorderLayout());
@@ -544,33 +505,11 @@ public class Administrador extends javax.swing.JFrame {
 
         tabsUsuarios.addTab("Gestion", tabGestiosUsuarios);
 
-        tabsReportes.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                tabsReportesStateChanged(evt);
-            }
-        });
-
-        reporteGanancias.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteGanancias.setLayout(new java.awt.BorderLayout());
-        tabsReportes.addTab("Ganancias", reporteGanancias);
-
-        reporteFacturas.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteFacturas.setLayout(new java.awt.BorderLayout());
-        tabsReportes.addTab("Facturas", reporteFacturas);
-
-        reporteOperadores.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteOperadores.setLayout(new java.awt.BorderLayout());
-        tabsReportes.addTab("Operadores", reporteOperadores);
-
-        reporteNose.setBackground(new java.awt.Color(255, 255, 255, 150));
-        reporteNose.setLayout(new java.awt.BorderLayout());
-        tabsReportes.addTab("Nose", reporteNose);
-
         javax.swing.GroupLayout panelDerLayout = new javax.swing.GroupLayout(panelDer);
         panelDer.setLayout(panelDerLayout);
         panelDerLayout.setHorizontalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(tabsUsuarios))
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +519,7 @@ public class Administrador extends javax.swing.JFrame {
         );
         panelDerLayout.setVerticalGroup(
             panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabsReportes, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
             .addGroup(panelDerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panelDerLayout.createSequentialGroup()
                     .addComponent(tabsUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -595,8 +534,6 @@ public class Administrador extends javax.swing.JFrame {
         tabsUsuarios.setFont( new Font("Sansserif", Font.BOLD, 12));
         //Poner invisible al inicio tab Usuarios
         tabsUsuarios.setVisible(false);
-        //Poner invisible all inicio
-        tabsReportes.setVisible(false);
 
         panelGeneral.add(panelDer, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 700, 450));
         panelDer.getAccessibleContext().setAccessibleDescription("");
@@ -667,18 +604,6 @@ public class Administrador extends javax.swing.JFrame {
         usuarios.setForeground(new Color(0, 0, 0)); 
     }//GEN-LAST:event_usuariosMouseExited
 
-    private void reportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesMouseEntered
-        // TODO add your handling code here:
-        cont_rep.setBackground(new Color(0, 10, 85));
-        reportes.setForeground(new Color(255, 255, 255)); 
-    }//GEN-LAST:event_reportesMouseEntered
-
-    private void reportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportesMouseExited
-        // TODO add your handling code here:
-        cont_rep.setBackground(new Color(189, 210, 219));
-        reportes.setForeground(new Color(0,0,0)); 
-    }//GEN-LAST:event_reportesMouseExited
-
     private void salidaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salidaMouseEntered
         // TODO add your handling code here:
         cont_sal.setBackground(new Color(0, 0, 0));
@@ -742,13 +667,12 @@ public class Administrador extends javax.swing.JFrame {
     
     
     private void usuariosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_usuariosActionPerformed
-        tabsReportes.setVisible(false);
+      
         tabsUsuarios.setVisible(true);
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
-        reportes.setEnabled(true);
         usuarios.setEnabled(false);
 
     }// GEN-LAST:event_usuariosActionPerformed
@@ -780,50 +704,17 @@ public class Administrador extends javax.swing.JFrame {
     }// GEN-LAST:event_salidaActionPerformed
 
     private void estadoClientesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_estadoClientesActionPerformed
-        tabsReportes.setVisible(false);
+
         tabsUsuarios.setVisible(false);
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
         panelDer.revalidate();
-        reportes.setEnabled(true);
         usuarios.setEnabled(true);
 
     }// GEN-LAST:event_estadoClientesActionPerformed
 
-    private void reportesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_reportesActionPerformed
-        tabsReportes.setVisible(true);
-        tabsUsuarios.setVisible(false);
-        panelGeneral.repaint();
-        panelGeneral.revalidate();
-        panelDer.repaint();
-        panelDer.revalidate();
-        reportes.setEnabled(false);
-        usuarios.setEnabled(true);
-
-    }// GEN-LAST:event_reportesActionPerformed
-
-    private void tabsReportesStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tabsReportesStateChanged
-        if (tabsReportes.getSelectedIndex() == 0) {
-            try {
-                Connection conn = getConnection();
-                Map<String, Object> parameters = new HashMap<>();
-                parameters.put("title", "Soy un titulo mamon");
-                String jrxml = "/reports/reportes.jrxml";
-                JasperPrint print = createPrint(parameters, jrxml, conn);
-                JRViewer view = createReportView(print);
-                reporteGanancias.add(view);
-                conn.close();
-
-            } catch (JRException | IOException | SQLException ex) {
-                Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        // else{
-        //
-        // }
-
-    }// GEN-LAST:event_tabsReportesStateChanged
+   
 
     private void tabsUsuariosStateChanged(javax.swing.event.ChangeEvent evt) {// GEN-FIRST:event_tabsUsuariosStateChanged
         // TODO add your handling code here:
@@ -1153,7 +1044,6 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel cont_acti;
     private javax.swing.JPanel cont_limp;
     private javax.swing.JPanel cont_reg;
-    private javax.swing.JPanel cont_rep;
     private javax.swing.JPanel cont_sal;
     private javax.swing.JPanel cont_us;
     private javax.swing.JLabel horaSesion;
@@ -1180,14 +1070,8 @@ public class Administrador extends javax.swing.JFrame {
     private javax.swing.JPanel panelDer;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
-    private javax.swing.JPanel reporteFacturas;
-    private javax.swing.JPanel reporteGanancias;
-    private javax.swing.JPanel reporteNose;
-    private javax.swing.JPanel reporteOperadores;
-    private javax.swing.JButton reportes;
     private javax.swing.JButton salida;
     private javax.swing.JPanel tabGestiosUsuarios;
-    private javax.swing.JTabbedPane tabsReportes;
     private javax.swing.JTabbedPane tabsUsuarios;
     private javax.swing.JLabel tituloSuperior;
     private javax.swing.JButton usuarios;
