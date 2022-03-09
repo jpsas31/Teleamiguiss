@@ -582,7 +582,7 @@ public class Gerente extends javax.swing.JFrame {
         actualizarInfo.setForeground(new java.awt.Color(255, 255, 255));
         actualizarInfo.setText("Actualizar información");
         actualizarInfo.setContentAreaFilled(false);
-        actualizarInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        actualizarInfo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         actualizarInfo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 actualizarInfoMouseEntered(evt);
@@ -607,7 +607,7 @@ public class Gerente extends javax.swing.JFrame {
         Registrar.setForeground(new java.awt.Color(255, 255, 255));
         Registrar.setText("Registrar");
         Registrar.setContentAreaFilled(false);
-        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Registrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Registrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 RegistrarMouseEntered(evt);
@@ -632,7 +632,7 @@ public class Gerente extends javax.swing.JFrame {
         cambiarEstado.setForeground(new java.awt.Color(255, 255, 255));
         cambiarEstado.setText("Activar/Desactivar");
         cambiarEstado.setContentAreaFilled(false);
-        cambiarEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cambiarEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cambiarEstado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 cambiarEstadoMouseEntered(evt);
@@ -656,7 +656,7 @@ public class Gerente extends javax.swing.JFrame {
         Limpiar.setForeground(new java.awt.Color(255, 255, 255));
         Limpiar.setText("Limpiar");
         Limpiar.setContentAreaFilled(false);
-        Limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Limpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Limpiar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 LimpiarMouseEntered(evt);
@@ -719,7 +719,7 @@ public class Gerente extends javax.swing.JFrame {
         agregarNumero.setForeground(new java.awt.Color(255, 255, 255));
         agregarNumero.setText("Agregar Numero");
         agregarNumero.setContentAreaFilled(false);
-        agregarNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        agregarNumero.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         agregarNumero.setEnabled(false);
         agregarNumero.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

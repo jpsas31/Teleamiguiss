@@ -1007,7 +1007,7 @@
                             <Property name="text" type="java.lang.String" value="Actualizar informaci&#xf3;n"/>
                             <Property name="contentAreaFilled" type="boolean" value="false"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                              <Color id="Default Cursor"/>
+                              <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
                           <Events>
@@ -1048,7 +1048,7 @@
                             <Property name="text" type="java.lang.String" value="Registrar"/>
                             <Property name="contentAreaFilled" type="boolean" value="false"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                              <Color id="Default Cursor"/>
+                              <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
                           <Events>
@@ -1089,7 +1089,7 @@
                             <Property name="text" type="java.lang.String" value="Activar/Desactivar"/>
                             <Property name="contentAreaFilled" type="boolean" value="false"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                              <Color id="Default Cursor"/>
+                              <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
                           <Events>
@@ -1127,7 +1127,7 @@
                             <Property name="text" type="java.lang.String" value="Limpiar"/>
                             <Property name="contentAreaFilled" type="boolean" value="false"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                              <Color id="Default Cursor"/>
+                              <Color id="Hand Cursor"/>
                             </Property>
                           </Properties>
                           <Events>
@@ -1255,7 +1255,7 @@
                             <Property name="text" type="java.lang.String" value="Agregar Numero"/>
                             <Property name="contentAreaFilled" type="boolean" value="false"/>
                             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                              <Color id="Default Cursor"/>
+                              <Color id="Hand Cursor"/>
                             </Property>
                             <Property name="enabled" type="boolean" value="false"/>
                           </Properties>
