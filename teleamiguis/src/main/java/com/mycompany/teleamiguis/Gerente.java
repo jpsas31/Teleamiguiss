@@ -242,7 +242,7 @@ public class Gerente extends javax.swing.JFrame {
         clientes.setForeground(new java.awt.Color(0, 0, 0));
         clientes.setText("Cliente");
         clientes.setContentAreaFilled(false);
-        clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 clientesMouseEntered(evt);
@@ -282,7 +282,7 @@ public class Gerente extends javax.swing.JFrame {
         reportes.setForeground(new java.awt.Color(0, 0, 0));
         reportes.setText("Reportes");
         reportes.setContentAreaFilled(false);
-        reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        reportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         reportes.setPreferredSize(new java.awt.Dimension(128, 25));
         reportes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -314,7 +314,7 @@ public class Gerente extends javax.swing.JFrame {
         salida.setForeground(new java.awt.Color(255, 255, 255));
         salida.setText("Salida");
         salida.setContentAreaFilled(false);
-        salida.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        salida.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salida.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 salidaMouseEntered(evt);

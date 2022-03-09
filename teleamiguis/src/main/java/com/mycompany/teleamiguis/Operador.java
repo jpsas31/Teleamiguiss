@@ -145,7 +145,7 @@ public class Operador extends javax.swing.JFrame {
         factura.setForeground(new java.awt.Color(0, 0, 0));
         factura.setText("Facturas");
         factura.setContentAreaFilled(false);
-        factura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        factura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         factura.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 facturaMouseEntered(evt);
@@ -201,7 +201,7 @@ public class Operador extends javax.swing.JFrame {
         registrarPago.setForeground(new java.awt.Color(0, 0, 0));
         registrarPago.setText("Registrar pago");
         registrarPago.setContentAreaFilled(false);
-        registrarPago.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        registrarPago.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registrarPago.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 registrarPagoMouseEntered(evt);
@@ -232,7 +232,7 @@ public class Operador extends javax.swing.JFrame {
         salida1.setForeground(new java.awt.Color(255, 255, 255));
         salida1.setText("Salida");
         salida1.setContentAreaFilled(false);
-        salida1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        salida1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         salida1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 salida1MouseEntered(evt);
@@ -458,7 +458,7 @@ public class Operador extends javax.swing.JFrame {
         buscar.setForeground(new java.awt.Color(255, 255, 255));
         buscar.setText("Buscar");
         buscar.setContentAreaFilled(false);
-        buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         buscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 buscarMouseEntered(evt);
@@ -483,7 +483,7 @@ public class Operador extends javax.swing.JFrame {
         abonar.setForeground(new java.awt.Color(0, 128, 0));
         abonar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/pagar.png"))); // NOI18N
         abonar.setContentAreaFilled(false);
-        abonar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        abonar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         abonar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 abonarMouseEntered(evt);
