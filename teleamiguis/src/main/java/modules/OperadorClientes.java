@@ -133,6 +133,9 @@ public class OperadorClientes {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDateTime now = LocalDateTime.now();
             
+            
+           
+            
             if (abono + cantidadPagada == totalPagar)
             {
                 stm.setDate(2,java.sql.Date.valueOf (dtf.format(now)) );
@@ -149,6 +152,11 @@ public class OperadorClientes {
             // envviando el query INSERT registro
             confirmacion = stm.executeUpdate();
             //System.out.println(confirmacion); 
+            conn.commit();
+            
+            
+            stm = conn.prepareStatement("UPDATE contratos set estado = true WHERE num_contrato = " + datos[1] );
+            stm.executeUpdate();
             conn.commit();
 
         } else if (confirmacion != 2){
