@@ -6,6 +6,8 @@ package com.mycompany.teleamiguis;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -19,12 +21,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import modules.AdministradorClientes;
 import modules.AdministradorUsuarios;
 import modules.AutoCompletion;
+import modules.BancoClientes;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.swing.JRViewer;
@@ -39,6 +46,7 @@ import static services.Reportes.getConnection;
 public class Operador extends javax.swing.JFrame {
     private AdministradorClientes admClient;
     private AdministradorUsuarios admUser;
+    private BancoClientes bancoObj; 
     int xMouse;
     int yMouse;
     private OperadorClientes rPago;
@@ -57,8 +65,12 @@ public class Operador extends javax.swing.JFrame {
         tituloSuperior.setText("Usuario " + nombreUser);
          try {
             // Hacemos invisibles todos los jlabel de abajo del tab de gestionUsuario
+            bancoObj = new BancoClientes(); // se crea una instancia de la clase 
+                                                   // BancoClientes
             admUser = new AdministradorUsuarios(); // se crea una instancia de la clase
                                                    // AdministradorUsuarios
+             verTabla(); // se actualiza la jtable
+                                                   
         } catch (IOException | SQLException e) {
             System.out.println("Hubo un problema al crear la clase administradorUsuario");
         }
@@ -83,13 +95,15 @@ public class Operador extends javax.swing.JFrame {
 
         panelGeneral = new javax.swing.JPanel();
         panelIzq = new javax.swing.JPanel();
-        cont_fac = new javax.swing.JPanel();
-        factura = new javax.swing.JButton();
         nombre = new javax.swing.JLabel();
         horaSesion = new javax.swing.JLabel();
         Logo = new javax.swing.JLabel();
+        cont_fac = new javax.swing.JPanel();
+        factura = new javax.swing.JButton();
         cont_reg = new javax.swing.JPanel();
         registrarPago = new javax.swing.JButton();
+        cont_ban = new javax.swing.JPanel();
+        registrarBanco = new javax.swing.JButton();
         cont_sal = new javax.swing.JPanel();
         salida1 = new javax.swing.JButton();
         barraTitulo = new javax.swing.JPanel();
@@ -122,6 +136,20 @@ public class Operador extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         cont_pag = new javax.swing.JPanel();
         abonar = new javax.swing.JButton();
+        verBanco = new javax.swing.JPanel();
+        label_vou = new javax.swing.JLabel();
+        label_confirm = new javax.swing.JLabel();
+        camp_link = new javax.swing.JTextField();
+        cont_exam = new javax.swing.JPanel();
+        but_exam = new javax.swing.JButton();
+        cont_enviar = new javax.swing.JPanel();
+        but_enviar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabl_banco = new javax.swing.JTable();
+        label_tabla = new javax.swing.JLabel();
+        cont_actu = new javax.swing.JPanel();
+        Actualizar = new javax.swing.JButton();
+        actu2 = new javax.swing.JButton();
         Fondo = new javax.swing.JLabel();
 
         setUndecorated(true);
@@ -134,6 +162,30 @@ public class Operador extends javax.swing.JFrame {
         panelIzq.setBackground(new java.awt.Color(22, 49, 92));
         panelIzq.setPreferredSize(new java.awt.Dimension(300, 450));
         panelIzq.setLayout(new java.awt.GridBagLayout());
+
+        nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        nombre.setForeground(new java.awt.Color(255, 255, 255));
+        nombre.setText("OPERADOR");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.insets = new java.awt.Insets(13, 5, 13, 5);
+        panelIzq.add(nombre, gridBagConstraints);
+
+        horaSesion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        horaSesion.setForeground(new java.awt.Color(255, 255, 255));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        LocalDateTime now = LocalDateTime.now();
+        horaSesion.setText(dtf.format(now));
+        horaSesion.setText(dtf.format(now));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 24, 5);
+        panelIzq.add(horaSesion, gridBagConstraints);
+
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
+        panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
         cont_fac.setBackground(new java.awt.Color(189, 210, 219));
         cont_fac.setForeground(new java.awt.Color(0, 0, 0));
@@ -164,32 +216,8 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
-        gridBagConstraints.insets = new java.awt.Insets(9, 0, 28, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 3, 0);
         panelIzq.add(cont_fac, gridBagConstraints);
-
-        nombre.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        nombre.setForeground(new java.awt.Color(255, 255, 255));
-        nombre.setText("OPERADOR");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.insets = new java.awt.Insets(13, 5, 13, 5);
-        panelIzq.add(nombre, gridBagConstraints);
-
-        horaSesion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        horaSesion.setForeground(new java.awt.Color(255, 255, 255));
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        horaSesion.setText(dtf.format(now));
-        horaSesion.setText(dtf.format(now));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 24, 5);
-        panelIzq.add(horaSesion, gridBagConstraints);
-
-        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/Logo.png"))); // NOI18N
-        panelIzq.add(Logo, new java.awt.GridBagConstraints());
 
         cont_reg.setBackground(new java.awt.Color(189, 210, 219));
         cont_reg.setForeground(new java.awt.Color(0, 0, 0));
@@ -220,8 +248,38 @@ public class Operador extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
-        gridBagConstraints.insets = new java.awt.Insets(19, 0, 10, 0);
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 3, 0);
         panelIzq.add(cont_reg, gridBagConstraints);
+
+        cont_ban.setBackground(new java.awt.Color(189, 210, 219));
+        cont_ban.setPreferredSize(new java.awt.Dimension(131, 25));
+        cont_ban.setLayout(new java.awt.BorderLayout());
+
+        registrarBanco.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        registrarBanco.setForeground(new java.awt.Color(0, 0, 0));
+        registrarBanco.setText("Bancos");
+        registrarBanco.setContentAreaFilled(false);
+        registrarBanco.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        registrarBanco.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                registrarBancoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                registrarBancoMouseExited(evt);
+            }
+        });
+        registrarBanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarBancoActionPerformed(evt);
+            }
+        });
+        cont_ban.add(registrarBanco, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 3, 0);
+        panelIzq.add(cont_ban, gridBagConstraints);
 
         cont_sal.setBackground(new java.awt.Color(102, 102, 102));
         cont_sal.setPreferredSize(new java.awt.Dimension(72, 25));
@@ -250,7 +308,7 @@ public class Operador extends javax.swing.JFrame {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.insets = new java.awt.Insets(18, 0, 18, 0);
         panelIzq.add(cont_sal, gridBagConstraints);
 
@@ -503,6 +561,151 @@ public class Operador extends javax.swing.JFrame {
 
         panelDer.add(tabPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 420));
 
+        verBanco.setVisible(false);
+        verBanco.setBackground(new java.awt.Color(255, 255, 255, 150));
+        verBanco.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        label_vou.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        label_vou.setForeground(new java.awt.Color(0, 0, 0));
+        label_vou.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_vou.setText("Registrar vouchers");
+        verBanco.add(label_vou, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 700, -1));
+
+        label_confirm.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        label_confirm.setForeground(new java.awt.Color(0, 0, 0));
+        label_confirm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label_confirm.setToolTipText("");
+        verBanco.add(label_confirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 700, 20));
+
+        camp_link.setEditable(false);
+        camp_link.setFont(new java.awt.Font("SansSerif", 2, 14)); // NOI18N
+        camp_link.setText("Dirección del archivo...");
+        verBanco.add(camp_link, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 390, 30));
+
+        cont_exam.setBackground(new java.awt.Color(0, 10, 85));
+        cont_exam.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        cont_exam.setName(""); // NOI18N
+        cont_exam.setLayout(new java.awt.BorderLayout());
+
+        but_exam.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        but_exam.setForeground(new java.awt.Color(255, 255, 255));
+        but_exam.setText("Examinar");
+        but_exam.setContentAreaFilled(false);
+        but_exam.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        but_exam.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                but_examMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                but_examMouseExited(evt);
+            }
+        });
+        but_exam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                but_examActionPerformed(evt);
+            }
+        });
+        cont_exam.add(but_exam, java.awt.BorderLayout.CENTER);
+
+        verBanco.add(cont_exam, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 70, 100, 30));
+
+        cont_enviar.setBackground(new java.awt.Color(0, 10, 85));
+        cont_enviar.setLayout(new java.awt.BorderLayout());
+
+        but_enviar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        but_enviar.setForeground(new java.awt.Color(255, 255, 255));
+        but_enviar.setText("Enviar");
+        but_enviar.setContentAreaFilled(false);
+        but_enviar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        but_enviar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                but_enviarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                but_enviarMouseExited(evt);
+            }
+        });
+        but_enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                but_enviarActionPerformed(evt);
+            }
+        });
+        cont_enviar.add(but_enviar, java.awt.BorderLayout.CENTER);
+
+        verBanco.add(cont_enviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 100, 30));
+
+        tabl_banco.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        tabl_banco.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Num_Voucher", "Num_Factura", "Cantidad", "Banco", "Digitado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabl_banco.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabl_banco.setSelectionBackground(new java.awt.Color(0, 10, 85));
+        jScrollPane1.setViewportView(tabl_banco);
+        if (tabl_banco.getColumnModel().getColumnCount() > 0) {
+            tabl_banco.getColumnModel().getColumn(0).setResizable(false);
+            tabl_banco.getColumnModel().getColumn(1).setResizable(false);
+            tabl_banco.getColumnModel().getColumn(2).setResizable(false);
+            tabl_banco.getColumnModel().getColumn(3).setResizable(false);
+            tabl_banco.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        verBanco.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 620, 150));
+
+        label_tabla.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        label_tabla.setForeground(new java.awt.Color(0, 0, 0));
+        label_tabla.setText("[Estado de vouchers actual]");
+        verBanco.add(label_tabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
+
+        cont_actu.setBackground(new java.awt.Color(0, 10, 85));
+        cont_actu.setLayout(new java.awt.BorderLayout());
+
+        Actualizar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        Actualizar.setForeground(new java.awt.Color(255, 255, 255));
+        Actualizar.setText("Actualizar facturas");
+        Actualizar.setContentAreaFilled(false);
+        Actualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        Actualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ActualizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ActualizarMouseExited(evt);
+            }
+        });
+        Actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizarActionPerformed(evt);
+            }
+        });
+        cont_actu.add(Actualizar, java.awt.BorderLayout.CENTER);
+
+        verBanco.add(cont_actu, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 160, 40));
+
+        actu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/updateee.png"))); // NOI18N
+        actu2.setContentAreaFilled(false);
+        actu2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        actu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actu2ActionPerformed(evt);
+            }
+        });
+        verBanco.add(actu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 20, 20));
+
+        panelDer.add(verBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 420));
+
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/usedPictures/fondo2.jpg"))); // NOI18N
         Fondo.setToolTipText("");
         Fondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -585,11 +788,17 @@ public class Operador extends javax.swing.JFrame {
     }//GEN-LAST:event_facturaMouseExited
 
     private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
- 
+        // botones
         factura.setEnabled(false);
+        registrarPago.setEnabled(true); 
+        registrarBanco.setEnabled(true); 
+        
+        //paneles
         tabPago.setVisible(false);
+        verBanco.setVisible(false); 
         verFactura.setVisible(true);
-        registrarPago.setEnabled(true);
+        
+        // actualizacion de paneles
         panelDer.repaint();
         panelDer.revalidate();
         panelGeneral.repaint();
@@ -729,7 +938,154 @@ public class Operador extends javax.swing.JFrame {
     private void txf_buscar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txf_buscar_facturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txf_buscar_facturaActionPerformed
+
+    private void registrarBancoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarBancoMouseEntered
+        // TODO add your handling code here:
+        cont_ban.setBackground(new Color(0, 10, 85));
+        registrarBanco.setForeground(new Color(255, 255, 255)); 
+    }//GEN-LAST:event_registrarBancoMouseEntered
+
+    private void registrarBancoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registrarBancoMouseExited
+        // TODO add your handling code here:
+        cont_ban.setBackground(new Color(189, 210, 219));
+        registrarBanco.setForeground(new Color(0, 0, 0)); 
+    }//GEN-LAST:event_registrarBancoMouseExited
+
+    private void registrarBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarBancoActionPerformed
+        // TODO add your handling code here:
+       registrarBanco.setEnabled(false);
+       registrarPago.setEnabled(true);
+       factura.setEnabled(true); 
+        //paneles
+        tabPago.setVisible(false);
+        verBanco.setVisible(true); 
+        verFactura.setVisible(false);
+        
+        // update de paneles
+        panelDer.repaint();
+        panelDer.revalidate();
+        panelGeneral.repaint();
+        panelGeneral.revalidate();
+        
+    }//GEN-LAST:event_registrarBancoActionPerformed
+
+    private void but_examMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but_examMouseEntered
+        // TODO add your handling code here:
+        cont_exam.setBackground(new Color(41, 35, 92));
+        but_exam.setForeground(new Color(255, 255, 255));
+    }//GEN-LAST:event_but_examMouseEntered
+
+    private void but_examMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but_examMouseExited
+        // TODO add your handling code here:
+        cont_exam.setBackground(new Color(0, 10, 85));
+    }//GEN-LAST:event_but_examMouseExited
+
+    private void but_enviarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but_enviarMouseEntered
+        // TODO add your handling code here:
+        cont_enviar.setBackground(new Color(41, 35, 92));
+    }//GEN-LAST:event_but_enviarMouseEntered
+
+    private void but_enviarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_but_enviarMouseExited
+        // TODO add your handling code here:
+        cont_enviar.setBackground(new Color(0, 10, 85)); 
+    }//GEN-LAST:event_but_enviarMouseExited
+
+    private void but_examActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_examActionPerformed
+        // TODO add your handling code here:
+        JFileChooser openFileChooser = new JFileChooser(); 
+        openFileChooser.setDialogTitle("Abrir archivo"); 
+        openFileChooser.removeChoosableFileFilter(openFileChooser.getFileFilter()); 
+        FileFilter filtro = new FileNameExtensionFilter("Excel File (.xlsx)", "xlsx"); 
+        openFileChooser.setFileFilter(filtro);
+        
+        if (openFileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File inputFile = openFileChooser.getSelectedFile(); 
+            camp_link.setText(inputFile.getAbsolutePath());
+        } 
+    }//GEN-LAST:event_but_examActionPerformed
+
+    private void but_enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_but_enviarActionPerformed
+        // TODO add your handling code here:
+        int resp = JOptionPane.showConfirmDialog(null, "Esta a punto de actualizar los vouchers en la base de datos, ¿desea continuar?", "Notificacion",
+                JOptionPane.YES_NO_OPTION);
+        if (resp != 1) {
+            if (camp_link.getText().equals("Dirección del archivo...")) {
+                JOptionPane.showMessageDialog(null, "Examine la direccion del archivo", "Alerta", JOptionPane.ERROR_MESSAGE);
+            } else {
+                try {
+                    if (bancoObj.leerVouchers(new File(camp_link.getText())) == 0){
+                        label_confirm.setText("Se han actualizado los vouchers en la base de datos correctamente");
+                    } else {
+                        label_confirm.setText("Ha sucedido un error en la actualizacion de los vouchers"); 
+                    }
+                    verTabla(); 
+                    revalidate(); 
+                    repaint(); 
+                } catch (IOException | SQLException ex) {
+                    Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        } 
+
+    }//GEN-LAST:event_but_enviarActionPerformed
+
+    private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
+        // TODO add your handling code here:
+         int resp = JOptionPane.showConfirmDialog(null, "Esta a punto de actualizar las facturas en la base de datos, ¿desea continuar?", "Notificacion",
+                JOptionPane.YES_NO_OPTION);
+         if (resp != 1) {
+             try {
+                 bancoObj.actualizar();
+                 JOptionPane.showMessageDialog(null, "Se ha actualizado la factura correctamente",  "Notificacion", JOptionPane.INFORMATION_MESSAGE );
+             } catch (IOException | SQLException ex) {
+                 Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+             }
+         }
+        
+        
+    }//GEN-LAST:event_ActualizarActionPerformed
+
+    private void ActualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseEntered
+        // TODO add your handling code here:
+        cont_actu.setBackground(new Color(41, 35, 92));
+    }//GEN-LAST:event_ActualizarMouseEntered
+
+    private void ActualizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ActualizarMouseExited
+        // TODO add your handling code here:
+        cont_actu.setBackground(new Color(0, 10, 85));
+    }//GEN-LAST:event_ActualizarMouseExited
+
+    private void actu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actu2ActionPerformed
+        try {
+            // TODO add your handling code here:
+            verTabla();
+        } catch (SQLException ex) {
+            Logger.getLogger(Operador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        revalidate(); 
+        repaint(); 
+    }//GEN-LAST:event_actu2ActionPerformed
     
+    private void verTabla() throws SQLException {
+        DefaultTableModel dtm; 
+        Object[] o = new Object[5];
+        dtm = (DefaultTableModel) tabl_banco.getModel();
+        
+        dtm.getDataVector().removeAllElements();
+        revalidate(); 
+        
+        String[][] tabla = bancoObj.mostrarVouchers(); 
+        //System.out.println(tabla.length); 
+        for (int i = 0; i < tabla.length; i++) {
+            for (int y = 0; y < tabla[0].length; y++) {
+                o[y] = tabla[i][y]; 
+                //System.out.println(tabla[i][y]);
+            } 
+            //System.out.println("Hola");
+            dtm.addRow(o);
+        }
+    }
     
     private void barraTituloMouseDragged(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_barraTituloMouseDragged
         // TODO add your handling code here:
@@ -746,11 +1102,17 @@ public class Operador extends javax.swing.JFrame {
     }// GEN-LAST:event_barraTituloMousePressed
 
     private void registrarPagoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_registrarPagoActionPerformed
-
+        // Botones
         factura.setEnabled(true);
-        tabPago.setVisible(true);
-        verFactura.setVisible(false);
         registrarPago.setEnabled(false);
+        registrarBanco.setEnabled(true);
+        
+        //paneles
+        tabPago.setVisible(true);
+        verBanco.setVisible(false); 
+        verFactura.setVisible(false);
+        
+        // update
         panelGeneral.repaint();
         panelGeneral.revalidate();
         panelDer.repaint();
@@ -816,13 +1178,22 @@ public class Operador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Actualizar;
     private javax.swing.JLabel Fondo;
     private javax.swing.JLabel Logo;
     private javax.swing.JButton abonar;
+    private javax.swing.JButton actu2;
     private javax.swing.JPanel barraTitulo;
     private javax.swing.JButton buscar;
+    private javax.swing.JButton but_enviar;
+    private javax.swing.JButton but_exam;
+    private javax.swing.JTextField camp_link;
     private javax.swing.JComboBox<String> campoConsultaCliente;
+    private javax.swing.JPanel cont_actu;
+    private javax.swing.JPanel cont_ban;
     private javax.swing.JPanel cont_bus;
+    private javax.swing.JPanel cont_enviar;
+    private javax.swing.JPanel cont_exam;
     private javax.swing.JPanel cont_fac;
     private javax.swing.JPanel cont_pag;
     private javax.swing.JPanel cont_reg;
@@ -830,8 +1201,12 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JLabel estado_factura;
     private javax.swing.JButton factura;
     private javax.swing.JLabel horaSesion;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_confirm;
     private javax.swing.JLabel label_registrarPago;
+    private javax.swing.JLabel label_tabla;
     private javax.swing.JLabel label_titulo1;
+    private javax.swing.JLabel label_vou;
     private javax.swing.JLabel lbl_abonado;
     private javax.swing.JLabel lbl_abonar;
     private javax.swing.JLabel lbl_caduca;
@@ -845,9 +1220,11 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JPanel panelFactura;
     private javax.swing.JPanel panelGeneral;
     private javax.swing.JPanel panelIzq;
+    private javax.swing.JButton registrarBanco;
     private javax.swing.JButton registrarPago;
     private javax.swing.JButton salida1;
     private javax.swing.JPanel tabPago;
+    private javax.swing.JTable tabl_banco;
     private javax.swing.JLabel tituloSuperior;
     private javax.swing.JTextField txf_abonado;
     private javax.swing.JTextField txf_abonar;
@@ -857,6 +1234,7 @@ public class Operador extends javax.swing.JFrame {
     private javax.swing.JTextField txf_num_contrato;
     private javax.swing.JTextField txf_pagado;
     private javax.swing.JTextField txf_total_a_pagar;
+    private javax.swing.JPanel verBanco;
     private javax.swing.JPanel verFactura;
     // End of variables declaration//GEN-END:variables
 }

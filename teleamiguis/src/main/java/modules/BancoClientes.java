@@ -135,9 +135,9 @@ public class BancoClientes {
             System.out.println("Se ha creado el excel"); 
       }
       
-      public void leerVouchers(File archivo) throws FileNotFoundException, IOException, SQLException {
+      public int leerVouchers(File archivo) throws FileNotFoundException, IOException, SQLException {
           PreparedStatement stm;
-            
+          
           FileInputStream in = new FileInputStream(archivo); 
           XSSFWorkbook importedfile = new XSSFWorkbook(in); 
           XSSFSheet sheet1 = importedfile.getSheetAt(0); 
@@ -147,6 +147,9 @@ public class BancoClientes {
           //
           Iterator<Row> rowIterator  = sheet1.iterator(); 
           Row row = rowIterator.next(); 
+          stm  = conn.prepareStatement("DELETE FROM voucher"); 
+          stm.executeUpdate(); 
+          conn.commit(); 
           while(rowIterator.hasNext()) {
                     row = rowIterator.next();
                     sql = "INSERT INTO voucher(num_voucher, num_factura, cantidad, banco) VALUES (CAST (? AS integer), CAST( ? AS integer), CAST (? AS money), ?)"; 
@@ -170,8 +173,8 @@ public class BancoClientes {
           
           
           in.close(); 
-          System.out.println("Ha sido leido correctamente"); 
-          
+          //System.out.println("Ha sido leido correctamente"); 
+          return 0; 
       } 
       
       public void actualizar() throws IOException, FileNotFoundException, SQLException{
@@ -180,11 +183,38 @@ public class BancoClientes {
           conn.commit(); 
       }; 
       
+      public String[][] mostrarVouchers() throws SQLException {
+        Statement stmt =   conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        ResultSet result = stmt.executeQuery("SELECT * FROM voucher");
+          // tomar el numero de rows: 
+          int rows = 0;
+          if (result.last()) {
+              rows = result.getRow();
+              result.beforeFirst();
+          }
+          //System.out.println(rows);
+          String arr[][] = new String[rows][5];
+
+          for (int y = 0; y < rows; y++) {
+              result.next();
+              for (int i = 0; i < 5; i++) {
+                  if (i == 4) {
+                      arr[y][i] = String.valueOf(result.getBoolean(i+1));
+                  } else {
+                      arr[y][i] = result.getString(i + 1);
+                  }
+                  //System.out.println(arr[y][i]);
+              }
+          }
+        return arr; 
+      }
+      
     public static void main(String args[]) throws SQLException, IOException{
         BancoClientes prueba = new BancoClientes(); 
         //prueba.leerVouchers(new File("./src/main/java/services/banco.xlsx")); 
-        //prueba.generarVouchers(); 
-        prueba.actualizar();
+       // prueba.generarVouchers(); 
+        //prueba.actualizar();
+        prueba.mostrarVouchers(); 
     }
   
   
